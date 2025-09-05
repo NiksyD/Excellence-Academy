@@ -1,56 +1,18 @@
 # Excellence Academy - Student Management System
 
-A modern web application for managing student records and academic information.
+A modern MVC web application for managing student records and academic information.
 
 ## 🚀 Tech Stack
 
-- **Backend**: ASP.NET Core 8.0 (C#)
-- **Frontend**: Razor Pages, Bootstrap 5, Font Awesome
-- **Database**: Entity Framework Core with SQL Server
-- **Authentication**: ASP.NET Core Identity
-- **UI/UX**: Responsive design with modern Bootstrap components
+![C#](https://img.shields.io/badge/c%23-%23239120.svg?style=for-the-badge&logo=c-sharp&logoColor=white)
+![.Net](https://img.shields.io/badge/.NET-5C2D91?style=for-the-badge&logo=.net&logoColor=white)
+![Bootstrap](https://img.shields.io/badge/bootstrap-%238511FA.svg?style=for-the-badge&logo=bootstrap&logoColor=white)
+![MicrosoftSQLServer](https://img.shields.io/badge/Microsoft%20SQL%20Server-CC2927?style=for-the-badge&logo=microsoft%20sql%20server&logoColor=white)
+![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
 
-## ✨ Features
-
-- **Student Management**: Create, Read, Update, Delete student records
-- **Responsive Design**: Mobile-friendly interface
-- **Search & Filter**: Real-time student search and course filtering
-- **Data Export**: CSV export functionality
-- **Modal Confirmations**: Enhanced user experience with Bootstrap modals
-- **Form Validation**: Client-side and server-side validation
-
-## 🛠️ Getting Started
-
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/NiksyD/Excellence-Academy.git
-   cd Excellence-Academy
-   ```
-
-2. **Run the application**
-   ```bash
-   dotnet restore
-   dotnet run
-   ```
-
-3. **Access the application**
-   - Navigate to `http://localhost:5000`
-   - Start managing student records!
-
-## 📊 Database Schema
-
-- **Students**: Id, Firstname, Lastname, Email, Course, DateCreated
-
-## 🎯 Project Structure
-
-```
-MyWebApplication/
-├── Controllers/     # MVC Controllers
-├── Models/         # Data Models
-├── Views/          # Razor Views
-├── Data/           # DbContext & Migrations
-└── wwwroot/        # Static files
-```
+This is an **ASP.NET Core MVC** application built with Entity Framework Core for data management and Bootstrap for responsive UI design.
 
 ---
-*Built with ❤️ using ASP.NET Core*
+*Built with ❤️ using ASP.NET Core MVC*
