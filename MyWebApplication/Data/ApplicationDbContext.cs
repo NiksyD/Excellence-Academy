@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using MyWebApplication.Models;
 
 namespace MyWebApplication.Data
@@ -10,5 +10,6 @@ namespace MyWebApplication.Data
         }
 
         public DbSet<Student> Students { get; set; }
+        public DbSet<GatePass> GatePasses { get; set; }
     }
 }

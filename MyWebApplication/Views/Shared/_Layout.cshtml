@@ -11,6 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    @await RenderSectionAsync("Styles", required: false)
 </head>
 <body>
     <header>
@@ -49,6 +50,11 @@
                         <li class="nav-item">
                             <a class="nav-link fw-medium" asp-area="" asp-controller="Student" asp-action="Index">
                                 <i class="fas fa-users me-1"></i>Student Portal
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fw-medium" asp-area="" asp-controller="GatePass" asp-action="Index">
+                                <i class="fas fa-id-card me-1"></i>Gate Pass
                             </a>
                         </li>
                     </ul>

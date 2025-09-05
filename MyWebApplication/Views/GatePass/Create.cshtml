@@ -1,0 +1,294 @@
+@model MyWebApplication.Models.GatePass
+
+@{
+    ViewData["Title"] = "Create Gate Pass - Excellence Academy";
+}
+
+<!-- Header Section -->
+<section class="bg-primary text-white py-4" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <h1 class="display-5 fw-bold mb-2">
+                    <i class="fas fa-id-card me-3"></i>Create Gate Pass
+                </h1>
+                <p class="lead mb-0">Submit a new vehicle gate pass application</p>
+            </div>
+            <div class="col-md-4 text-md-end">
+                <a asp-action="Index" class="btn btn-light rounded-pill px-4">
+                    <i class="fas fa-arrow-left me-2"></i>Back to Gate Passes
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Main Content -->
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="card shadow-lg border-0">
+                <div class="card-header bg-light py-4">
+                    <h4 class="mb-0 text-center">
+                        <i class="fas fa-car text-primary me-2"></i>
+                        Gate Pass Application Form
+                    </h4>
+                </div>
+                <div class="card-body p-5">
+                    <form asp-action="Create" method="post" id="gatePassForm">
+                        <div class="row g-4">
+                            <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+                            
+                            <!-- Personal Information Section -->
+                            <div class="col-12">
+                                <h5 class="text-primary mb-3">
+                                    <i class="fas fa-user me-2"></i>Personal Information
+                                </h5>
+                                <hr class="mb-4">
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <div class="form-floating mb-3">
+                                    <input asp-for="Name" class="form-control" placeholder="Full Name" />
+                                    <label asp-for="Name" class="form-label">
+                                        <i class="fas fa-user me-2"></i>Full Name
+                                    </label>
+                                    <span asp-validation-for="Name" class="text-danger small"></span>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <div class="form-floating mb-3">
+                                    <select asp-for="Department" class="form-select">
+                                        <option value="">Select Department</option>
+                                        <option value="Computer Science">Computer Science</option>
+                                        <option value="Information Technology">Information Technology</option>
+                                        <option value="Engineering">Engineering</option>
+                                        <option value="Business Administration">Business Administration</option>
+                                        <option value="Education">Education</option>
+                                        <option value="Arts and Sciences">Arts and Sciences</option>
+                                        <option value="Nursing">Nursing</option>
+                                        <option value="Architecture">Architecture</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                    <label asp-for="Department" class="form-label">
+                                        <i class="fas fa-building me-2"></i>Department
+                                    </label>
+                                    <span asp-validation-for="Department" class="text-danger small"></span>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-12">
+                                <div class="form-floating mb-3">
+                                    <textarea asp-for="Address" class="form-control" placeholder="Complete Address" style="height: 100px"></textarea>
+                                    <label asp-for="Address" class="form-label">
+                                        <i class="fas fa-map-marker-alt me-2"></i>Address
+                                    </label>
+                                    <span asp-validation-for="Address" class="text-danger small"></span>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <div class="form-floating mb-3">
+                                    <input asp-for="Faculty" class="form-control" placeholder="Faculty" />
+                                    <label asp-for="Faculty" class="form-label">
+                                        <i class="fas fa-chalkboard-teacher me-2"></i>Faculty
+                                    </label>
+                                    <span asp-validation-for="Faculty" class="text-danger small"></span>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <div class="form-floating mb-3">
+                                    <input asp-for="CourseYear" class="form-control" placeholder="Course & Year" />
+                                    <label asp-for="CourseYear" class="form-label">
+                                        <i class="fas fa-graduation-cap me-2"></i>Course & Year
+                                    </label>
+                                    <span asp-validation-for="CourseYear" class="text-danger small"></span>
+                                </div>
+                            </div>
+
+                            <!-- Vehicle Information Section -->
+                            <div class="col-12 mt-4">
+                                <h5 class="text-primary mb-3">
+                                    <i class="fas fa-car me-2"></i>Vehicle Information
+                                </h5>
+                                <hr class="mb-4">
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <div class="form-floating mb-3">
+                                    <input asp-for="VehiclePlateNo" class="form-control text-uppercase" placeholder="Plate Number" />
+                                    <label asp-for="VehiclePlateNo" class="form-label">
+                                        <i class="fas fa-id-badge me-2"></i>Vehicle Plate No.
+                                    </label>
+                                    <span asp-validation-for="VehiclePlateNo" class="text-danger small"></span>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <div class="form-floating mb-3">
+                                    <select asp-for="VehicleType" class="form-select">
+                                        <option value="">Select Vehicle Type</option>
+                                        <option value="Motorcycle">Motorcycle</option>
+                                        <option value="Car">Car</option>
+                                        <option value="SUV">SUV</option>
+                                        <option value="Van">Van</option>
+                                        <option value="Truck">Truck</option>
+                                        <option value="Bicycle">Bicycle</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                    <label asp-for="VehicleType" class="form-label">
+                                        <i class="fas fa-car me-2"></i>Vehicle Type
+                                    </label>
+                                    <span asp-validation-for="VehicleType" class="text-danger small"></span>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <div class="form-floating mb-3">
+                                    <input asp-for="Maker" class="form-control" placeholder="Vehicle Maker" />
+                                    <label asp-for="Maker" class="form-label">
+                                        <i class="fas fa-industry me-2"></i>Maker
+                                    </label>
+                                    <span asp-validation-for="Maker" class="text-danger small"></span>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <div class="form-floating mb-3">
+                                    <input asp-for="Color" class="form-control" placeholder="Vehicle Color" />
+                                    <label asp-for="Color" class="form-label">
+                                        <i class="fas fa-palette me-2"></i>Color
+                                    </label>
+                                    <span asp-validation-for="Color" class="text-danger small"></span>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <div class="form-floating mb-3">
+                                    <input asp-for="Date" class="form-control" type="date" value="@DateTime.Now.ToString("yyyy-MM-dd")" />
+                                    <label asp-for="Date" class="form-label">
+                                        <i class="fas fa-calendar me-2"></i>Application Date
+                                    </label>
+                                    <span asp-validation-for="Date" class="text-danger small"></span>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <div class="form-floating mb-3">
+                                    <input asp-for="RegistrationExpiryDate" class="form-control" type="date" />
+                                    <label asp-for="RegistrationExpiryDate" class="form-label">
+                                        <i class="fas fa-calendar-times me-2"></i>Registration Expiry Date
+                                    </label>
+                                    <span asp-validation-for="RegistrationExpiryDate" class="text-danger small"></span>
+                                </div>
+                            </div>
+
+                            <!-- Documents Section -->
+                            <div class="col-12 mt-4">
+                                <h5 class="text-primary mb-3">
+                                    <i class="fas fa-file-alt me-2"></i>Required Documents
+                                </h5>
+                                <hr class="mb-4">
+                            </div>
+                            
+                            <div class="col-md-12">
+                                <div class="form-floating mb-3">
+                                    <textarea asp-for="AttachedDocuments" class="form-control" placeholder="Attached Documents" style="height: 100px"></textarea>
+                                    <label asp-for="AttachedDocuments" class="form-label">
+                                        <i class="fas fa-file-alt me-2"></i>Attached Study Load and Registration
+                                    </label>
+                                    <span asp-validation-for="AttachedDocuments" class="text-danger small"></span>
+                                </div>
+                            </div>
+
+                            <!-- Additional Information Section -->
+                            <div class="col-12 mt-4">
+                                <h5 class="text-primary mb-3">
+                                    <i class="fas fa-comment me-2"></i>Additional Information
+                                </h5>
+                                <hr class="mb-4">
+                            </div>
+                            
+                            <div class="col-md-12">
+                                <div class="form-floating mb-3">
+                                    <textarea asp-for="Remarks" class="form-control" placeholder="Remarks" style="height: 100px"></textarea>
+                                    <label asp-for="Remarks" class="form-label">
+                                        <i class="fas fa-comment me-2"></i>Remarks
+                                    </label>
+                                    <span asp-validation-for="Remarks" class="text-danger small"></span>
+                                </div>
+                            </div>
+
+                            <!-- Gate Pass Preview Card -->
+                            <div class="col-12 mt-4">
+                                <div class="card bg-light border-0" id="gatePassPreview" style="display: none;">
+                                    <div class="card-body">
+                                        <h6 class="text-primary mb-3">
+                                            <i class="fas fa-eye me-2"></i>Gate Pass Preview
+                                        </h6>
+                                        <div class="d-flex align-items-center">
+                                            <div class="avatar bg-primary rounded-circle me-3 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                                <i class="fas fa-car text-white"></i>
+                                            </div>
+                                            <div>
+                                                <div class="fw-bold" id="previewName">Applicant Name</div>
+                                                <div class="text-muted small" id="previewDepartment">Department</div>
+                                                <div class="text-muted small" id="previewVehicle">Vehicle Info</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Form Actions -->
+                        <div class="row mt-5">
+                            <div class="col-12">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <a asp-action="Index" class="btn btn-outline-secondary btn-lg rounded-pill px-4">
+                                        <i class="fas fa-times me-2"></i>Cancel
+                                    </a>
+                                    <button type="submit" class="btn btn-primary btn-lg rounded-pill px-5">
+                                        <i class="fas fa-save me-2"></i>Submit Application
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Help Section -->
+            <div class="card mt-4 border-0 bg-light">
+                <div class="card-body">
+                    <h6 class="text-primary mb-3">
+                        <i class="fas fa-info-circle me-2"></i>Application Guidelines
+                    </h6>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul class="list-unstyled mb-0">
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i>All required fields must be completed</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Provide accurate vehicle information</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul class="list-unstyled mb-0">
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Attach required documents</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Review information before submission</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script src="~/js/GatePass/create.js"></script>
+}
