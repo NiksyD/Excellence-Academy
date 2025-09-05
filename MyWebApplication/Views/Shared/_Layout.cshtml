@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Excellence Academy</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/MyWebApplication.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+            <div class="container">
+                <a class="navbar-brand d-flex align-items-center" asp-area="" asp-controller="Home" asp-action="Index">
+                    <i class="fas fa-graduation-cap text-primary me-2" style="font-size: 1.5rem;"></i>
+                    <span class="fw-bold fs-4 text-primary">Excellence Academy</span>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link fw-medium" asp-area="" asp-controller="Home" asp-action="Index">
+                                <i class="fas fa-home me-1"></i>Home
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle fw-medium" href="#" id="programsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-book me-1"></i>Programs
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="programsDropdown">
+                                <li><a class="dropdown-item" href="#programs"><i class="fas fa-microscope me-2"></i>Science & Technology</a></li>
+                                <li><a class="dropdown-item" href="#programs"><i class="fas fa-palette me-2"></i>Arts & Humanities</a></li>
+                                <li><a class="dropdown-item" href="#programs"><i class="fas fa-chart-line me-2"></i>Business Studies</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fw-medium" href="#contact">
+                                <i class="fas fa-envelope me-1"></i>Contact
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fw-medium" asp-area="" asp-controller="Student" asp-action="Index">
+                                <i class="fas fa-users me-1"></i>Student Portal
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="d-flex">
+                        <a href="#contact" class="btn btn-outline-primary me-2 rounded-pill px-3">
+                            <i class="fas fa-calendar-alt me-1"></i>Schedule Visit
+                        </a>
+                        <a href="#contact" class="btn btn-primary rounded-pill px-3">
+                            <i class="fas fa-user-plus me-1"></i>Apply Now
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main role="main">
+        @RenderBody()
+    </main>
+
+    <footer class="bg-dark text-light py-5 mt-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="fas fa-graduation-cap text-primary me-2" style="font-size: 1.5rem;"></i>
+                        <h5 class="mb-0 text-white">Excellence Academy</h5>
+                    </div>
+                    <p class="text-light-emphasis mb-3">Empowering minds, shaping futures. Join our community of learners where innovation meets tradition in education.</p>
+                    <div class="d-flex gap-3">
+                        <a href="#" class="text-light-emphasis hover-text-primary"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-light-emphasis hover-text-primary"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-light-emphasis hover-text-primary"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-light-emphasis hover-text-primary"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <h6 class="text-white mb-3">Quick Links</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-light-emphasis text-decoration-none hover-text-primary">About Us</a></li>
+                        <li class="mb-2"><a href="#programs" class="text-light-emphasis text-decoration-none hover-text-primary">Programs</a></li>
+                        <li class="mb-2"><a href="#" class="text-light-emphasis text-decoration-none hover-text-primary">Admissions</a></li>
+                        <li class="mb-2"><a href="#" class="text-light-emphasis text-decoration-none hover-text-primary">Faculty</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <h6 class="text-white mb-3">Student Life</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-light-emphasis text-decoration-none hover-text-primary">Campus</a></li>
+                        <li class="mb-2"><a href="#" class="text-light-emphasis text-decoration-none hover-text-primary">Activities</a></li>
+                        <li class="mb-2"><a href="#" class="text-light-emphasis text-decoration-none hover-text-primary">Sports</a></li>
+                        <li class="mb-2"><a asp-controller="Student" asp-action="Index" class="text-light-emphasis text-decoration-none hover-text-primary">Student Portal</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <h6 class="text-white mb-3">Contact Information</h6>
+                    <div class="d-flex align-items-start mb-2">
+                        <i class="fas fa-map-marker-alt text-primary me-2 mt-1"></i>
+                        <span class="text-light-emphasis">123 Education Street<br>Learning City, LC 12345</span>
+                    </div>
+                    <div class="d-flex align-items-center mb-2">
+                        <i class="fas fa-phone text-primary me-2"></i>
+                        <span class="text-light-emphasis">(555) 123-4567</span>
+                    </div>
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="fas fa-envelope text-primary me-2"></i>
+                        <span class="text-light-emphasis">info@excellenceacademy.edu</span>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-clock text-primary me-2"></i>
+                        <span class="text-light-emphasis">Mon-Fri: 8:00 AM - 6:00 PM</span>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4 border-secondary">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="mb-0 text-light-emphasis">&copy; 2025 Excellence Academy. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <a asp-controller="Home" asp-action="Privacy" class="text-light-emphasis text-decoration-none hover-text-primary me-3">Privacy Policy</a>
+                    <a href="#" class="text-light-emphasis text-decoration-none hover-text-primary">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

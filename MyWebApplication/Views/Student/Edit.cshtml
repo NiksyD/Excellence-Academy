@@ -1,0 +1,265 @@
+@model MyWebApplication.Models.Student
+@{
+	ViewData["Title"] = "Edit Student - Excellence Academy";
+}
+
+<!-- Header Section -->
+<section class="bg-primary text-white py-4" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+	<div class="container">
+		<div class="row align-items-center">
+			<div class="col-md-8">
+				<h1 class="display-5 fw-bold mb-2">
+					<i class="fas fa-user-edit me-3"></i>Edit Student
+				</h1>
+				<p class="lead mb-0">Update student information for @Model.Firstname @Model.Lastname</p>
+			</div>
+			<div class="col-md-4 text-md-end">
+				<a asp-action="Index" class="btn btn-light rounded-pill px-4">
+					<i class="fas fa-arrow-left me-2"></i>Back to Students
+				</a>
+			</div>
+		</div>
+	</div>
+</section>
+
+<!-- Main Content -->
+<div class="container py-5">
+	<div class="row justify-content-center">
+		<div class="col-lg-8">
+			<div class="card shadow-lg border-0">
+				<div class="card-header bg-light py-4">
+					<h4 class="mb-0 text-center">
+						<i class="fas fa-graduation-cap text-primary me-2"></i>
+						Student Information Update
+					</h4>
+				</div>
+				<div class="card-body p-5">
+					<form method="post" asp-action="Edit" id="editStudentForm">
+						<div class="row g-4">
+							<!-- Student ID (Read-only) -->
+							<div class="col-12">
+								<div class="alert alert-info d-flex align-items-center">
+									<i class="fas fa-info-circle me-2"></i>
+									<span>Student ID: <strong>#@Model.Id</strong></span>
+								</div>
+							</div>
+							
+							<!-- Personal Information Section -->
+							<div class="col-12">
+								<h5 class="text-primary mb-3">
+									<i class="fas fa-user me-2"></i>Personal Information
+								</h5>
+								<hr class="mb-4">
+							</div>
+							
+							<input type="hidden" asp-for="Id" />
+							
+							<div class="col-md-6">
+								<div class="form-floating mb-3">
+									<input asp-for="Firstname" class="form-control" placeholder="First Name" />
+									<label asp-for="Firstname" class="form-label">
+										<i class="fas fa-user me-2"></i>First Name
+									</label>
+									<span asp-validation-for="Firstname" class="text-danger small"></span>
+								</div>
+							</div>
+							
+							<div class="col-md-6">
+								<div class="form-floating mb-3">
+									<input asp-for="Lastname" class="form-control" placeholder="Last Name" />
+									<label asp-for="Lastname" class="form-label">
+										<i class="fas fa-user me-2"></i>Last Name
+									</label>
+									<span asp-validation-for="Lastname" class="text-danger small"></span>
+								</div>
+							</div>
+							
+							<div class="col-md-6">
+								<div class="form-floating mb-3">
+									<input asp-for="Email" type="email" class="form-control" placeholder="Email Address" />
+									<label asp-for="Email" class="form-label">
+										<i class="fas fa-envelope me-2"></i>Email Address
+									</label>
+									<span asp-validation-for="Email" class="text-danger small"></span>
+								</div>
+							</div>
+							
+							<!-- Academic Information Section -->
+							<div class="col-12 mt-4">
+								<h5 class="text-primary mb-3">
+									<i class="fas fa-book me-2"></i>Academic Information
+								</h5>
+								<hr class="mb-4">
+							</div>
+							
+							<div class="col-md-6">
+								<div class="form-floating mb-3">
+									<select asp-for="Course" class="form-select">
+										<option value="">Select a Program</option>
+										<option value="Science & Technology">Science & Technology</option>
+										<option value="Arts & Humanities">Arts & Humanities</option>
+										<option value="Business Studies">Business Studies</option>
+										<option value="Engineering">Engineering</option>
+										<option value="Medicine">Medicine</option>
+										<option value="Computer Science">Computer Science</option>
+									</select>
+									<label asp-for="Course" class="form-label">
+										<i class="fas fa-graduation-cap me-2"></i>Academic Program
+									</label>
+									<span asp-validation-for="Course" class="text-danger small"></span>
+								</div>
+							</div>
+							
+							<div class="col-md-6">
+								<div class="form-floating mb-3">
+									<input asp-for="DateCreated" type="date" class="form-control" />
+									<label asp-for="DateCreated" class="form-label">
+										<i class="fas fa-calendar me-2"></i>Enrollment Date
+									</label>
+									<span asp-validation-for="DateCreated" class="text-danger small"></span>
+								</div>
+							</div>
+							
+							<!-- Student Preview Card -->
+							<div class="col-12 mt-4">
+								<div class="card bg-light border-0">
+									<div class="card-body">
+										<h6 class="text-primary mb-3">
+											<i class="fas fa-eye me-2"></i>Updated Student Preview
+										</h6>
+										<div class="d-flex align-items-center">
+											<div class="avatar bg-primary rounded-circle me-3 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+												<span class="text-white fw-bold" id="previewInitials">@(Model.Firstname?.Substring(0, 1))@(Model.Lastname?.Substring(0, 1))</span>
+											</div>
+											<div>
+												<div class="fw-bold" id="previewName">@Model.Firstname @Model.Lastname</div>
+												<div class="text-muted small" id="previewEmail">@Model.Email</div>
+												<div class="text-muted small" id="previewCourse">@Model.Course</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<!-- Form Actions -->
+						<div class="row mt-5">
+							<div class="col-12">
+								<div class="d-flex justify-content-between align-items-center">
+									<a asp-action="Index" class="btn btn-outline-secondary btn-lg rounded-pill px-4">
+										<i class="fas fa-times me-2"></i>Cancel
+									</a>
+									<div class="d-flex gap-2">
+										<a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-outline-info btn-lg rounded-pill px-4">
+											<i class="fas fa-eye me-2"></i>View Details
+										</a>
+										<button type="submit" class="btn btn-success btn-lg rounded-pill px-5">
+											<i class="fas fa-save me-2"></i>Update Student
+										</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+			
+			<!-- Change History Section -->
+			<div class="card mt-4 border-0 bg-light">
+				<div class="card-body">
+					<h6 class="text-primary mb-3">
+						<i class="fas fa-history me-2"></i>Student Information
+					</h6>
+					<div class="row">
+						<div class="col-md-6">
+							<small class="text-muted">
+								<strong>Student ID:</strong> #@Model.Id<br>
+								<strong>Enrolled:</strong> @Model.DateCreated.ToString("MMMM dd, yyyy")
+							</small>
+						</div>
+						<div class="col-md-6">
+							<small class="text-muted">
+								<strong>Last Modified:</strong> @DateTime.Now.ToString("MMMM dd, yyyy")<br>
+								<strong>Status:</strong> <span class="badge bg-success">Active</span>
+							</small>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+@section Scripts {
+	@{
+		<partial name="_ValidationScriptsPartial" />
+	}
+	<script>
+		// Real-time preview functionality
+		function updatePreview() {
+			const firstName = document.getElementById('Firstname').value || '';
+			const lastName = document.getElementById('Lastname').value || '';
+			const email = document.getElementById('Email').value || '';
+			const course = document.getElementById('Course').value || '';
+			
+			const initials = document.getElementById('previewInitials');
+			const name = document.getElementById('previewName');
+			const emailPreview = document.getElementById('previewEmail');
+			const coursePreview = document.getElementById('previewCourse');
+			
+			initials.textContent = (firstName.charAt(0) + lastName.charAt(0)).toUpperCase() || '--';
+			name.textContent = `${firstName} ${lastName}`.trim() || 'Full Name';
+			emailPreview.textContent = email || 'email@example.com';
+			coursePreview.textContent = course || 'Program';
+		}
+		
+		// Add event listeners for real-time preview
+		document.addEventListener('DOMContentLoaded', function() {
+			const inputs = ['Firstname', 'Lastname', 'Email', 'Course'];
+			inputs.forEach(id => {
+				const element = document.getElementById(id);
+				if (element) {
+					element.addEventListener('input', updatePreview);
+					element.addEventListener('change', updatePreview);
+				}
+			});
+		});
+		
+		// Form validation enhancement
+		document.getElementById('editStudentForm').addEventListener('submit', function(e) {
+			const requiredFields = ['Firstname', 'Lastname', 'Email', 'Course'];
+			let isValid = true;
+			
+			requiredFields.forEach(field => {
+				const input = document.getElementById(field);
+				if (!input.value.trim()) {
+					isValid = false;
+					input.classList.add('is-invalid');
+				} else {
+					input.classList.remove('is-invalid');
+				}
+			});
+			
+			if (!isValid) {
+				e.preventDefault();
+				alert('Please fill in all required fields.');
+			}
+		});
+		
+		// Email validation
+		document.getElementById('Email').addEventListener('blur', function() {
+			const email = this.value;
+			const atChar = String.fromCharCode(64);
+			const dotChar = String.fromCharCode(46);
+			const atPos = email.indexOf(atChar);
+			const dotPos = email.indexOf(dotChar);
+			const isValidEmail = atPos > 0 && dotPos > atPos && email.length > 5;
+			
+			if (email && !isValidEmail) {
+				this.classList.add('is-invalid');
+			} else {
+				this.classList.remove('is-invalid');
+			}
+		});
+	</script>
+}

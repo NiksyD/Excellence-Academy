@@ -1,0 +1,278 @@
+@model IEnumerable<MyWebApplication.Models.Student>
+@{
+	ViewData["Title"] = "Student Management - Excellence Academy";
+}
+
+<!-- Header Section -->
+<section class="bg-primary text-white py-4" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+	<div class="container">
+		<div class="row align-items-center">
+			<div class="col-md-8">
+				<h1 class="display-5 fw-bold mb-2">
+					<i class="fas fa-users me-3"></i>Student Management
+				</h1>
+				<p class="lead mb-0">Manage student records and academic information</p>
+			</div>
+			<div class="col-md-4 text-md-end">
+				<a asp-controller="Student" asp-action="Create" class="btn btn-light btn-lg rounded-pill px-4">
+					<i class="fas fa-user-plus me-2"></i>Add New Student
+				</a>
+			</div>
+		</div>
+	</div>
+</section>
+
+<!-- Main Content -->
+<div class="container py-5">
+	<!-- Statistics Cards -->
+	<div class="row mb-5">
+		<div class="col-md-3 col-6 mb-3">
+			<div class="card bg-primary text-white h-100">
+				<div class="card-body text-center">
+					<i class="fas fa-users fa-2x mb-2"></i>
+					<h4 class="fw-bold">@(Model?.Count() ?? 0)</h4>
+					<p class="mb-0">Total Students</p>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-3 col-6 mb-3">
+			<div class="card bg-success text-white h-100">
+				<div class="card-body text-center">
+					<i class="fas fa-graduation-cap fa-2x mb-2"></i>
+					<h4 class="fw-bold">@(Model?.Where(s => !string.IsNullOrEmpty(s.Course)).Count() ?? 0)</h4>
+					<p class="mb-0">Enrolled</p>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-3 col-6 mb-3">
+			<div class="card bg-info text-white h-100">
+				<div class="card-body text-center">
+					<i class="fas fa-book fa-2x mb-2"></i>
+					<h4 class="fw-bold">@(Model?.Select(s => s.Course).Distinct().Count() ?? 0)</h4>
+					<p class="mb-0">Programs</p>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-3 col-6 mb-3">
+			<div class="card bg-warning text-white h-100">
+				<div class="card-body text-center">
+					<i class="fas fa-calendar fa-2x mb-2"></i>
+					<h4 class="fw-bold">@DateTime.Now.Year</h4>
+					<p class="mb-0">Academic Year</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Search and Filter Section -->
+	<div class="card shadow-sm mb-4">
+		<div class="card-body">
+			<div class="row align-items-center">
+				<div class="col-md-6">
+					<div class="input-group">
+						<span class="input-group-text"><i class="fas fa-search"></i></span>
+						<input type="text" class="form-control" placeholder="Search students..." id="searchInput">
+					</div>
+				</div>
+				<div class="col-md-3">
+					<select class="form-select" id="courseFilter">
+						<option value="">All Programs</option>
+						@if (Model != null)
+						{
+							@foreach (var course in Model.Select(s => s.Course).Distinct().Where(c => !string.IsNullOrEmpty(c)))
+							{
+								<option value="@course">@course</option>
+							}
+						}
+					</select>
+				</div>
+				<div class="col-md-3">
+					<button class="btn btn-outline-primary w-100" onclick="exportToCSV()">
+						<i class="fas fa-download me-2"></i>Export CSV
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Students Table -->
+	<div class="card shadow-sm">
+		<div class="card-header bg-light">
+			<h5 class="mb-0"><i class="fas fa-table me-2"></i>Student Records</h5>
+		</div>
+		<div class="card-body p-0">
+			@if (Model != null && Model.Any())
+			{
+				<div class="table-responsive">
+					<table class="table table-hover mb-0" id="studentsTable">
+						<thead class="table-primary">
+							<tr>
+								<th class="px-4 py-3">
+									<i class="fas fa-hashtag me-2"></i>ID
+								</th>
+								<th class="px-4 py-3">
+									<i class="fas fa-user me-2"></i>Full Name
+								</th>
+								<th class="px-4 py-3">
+									<i class="fas fa-book me-2"></i>Program
+								</th>
+								<th class="px-4 py-3">
+									<i class="fas fa-envelope me-2"></i>Email
+								</th>
+								<th class="px-4 py-3">
+									<i class="fas fa-calendar me-2"></i>Enrolled
+								</th>
+								<th class="px-4 py-3 text-center">
+									<i class="fas fa-cogs me-2"></i>Actions
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							@foreach (var student in Model)
+							{
+								<tr>
+									<td class="px-4 py-3">
+										<span class="badge bg-secondary">#@student.Id</span>
+									</td>
+									<td class="px-4 py-3">
+										<div class="d-flex align-items-center">
+											<div class="avatar bg-primary rounded-circle me-3 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+												<span class="text-white fw-bold">@(student.Firstname?.Substring(0, 1))@(student.Lastname?.Substring(0, 1))</span>
+											</div>
+											<div>
+												<div class="fw-medium">@student.Firstname @student.Lastname</div>
+											</div>
+										</div>
+									</td>
+									<td class="px-4 py-3">
+										@if (!string.IsNullOrEmpty(student.Course))
+										{
+											<span class="badge bg-info">@student.Course</span>
+										}
+										else
+										{
+											<span class="text-muted">Not assigned</span>
+										}
+									</td>
+									<td class="px-4 py-3">
+										<a href="mailto:@student.Email" class="text-decoration-none">
+											<i class="fas fa-envelope me-1"></i>@student.Email
+										</a>
+									</td>
+									<td class="px-4 py-3">
+										<small class="text-muted">
+											@student.DateCreated.ToString("MMM dd, yyyy")
+										</small>
+									</td>
+									<td class="px-4 py-3 text-center">
+										<div class="btn-group" role="group">
+											<a asp-action="Details" asp-route-id="@student.Id" 
+											   class="btn btn-outline-info btn-sm" 
+											   title="View Details">
+												<i class="fas fa-eye"></i>
+											</a>
+											<a asp-action="Edit" asp-route-id="@student.Id" 
+											   class="btn btn-outline-warning btn-sm" 
+											   title="Edit Student">
+												<i class="fas fa-edit"></i>
+											</a>
+											<a asp-action="Delete" asp-route-id="@student.Id" 
+											   class="btn btn-outline-danger btn-sm" 
+											   title="Delete Student"
+											>
+												<i class="fas fa-trash"></i>
+											</a>
+										</div>
+									</td>
+								</tr>
+							}
+						</tbody>
+					</table>
+				</div>
+			}
+			else
+			{
+				<div class="text-center py-5">
+					<i class="fas fa-users fa-4x text-muted mb-3"></i>
+					<h4 class="text-muted">No Students Found</h4>
+					<p class="text-muted mb-4">Start by adding your first student to the system.</p>
+					<a asp-controller="Student" asp-action="Create" class="btn btn-primary btn-lg rounded-pill px-4">
+						<i class="fas fa-user-plus me-2"></i>Add First Student
+					</a>
+				</div>
+			}
+		</div>
+	</div>
+</div>
+
+@section Scripts {
+	<script>
+		// Search functionality
+		document.getElementById('searchInput').addEventListener('keyup', function() {
+			const searchTerm = this.value.toLowerCase();
+			const table = document.getElementById('studentsTable');
+			const rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+			
+			for (let i = 0; i < rows.length; i++) {
+				const row = rows[i];
+				const text = row.textContent.toLowerCase();
+				row.style.display = text.includes(searchTerm) ? '' : 'none';
+			}
+		});
+
+		// Course filter functionality
+		document.getElementById('courseFilter').addEventListener('change', function() {
+			const selectedCourse = this.value.toLowerCase();
+			const table = document.getElementById('studentsTable');
+			const rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+			
+			for (let i = 0; i < rows.length; i++) {
+				const row = rows[i];
+				const courseCell = row.cells[2].textContent.toLowerCase();
+				
+				if (selectedCourse === '' || courseCell.includes(selectedCourse)) {
+					row.style.display = '';
+				} else {
+					row.style.display = 'none';
+				}
+			}
+		});
+
+		// Export to CSV functionality
+		function exportToCSV() {
+			const table = document.getElementById('studentsTable');
+			const rows = table.querySelectorAll('tr');
+			let csv = [];
+			
+			// Add headers
+			csv.push('ID,First Name,Last Name,Program,Email,Date Enrolled');
+			
+			// Add data rows
+			for (let i = 1; i < rows.length; i++) {
+				const row = rows[i];
+				if (row.style.display !== 'none') {
+					const cells = row.querySelectorAll('td');
+					const rowData = [
+						cells[0].textContent.replace('#', '').trim(),
+						'@(Model?.FirstOrDefault()?.Firstname ?? "")',
+						'@(Model?.FirstOrDefault()?.Lastname ?? "")',
+						cells[2].textContent.trim(),
+						cells[3].textContent.replace('✉', '').trim(),
+						cells[4].textContent.trim()
+					];
+					csv.push(rowData.join(','));
+				}
+			}
+			
+			// Download CSV
+			const csvContent = csv.join('\n');
+			const blob = new Blob([csvContent], { type: 'text/csv' });
+			const url = window.URL.createObjectURL(blob);
+			const a = document.createElement('a');
+			a.href = url;
+			a.download = 'students_' + new Date().toISOString().split('T')[0] + '.csv';
+			a.click();
+			window.URL.revokeObjectURL(url);
+		}
+	</script>
+}
