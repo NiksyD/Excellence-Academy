@@ -1,6 +1,6 @@
-@model MyWebApplication.Models.GatePass
+@model MyWebApplication.Models.ActivityReservation
 @{
-    ViewData["Title"] = "Review Gate Pass - Excellence Academy";
+    ViewData["Title"] = "Review Activity Reservation - Excellence Academy";
 }
 
 <!-- Header Section -->
@@ -9,9 +9,9 @@
         <div class="row align-items-center">
             <div class="col-md-8">
                 <h1 class="display-6 fw-bold mb-2">
-                    <i class="fas fa-check-circle me-3"></i>Review Gate Pass
+                    <i class="fas fa-check-circle me-3"></i>Review Activity Reservation
                 </h1>
-                <p class="lead mb-0">Review and approve gate pass application</p>
+                <p class="lead mb-0">Review and approve activity reservation application</p>
             </div>
             <div class="col-md-4 text-md-end">
                 <a asp-action="Index" class="btn btn-light btn-lg rounded-pill px-4">
@@ -26,59 +26,43 @@
 <div class="container py-5">
     <div class="row justify-content-center">
         <div class="col-lg-10">
-            <!-- Application Summary Card -->
+            <!-- Reservation Summary Card -->
             <div class="card shadow-lg mb-4">
                 <div class="card-header bg-light">
                     <h5 class="mb-0">
                         <i class="fas fa-file-alt me-2 text-primary"></i>
-                        Gate Pass Application #@Model.Id
+                        Activity Reservation #@Model.Id
                     </h5>
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <!-- Applicant Information -->
+                        <!-- Organization Information -->
                         <div class="col-md-6">
                             <h6 class="text-primary mb-3">
-                                <i class="fas fa-user me-2"></i>Applicant Information
+                                <i class="fas fa-building me-2"></i>Organization Information
                             </h6>
                             <div class="mb-3">
-                                <label class="form-label fw-medium">Full Name</label>
-                                <p class="mb-1">@Model.Name</p>
+                                <label class="form-label fw-medium">Organization Name</label>
+                                <p class="mb-1">@Model.OrganizationName</p>
                             </div>
                             <div class="mb-3">
-                                <label class="form-label fw-medium">Department</label>
-                                <p class="mb-1">@Model.Department</p>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label fw-medium">Faculty</label>
-                                <p class="mb-1">@Model.Faculty</p>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label fw-medium">Course Year</label>
-                                <p class="mb-1">@Model.CourseYear</p>
+                                <label class="form-label fw-medium">Form Date</label>
+                                <p class="mb-1">@Model.FormDate.ToString("MMMM dd, yyyy")</p>
                             </div>
                         </div>
                         
-                        <!-- Vehicle Information -->
+                        <!-- Activity Information -->
                         <div class="col-md-6">
                             <h6 class="text-primary mb-3">
-                                <i class="fas fa-car me-2"></i>Vehicle Information
+                                <i class="fas fa-star me-2"></i>Activity Information
                             </h6>
                             <div class="mb-3">
-                                <label class="form-label fw-medium">Vehicle Type</label>
-                                <p class="mb-1">@Model.VehicleType</p>
+                                <label class="form-label fw-medium">Activity Title</label>
+                                <p class="mb-1 fw-bold">@Model.ActivityTitle</p>
                             </div>
                             <div class="mb-3">
-                                <label class="form-label fw-medium">Vehicle Plate Number</label>
-                                <p class="mb-1 fw-bold">@Model.VehiclePlateNo</p>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label fw-medium">Maker</label>
-                                <p class="mb-1">@Model.Maker</p>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label fw-medium">Color</label>
-                                <p class="mb-1">@Model.Color</p>
+                                <label class="form-label fw-medium">Nature of Activity</label>
+                                <p class="mb-1">@Model.NatureOfActivity</p>
                             </div>
                         </div>
                     </div>
@@ -86,19 +70,66 @@
                     <hr class="my-4">
                     
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="mb-3">
-                                <label class="form-label fw-medium">Application Date</label>
-                                <p class="mb-1">@Model.Date.ToString("MMMM dd, yyyy")</p>
+                                <label class="form-label fw-medium">Venue</label>
+                                <p class="mb-1">@Model.Venue</p>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="mb-3">
-                                <label class="form-label fw-medium">Registration Expiry</label>
-                                <p class="mb-1">@(Model.RegistrationExpiryDate?.ToString("MMMM dd, yyyy") ?? "Not specified")</p>
+                                <label class="form-label fw-medium">Date Needed</label>
+                                <p class="mb-1">@Model.DateNeeded.ToString("MMMM dd, yyyy")</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label class="form-label fw-medium">Time</label>
+                                <p class="mb-1">@Model.TimeFrom.ToString(@"hh\:mm") - @Model.TimeTo.ToString(@"hh\:mm")</p>
                             </div>
                         </div>
                     </div>
+                    
+                    <div class="row">
+                        @if (!string.IsNullOrEmpty(Model.Speaker))
+                        {
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label fw-medium">Speaker</label>
+                                    <p class="mb-1">@Model.Speaker</p>
+                                </div>
+                            </div>
+                        }
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label fw-medium">Source of Funds</label>
+                                <p class="mb-1">@Model.SourceOfFunds</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label fw-medium">Participants</label>
+                                <p class="mb-1">@Model.Participants</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label fw-medium">Purpose/Objective</label>
+                                <p class="mb-1">@Model.PurposeObjective</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    @if (!string.IsNullOrEmpty(Model.EquipmentFacilitiesNeeded))
+                    {
+                        <div class="mb-3">
+                            <label class="form-label fw-medium">Equipment & Facilities Needed</label>
+                            <p class="mb-1">@Model.EquipmentFacilitiesNeeded</p>
+                        </div>
+                    }
                     
                     @if (!string.IsNullOrEmpty(Model.AttachedDocuments))
                     {
@@ -121,17 +152,20 @@
                 <div class="card-body">
                     <form asp-action="Review" method="post">
                         <input type="hidden" asp-for="Id" />
-                        <input type="hidden" asp-for="Name" />
-                        <input type="hidden" asp-for="RegistrationExpiryDate" />
-                        <input type="hidden" asp-for="Department" />
-                        <input type="hidden" asp-for="Faculty" />
-                        <input type="hidden" asp-for="CourseYear" />
-                        <input type="hidden" asp-for="VehicleType" />
-                        <input type="hidden" asp-for="Maker" />
-                        <input type="hidden" asp-for="Color" />
-                        <input type="hidden" asp-for="VehiclePlateNo" />
+                        <input type="hidden" asp-for="OrganizationName" />
+                        <input type="hidden" asp-for="FormDate" />
+                        <input type="hidden" asp-for="ActivityTitle" />
+                        <input type="hidden" asp-for="Venue" />
+                        <input type="hidden" asp-for="DateNeeded" />
+                        <input type="hidden" asp-for="TimeFrom" />
+                        <input type="hidden" asp-for="TimeTo" />
+                        <input type="hidden" asp-for="Participants" />
+                        <input type="hidden" asp-for="Speaker" />
+                        <input type="hidden" asp-for="PurposeObjective" />
+                        <input type="hidden" asp-for="EquipmentFacilitiesNeeded" />
+                        <input type="hidden" asp-for="NatureOfActivity" />
+                        <input type="hidden" asp-for="SourceOfFunds" />
                         <input type="hidden" asp-for="AttachedDocuments" />
-                        <input type="hidden" asp-for="Date" />
                         <input type="hidden" asp-for="DateCreated" />
                         <input type="hidden" asp-for="Status" />
 
@@ -154,11 +188,11 @@
                                     <div class="d-flex gap-3">
                                         <button type="button" class="btn btn-danger btn-lg rounded-pill px-4"
                                                 data-bs-toggle="modal" data-bs-target="#rejectModal">
-                                            <i class="fas fa-times-circle me-2"></i>Reject Application
+                                            <i class="fas fa-times-circle me-2"></i>Reject Reservation
                                         </button>
                                         <button type="button" class="btn btn-success btn-lg rounded-pill px-5"
                                                 data-bs-toggle="modal" data-bs-target="#approveModal">
-                                            <i class="fas fa-check-circle me-2"></i>Approve Application
+                                            <i class="fas fa-check-circle me-2"></i>Approve Reservation
                                         </button>
                                     </div>
                                 </div>
@@ -177,14 +211,14 @@
                     <div class="row">
                         <div class="col-md-6">
                             <ul class="list-unstyled mb-0">
-                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Verify all vehicle information</li>
-                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Check registration validity</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Verify venue availability</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Check equipment requirements</li>
                             </ul>
                         </div>
                         <div class="col-md-6">
                             <ul class="list-unstyled mb-0">
-                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Confirm applicant details</li>
-                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Review attached documents</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Confirm activity objectives</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Review funding source</li>
                             </ul>
                         </div>
                     </div>
@@ -200,7 +234,7 @@
         <div class="modal-content">
             <div class="modal-header bg-success text-white">
                 <h5 class="modal-title" id="approveModalLabel">
-                    <i class="fas fa-check-circle me-2"></i>Review Gate Pass
+                    <i class="fas fa-check-circle me-2"></i>Approve Activity Reservation
                 </h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -208,10 +242,10 @@
                 <div class="text-center mb-3">
                     <i class="fas fa-check-circle text-success" style="font-size: 3rem;"></i>
                 </div>
-                <p class="text-center mb-3">Are you sure you want to <strong>approve</strong> this gate pass application?</p>
+                <p class="text-center mb-3">Are you sure you want to <strong>approve</strong> this activity reservation?</p>
                 <div class="alert alert-info">
                     <i class="fas fa-info-circle me-2"></i>
-                    <strong>Gate Pass #@Model.Id</strong> for <strong>@Model.Name</strong> will be approved and the applicant will be notified.
+                    <strong>Reservation #@Model.Id</strong> for <strong>@Model.ActivityTitle</strong> will be approved and the organization will be notified.
                 </div>
             </div>
             <div class="modal-footer">
@@ -232,7 +266,7 @@
         <div class="modal-content">
             <div class="modal-header bg-danger text-white">
                 <h5 class="modal-title" id="rejectModalLabel">
-                    <i class="fas fa-times-circle me-2"></i>Reject Gate Pass
+                    <i class="fas fa-times-circle me-2"></i>Reject Activity Reservation
                 </h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -240,10 +274,10 @@
                 <div class="text-center mb-3">
                     <i class="fas fa-times-circle text-danger" style="font-size: 3rem;"></i>
                 </div>
-                <p class="text-center mb-3">Are you sure you want to <strong>reject</strong> this gate pass application?</p>
+                <p class="text-center mb-3">Are you sure you want to <strong>reject</strong> this activity reservation?</p>
                 <div class="alert alert-warning">
                     <i class="fas fa-exclamation-triangle me-2"></i>
-                    <strong>Gate Pass #@Model.Id</strong> for <strong>@Model.Name</strong> will be rejected. Please ensure you have provided a clear reason in the remarks field.
+                    <strong>Reservation #@Model.Id</strong> for <strong>@Model.ActivityTitle</strong> will be rejected. Please ensure you have provided a clear reason in the remarks field.
                 </div>
             </div>
             <div class="modal-footer">

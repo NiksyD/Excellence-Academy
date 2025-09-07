@@ -11,5 +11,6 @@ namespace MyWebApplication.Data
 
         public DbSet<Student> Students { get; set; }
         public DbSet<GatePass> GatePasses { get; set; }
+        public DbSet<ActivityReservation> ActivityReservations { get; set; }
     }
 }

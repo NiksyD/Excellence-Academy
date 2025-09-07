@@ -1,0 +1,149 @@
+/* ActivityReservation Details Page Styles */
+
+.timeline {
+    position: relative;
+    padding-left: 30px;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 15px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: #e9ecef;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.timeline-marker {
+    position: absolute;
+    left: -22px;
+    top: 5px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    box-shadow: 0 0 0 2px #e9ecef;
+}
+
+.timeline-content {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 3px solid #007bff;
+}
+
+/* Additional styles for better visual hierarchy */
+.reservation-status-badge {
+    font-size: 0.9rem;
+    padding: 8px 16px;
+}
+
+.info-card {
+    border: none;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    transition: box-shadow 0.15s ease-in-out;
+}
+
+.info-card:hover {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+.field-label {
+    font-weight: 600;
+    color: #6c757d;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.25rem;
+}
+
+.field-value {
+    color: #212529;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.activity-title {
+    color: #0d6efd !important;
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+/* Action buttons styling */
+.action-btn {
+    border-radius: 50px;
+    padding: 10px 20px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.action-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Timeline enhancements */
+.timeline-marker.bg-primary {
+    background-color: #0d6efd !important;
+}
+
+.timeline-marker.bg-success {
+    background-color: #198754 !important;
+}
+
+.timeline-marker.bg-danger {
+    background-color: #dc3545 !important;
+}
+
+.timeline-content h6 {
+    color: #495057;
+    font-weight: 600;
+}
+
+.timeline-content .text-muted {
+    color: #6c757d !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .timeline {
+        padding-left: 20px;
+    }
+    
+    .timeline::before {
+        left: 10px;
+    }
+    
+    .timeline-marker {
+        left: -17px;
+        width: 10px;
+        height: 10px;
+    }
+    
+    .timeline-content {
+        padding: 12px;
+    }
+}
+
+/* Print styles */
+@media print {
+    .timeline::before {
+        background: #000 !important;
+    }
+    
+    .timeline-marker {
+        border-color: #000 !important;
+        box-shadow: none !important;
+    }
+    
+    .timeline-content {
+        border-left-color: #000 !important;
+        background: #fff !important;
+    }
+}

@@ -1,0 +1,282 @@
+@model MyWebApplication.Models.ActivityReservation
+
+@{
+    ViewData["Title"] = "Create Activity Reservation - Excellence Academy";
+}
+
+<!-- Header Section -->
+<section class="bg-primary text-white py-4" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <h1 class="display-5 fw-bold mb-2">
+                    <i class="fas fa-calendar-plus me-3"></i>Create Activity Reservation
+                </h1>
+                <p class="lead mb-0">Submit a new activity area reservation form</p>
+            </div>
+            <div class="col-md-4 text-md-end">
+                <a asp-action="Index" class="btn btn-light rounded-pill px-4">
+                    <i class="fas fa-arrow-left me-2"></i>Back to Reservations
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Main Content -->
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="card shadow-lg border-0">
+                <div class="card-header bg-light py-4">
+                    <h4 class="mb-0 text-center">
+                        <i class="fas fa-clipboard-list text-primary me-2"></i>
+                        Activity Area Reservation Form
+                    </h4>
+                </div>
+                <div class="card-body p-5">
+                    <form asp-action="Create" method="post" id="activityReservationForm">
+                        <div class="row g-4">
+                            <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+                            
+                            <!-- Organization Information Section -->
+                            <div class="col-12">
+                                <h5 class="text-primary mb-3">
+                                    <i class="fas fa-building me-2"></i>Organization Information
+                                </h5>
+                                <hr class="mb-4">
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <div class="form-floating mb-3">
+                                    <input asp-for="OrganizationName" class="form-control" placeholder="Name of Organization" />
+                                    <label asp-for="OrganizationName" class="form-label">
+                                        <i class="fas fa-building me-2"></i>Name of Organization
+                                    </label>
+                                    <span asp-validation-for="OrganizationName" class="text-danger small"></span>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <div class="form-floating mb-3">
+                                    <input asp-for="FormDate" class="form-control" type="date" value="@DateTime.Now.ToString("yyyy-MM-dd")" />
+                                    <label asp-for="FormDate" class="form-label">
+                                        <i class="fas fa-calendar me-2"></i>Form Date
+                                    </label>
+                                    <span asp-validation-for="FormDate" class="text-danger small"></span>
+                                </div>
+                            </div>
+
+                            <!-- Activity Information Section -->
+                            <div class="col-12 mt-4">
+                                <h5 class="text-primary mb-3">
+                                    <i class="fas fa-tasks me-2"></i>Activity Information
+                                </h5>
+                                <hr class="mb-4">
+                            </div>
+                            
+                            <div class="col-md-12">
+                                <div class="form-floating mb-3">
+                                    <input asp-for="ActivityTitle" class="form-control" placeholder="Activity Title" />
+                                    <label asp-for="ActivityTitle" class="form-label">
+                                        <i class="fas fa-star me-2"></i>Activity Title
+                                    </label>
+                                    <span asp-validation-for="ActivityTitle" class="text-danger small"></span>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <div class="form-floating mb-3">
+                                    <input asp-for="Venue" class="form-control" placeholder="Venue" />
+                                    <label asp-for="Venue" class="form-label">
+                                        <i class="fas fa-map-marker-alt me-2"></i>Venue
+                                    </label>
+                                    <span asp-validation-for="Venue" class="text-danger small"></span>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <div class="form-floating mb-3">
+                                    <input asp-for="DateNeeded" class="form-control" type="date" />
+                                    <label asp-for="DateNeeded" class="form-label">
+                                        <i class="fas fa-calendar-day me-2"></i>Date Needed
+                                    </label>
+                                    <span asp-validation-for="DateNeeded" class="text-danger small"></span>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <div class="form-floating mb-3">
+                                    <input asp-for="TimeFrom" class="form-control" type="time" />
+                                    <label asp-for="TimeFrom" class="form-label">
+                                        <i class="fas fa-clock me-2"></i>Time From
+                                    </label>
+                                    <span asp-validation-for="TimeFrom" class="text-danger small"></span>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <div class="form-floating mb-3">
+                                    <input asp-for="TimeTo" class="form-control" type="time" />
+                                    <label asp-for="TimeTo" class="form-label">
+                                        <i class="fas fa-clock me-2"></i>Time To
+                                    </label>
+                                    <span asp-validation-for="TimeTo" class="text-danger small"></span>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <div class="form-floating mb-3">
+                                    <input asp-for="Speaker" class="form-control" placeholder="Speaker (Optional)" />
+                                    <label asp-for="Speaker" class="form-label">
+                                        <i class="fas fa-microphone me-2"></i>Speaker
+                                    </label>
+                                    <span asp-validation-for="Speaker" class="text-danger small"></span>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <div class="form-floating mb-3">
+                                    <select asp-for="NatureOfActivity" class="form-select">
+                                        <option value="">Select Nature of Activity</option>
+                                        <option value="Conference">Conference</option>
+                                        <option value="Seminar">Seminar</option>
+                                        <option value="Workshop">Workshop</option>
+                                        <option value="Meeting">Meeting</option>
+                                        <option value="Training">Training</option>
+                                        <option value="Presentation">Presentation</option>
+                                        <option value="Competition">Competition</option>
+                                        <option value="Exhibition">Exhibition</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                    <label asp-for="NatureOfActivity" class="form-label">
+                                        <i class="fas fa-tag me-2"></i>Nature of Activity
+                                    </label>
+                                    <span asp-validation-for="NatureOfActivity" class="text-danger small"></span>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-12">
+                                <div class="form-floating mb-3">
+                                    <textarea asp-for="Participants" class="form-control" placeholder="Participants" style="height: 100px"></textarea>
+                                    <label asp-for="Participants" class="form-label">
+                                        <i class="fas fa-users me-2"></i>Participants
+                                    </label>
+                                    <span asp-validation-for="Participants" class="text-danger small"></span>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-12">
+                                <div class="form-floating mb-3">
+                                    <textarea asp-for="PurposeObjective" class="form-control" placeholder="Purpose/Objective" style="height: 120px"></textarea>
+                                    <label asp-for="PurposeObjective" class="form-label">
+                                        <i class="fas fa-bullseye me-2"></i>Purpose/Objective
+                                    </label>
+                                    <span asp-validation-for="PurposeObjective" class="text-danger small"></span>
+                                </div>
+                            </div>
+
+                            <!-- Resources Section -->
+                            <div class="col-12 mt-4">
+                                <h5 class="text-primary mb-3">
+                                    <i class="fas fa-tools me-2"></i>Resources & Funding
+                                </h5>
+                                <hr class="mb-4">
+                            </div>
+                            
+                            <div class="col-md-12">
+                                <div class="form-floating mb-3">
+                                    <textarea asp-for="EquipmentFacilitiesNeeded" class="form-control" placeholder="Equipment & Other Facilities Needed" style="height: 100px"></textarea>
+                                    <label asp-for="EquipmentFacilitiesNeeded" class="form-label">
+                                        <i class="fas fa-tools me-2"></i>Equipment & Other Facilities Needed
+                                    </label>
+                                    <span asp-validation-for="EquipmentFacilitiesNeeded" class="text-danger small"></span>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <div class="form-floating mb-3">
+                                    <select asp-for="SourceOfFunds" class="form-select">
+                                        <option value="">Select Source of Funds</option>
+                                        <option value="Department Budget">Department Budget</option>
+                                        <option value="Organization Budget">Organization Budget</option>
+                                        <option value="External Sponsor">External Sponsor</option>
+                                        <option value="Student Fees">Student Fees</option>
+                                        <option value="Grant">Grant</option>
+                                        <option value="Self-Funded">Self-Funded</option>
+                                        <option value="N/A">N/A</option>
+                                    </select>
+                                    <label asp-for="SourceOfFunds" class="form-label">
+                                        <i class="fas fa-dollar-sign me-2"></i>Source of Funds
+                                    </label>
+                                    <span asp-validation-for="SourceOfFunds" class="text-danger small"></span>
+                                </div>
+                            </div>
+
+                            <!-- Documents Section -->
+                            <div class="col-12 mt-4">
+                                <h5 class="text-primary mb-3">
+                                    <i class="fas fa-file-alt me-2"></i>Supporting Documents
+                                </h5>
+                                <hr class="mb-4">
+                            </div>
+                            
+                            <div class="col-md-12">
+                                <div class="form-floating mb-3">
+                                    <textarea asp-for="AttachedDocuments" class="form-control" placeholder="Attached Documents" style="height: 100px"></textarea>
+                                    <label asp-for="AttachedDocuments" class="form-label">
+                                        <i class="fas fa-file-alt me-2"></i>Attached Documents
+                                    </label>
+                                    <span asp-validation-for="AttachedDocuments" class="text-danger small"></span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Form Actions -->
+                        <div class="row mt-5">
+                            <div class="col-12">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <a asp-action="Index" class="btn btn-outline-secondary btn-lg rounded-pill px-4">
+                                        <i class="fas fa-times me-2"></i>Cancel
+                                    </a>
+                                    <button type="submit" class="btn btn-primary btn-lg rounded-pill px-5">
+                                        <i class="fas fa-save me-2"></i>Submit Reservation
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Help Section -->
+            <div class="card mt-4 border-0 bg-light">
+                <div class="card-body">
+                    <h6 class="text-primary mb-3">
+                        <i class="fas fa-info-circle me-2"></i>Reservation Guidelines
+                    </h6>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul class="list-unstyled mb-0">
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i>All required fields must be completed</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Provide clear activity objectives</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul class="list-unstyled mb-0">
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Specify equipment needs clearly</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Review information before submission</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
