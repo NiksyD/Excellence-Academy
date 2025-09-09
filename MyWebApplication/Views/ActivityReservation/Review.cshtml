@@ -294,39 +294,5 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    <script>
-        function submitApproval(action) {
-            // Find the form by method and action
-            const form = document.querySelector('form[method="post"]');
-            if (!form) {
-                console.error('Form not found');
-                return;
-            }
-            
-            // Remove any existing action inputs to avoid duplicates
-            const existingActionInput = form.querySelector('input[name="action"]');
-            if (existingActionInput) {
-                existingActionInput.remove();
-            }
-            
-            // Create a hidden input for the action
-            const actionInput = document.createElement('input');
-            actionInput.type = 'hidden';
-            actionInput.name = 'action';
-            actionInput.value = action;
-            form.appendChild(actionInput);
-            
-            // Close the modal
-            const modal = document.querySelector('.modal.show');
-            if (modal) {
-                const modalInstance = bootstrap.Modal.getInstance(modal);
-                if (modalInstance) {
-                    modalInstance.hide();
-                }
-            }
-            
-            // Submit the form
-            form.submit();
-        }
-    </script>
+    <script src="~/js/ActivityReservation/review.js"></script>
 }
