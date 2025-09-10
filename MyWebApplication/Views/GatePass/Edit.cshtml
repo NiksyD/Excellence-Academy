@@ -54,7 +54,7 @@
                         </span>
                     </div>
 
-                    <form asp-action="Edit" method="post" id="editGatePassForm">
+                    <form asp-action="Edit" method="post" enctype="multipart/form-data" id="editGatePassForm">
                         <div class="row g-4">
                             <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
                             
@@ -217,15 +217,121 @@
                                 </h5>
                                 <hr class="mb-4">
                             </div>
-                            
+            
                             <div class="col-md-12">
-                                <div class="form-floating mb-3">
-                                    <textarea asp-for="AttachedDocuments" class="form-control" placeholder="Attached Documents" style="height: 100px"></textarea>
-                                    <label asp-for="AttachedDocuments" class="form-label">
-                                        <i class="fas fa-file-alt me-2"></i>Attached Study Load and Registration
-                                    </label>
-                                    <span asp-validation-for="AttachedDocuments" class="text-danger small"></span>
+                                <label class="form-label fw-medium mb-3">
+                                    <i class="fas fa-file-alt me-2"></i>Attached Study Load and Registration
+                                </label>
+                
+                                <!-- Enhanced File Upload Area -->
+                                <div id="fileUploadArea" class="file-upload-zone border border-2 border-dashed rounded-3 p-5 text-center mb-4 position-relative" style="border-color: #dee2e6; background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%); transition: all 0.3s ease; min-height: 200px;">
+                                    <div class="upload-content">
+                                        <div class="upload-icon mb-3">
+                                            <i class="fas fa-cloud-upload-alt fa-4x text-primary opacity-75"></i>
+                                        </div>
+                                        <h4 class="fw-bold text-dark mb-2">Drag & Drop Files Here</h4>
+                                        <p class="text-muted mb-3">or click to browse and select multiple files</p>
+                        
+                                        <!-- Hidden File Input -->
+                                        <input type="file" id="fileInput" name="files" multiple accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" style="display: none;">
+                        
+                                        <!-- Browse Button -->
+                                        <button type="button" class="btn btn-primary btn-lg rounded-pill px-4 py-2 mb-3" onclick="document.getElementById('fileInput').click()">
+                                            <i class="fas fa-folder-open me-2"></i>Browse Files
+                                        </button>
+                        
+                                        <!-- File Format Info -->
+                                        <div class="file-format-info mt-3">
+                                            <div class="row justify-content-center">
+                                                <div class="col-auto">
+                                                    <div class="d-flex align-items-center gap-3 flex-wrap justify-content-center">
+                                                        <span class="badge bg-danger-subtle text-danger px-3 py-2">
+                                                            <i class="fas fa-file-pdf me-1"></i>PDF
+                                                        </span>
+                                                        <span class="badge bg-primary-subtle text-primary px-3 py-2">
+                                                            <i class="fas fa-file-word me-1"></i>DOC/DOCX
+                                                        </span>
+                                                        <span class="badge bg-success-subtle text-success px-3 py-2">
+                                                            <i class="fas fa-file-image me-1"></i>JPG/PNG
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                    
+                                    <!-- Upload Progress Overlay -->
+                                    <div id="uploadProgress" class="position-absolute top-0 start-0 w-100 h-100 d-none upload-progress d-flex align-items-center justify-content-center" style="background: rgba(255, 255, 255, 0.9);">
+                                        <div class="text-center">
+                                            <div class="spinner-border text-primary mb-3" role="status">
+                                                <span class="visually-hidden">Uploading...</span>
+                                            </div>
+                                            <p class="text-primary fw-medium">Processing files...</p>
+                                        </div>
+                                    </div>
                                 </div>
+                
+                                <!-- File List Container -->
+                                <div id="fileListContainer" class="file-list-container d-none">
+                                    <div class="card shadow-sm">
+                                        <div class="card-header text-white d-flex justify-content-between align-items-center">
+                                            <h6 class="mb-0">
+                                                <i class="fas fa-files me-2"></i>Selected Files
+                                            </h6>
+                                            <span id="fileCount" class="badge bg-light text-primary">0</span>
+                                        </div>
+                                        <div class="card-body p-0">
+                                            <ul id="fileList" class="list-group list-group-flush">
+                                                <!-- Files will be added here dynamically -->
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <!-- Existing Files Display -->
+                                @if (Model.Documents != null && Model.Documents.Any())
+                                {
+                                    <div class="existing-files-container mt-4">
+                                        <div class="card shadow-sm">
+                                            <div class="card-header bg-info text-white d-flex justify-content-between align-items-center">
+                                                <h6 class="mb-0">
+                                                    <i class="fas fa-folder me-2"></i>Existing Files
+                                                </h6>
+                                                <span class="badge bg-light text-info">@Model.Documents.Count()</span>
+                                            </div>
+                                            <div class="card-body p-0">
+                                                <ul class="list-group list-group-flush">
+                                                    @foreach (var document in Model.Documents)
+                                                    {
+                                                        <li class="list-group-item d-flex justify-content-between align-items-center py-3">
+                                                            <div class="d-flex align-items-center">
+                                                                <div class="file-icon me-3">
+                                                                    <i class="fas fa-file-alt fa-2x text-info"></i>
+                                                                </div>
+                                                                <div>
+                                                                    <h6 class="mb-1 fw-medium">@document.FileName</h6>
+                                                                    <small class="text-muted">
+                                                                        <i class="fas fa-calendar me-1"></i>Uploaded: @document.UploadedAt.ToString("MMM dd, yyyy")
+                                                                    </small>
+                                                                </div>
+                                                            </div>
+                                                            <div class="file-actions">
+                                                                <a href="@Url.Action("ViewFile", "GatePass", new { id = document.Id })" 
+                                                                   class="btn btn-outline-primary btn-sm me-2" target="_blank">
+                                                                    <i class="fas fa-eye"></i>
+                                                                </a>
+                                                                <a href="@Url.Action("DownloadFile", "GatePass", new { id = document.Id })" 
+                                                                   class="btn btn-outline-success btn-sm">
+                                                                    <i class="fas fa-download"></i>
+                                                                </a>
+                                                            </div>
+                                                        </li>
+                                                    }
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
                             </div>
 
                             <!-- Additional Information Section -->
@@ -315,6 +421,10 @@
         </div>
     </div>
 </div>
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/GatePass/create.css" />
+}
 
 @section Scripts {
     @{

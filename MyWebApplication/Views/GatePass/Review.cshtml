@@ -99,14 +99,6 @@
                             </div>
                         </div>
                     </div>
-                    
-                    @if (!string.IsNullOrEmpty(Model.AttachedDocuments))
-                    {
-                        <div class="mb-3">
-                            <label class="form-label fw-medium">Attached Documents</label>
-                            <p class="mb-1">@Model.AttachedDocuments</p>
-                        </div>
-                    }
                 </div>
             </div>
 
@@ -130,7 +122,6 @@
                         <input type="hidden" asp-for="Maker" />
                         <input type="hidden" asp-for="Color" />
                         <input type="hidden" asp-for="VehiclePlateNo" />
-                        <input type="hidden" asp-for="AttachedDocuments" />
                         <input type="hidden" asp-for="Date" />
                         <input type="hidden" asp-for="DateCreated" />
                         <input type="hidden" asp-for="Status" />

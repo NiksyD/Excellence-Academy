@@ -186,6 +186,50 @@ namespace MyWebApplication.Migrations
                     b.ToTable("GatePasses");
                 });
 
+            modelBuilder.Entity("MyWebApplication.Models.GatePassDocument", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ContentType")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("FileName")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("FilePath")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<long>("FileSize")
+                        .HasColumnType("bigint");
+
+                    b.Property<int>("GatePassId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("StoredFileName")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<DateTime>("UploadedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GatePassId");
+
+                    b.ToTable("GatePassDocuments");
+                });
+
             modelBuilder.Entity("MyWebApplication.Models.Student", b =>
                 {
                     b.Property<int>("Id")
@@ -216,6 +260,22 @@ namespace MyWebApplication.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Students");
+                });
+
+            modelBuilder.Entity("MyWebApplication.Models.GatePassDocument", b =>
+                {
+                    b.HasOne("MyWebApplication.Models.GatePass", "GatePass")
+                        .WithMany("Documents")
+                        .HasForeignKey("GatePassId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("GatePass");
+                });
+
+            modelBuilder.Entity("MyWebApplication.Models.GatePass", b =>
+                {
+                    b.Navigation("Documents");
                 });
 #pragma warning restore 612, 618
         }

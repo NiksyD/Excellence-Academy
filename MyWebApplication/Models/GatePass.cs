@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 
 namespace MyWebApplication.Models
 {
@@ -52,8 +52,9 @@ namespace MyWebApplication.Models
         [Display(Name = "Color")]
         public string? Color { get; set; }
 
-        [Display(Name = "Attached Study Load and Registration")]
-        public string? AttachedDocuments { get; set; }
+
+        // Navigation property for file attachments
+        public virtual ICollection<GatePassDocument> Documents { get; set; } = new List<GatePassDocument>();
 
         [Display(Name = "Status")]
         public string Status { get; set; } = "Pending";

@@ -1,0 +1,186 @@
+/* Enhanced File Upload Styles for GatePass Create */
+
+.file-upload-zone {
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.file-upload-zone:hover {
+    border-color: #0d6efd !important;
+    background: linear-gradient(135deg, #e7f3ff 0%, #f8f9fa 100%) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(13, 110, 253, 0.15);
+}
+
+.file-upload-zone.drag-over {
+    border-color: #0d6efd !important;
+    background: linear-gradient(135deg, #e7f3ff 0%, #cfe2ff 100%) !important;
+    box-shadow: 0 0 20px rgba(13, 110, 253, 0.3);
+    animation: pulse-border 1.5s infinite;
+}
+
+@keyframes pulse-border {
+    0% { box-shadow: 0 0 20px rgba(13, 110, 253, 0.3); }
+    50% { box-shadow: 0 0 30px rgba(13, 110, 253, 0.5); }
+    100% { box-shadow: 0 0 20px rgba(13, 110, 253, 0.3); }
+}
+
+.upload-icon {
+    transition: all 0.3s ease;
+}
+
+.file-upload-zone:hover .upload-icon i {
+    transform: scale(1.1);
+    color: #0d6efd !important;
+}
+
+.file-upload-zone.drag-over .upload-icon i {
+    transform: scale(1.2);
+    animation: bounce 0.6s ease-in-out infinite alternate;
+}
+
+@keyframes bounce {
+    from { transform: scale(1.2) translateY(0px); }
+    to { transform: scale(1.2) translateY(-10px); }
+}
+
+.file-format-info .badge {
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+}
+
+.file-format-info .badge:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.bg-danger-subtle {
+    background-color: rgba(220, 53, 69, 0.1) !important;
+    border-color: rgba(220, 53, 69, 0.2) !important;
+}
+
+.bg-primary-subtle {
+    background-color: rgba(13, 110, 253, 0.1) !important;
+    border-color: rgba(13, 110, 253, 0.2) !important;
+}
+
+.bg-success-subtle {
+    background-color: rgba(25, 135, 84, 0.1) !important;
+    border-color: rgba(25, 135, 84, 0.2) !important;
+}
+
+.file-list-container .card {
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.file-list-container .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.file-list-container .card-header {
+    background: linear-gradient(135deg, #0d6efd 0%, #0b5ed7 100%);
+    border: none;
+    padding: 1rem 1.25rem;
+}
+
+.file-list-container .list-group-item {
+    transition: all 0.3s ease;
+    border-left: 4px solid transparent;
+}
+
+.file-list-container .list-group-item:hover {
+    background-color: #f8f9fa;
+    border-left-color: #0d6efd;
+    transform: translateX(5px);
+}
+
+.file-icon {
+    transition: all 0.3s ease;
+}
+
+.file-list-container .list-group-item:hover .file-icon i {
+    transform: scale(1.1);
+}
+
+.file-actions .btn {
+    transition: all 0.3s ease;
+}
+
+.file-actions .btn:hover {
+    transform: scale(1.1);
+}
+
+.upload-progress {
+    backdrop-filter: blur(5px);
+    border-radius: 12px;
+}
+
+.upload-progress .spinner-border {
+    width: 3rem;
+    height: 3rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .file-upload-zone {
+        padding: 2rem 1rem !important;
+        min-height: 150px !important;
+    }
+    
+    .upload-icon i {
+        font-size: 2.5rem !important;
+    }
+    
+    .file-format-info .d-flex {
+        flex-direction: column !important;
+        gap: 0.5rem !important;
+    }
+    
+    .file-format-info .badge {
+        margin: 0.25rem !important;
+    }
+}
+
+/* Animation for file addition */
+.list-group-item {
+    animation: slideInFromRight 0.3s ease-out;
+}
+
+@keyframes slideInFromRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Custom scrollbar for file list */
+.file-list-container .card-body {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.file-list-container .card-body::-webkit-scrollbar {
+    width: 6px;
+}
+
+.file-list-container .card-body::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+}
+
+.file-list-container .card-body::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 3px;
+}
+
+.file-list-container .card-body::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}

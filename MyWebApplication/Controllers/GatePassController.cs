@@ -1,16 +1,20 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using MyWebApplication.Data;
 using MyWebApplication.Models;
+using MyWebApplication.Services;
 
 namespace MyWebApplication.Controllers
 {
     public class GatePassController : Controller
     {
         private readonly ApplicationDbContext _db;
+        private readonly IFileUploadService _fileUploadService;
 
-        public GatePassController(ApplicationDbContext db)
+        public GatePassController(ApplicationDbContext db, IFileUploadService fileUploadService)
         {
             _db = db;
+            _fileUploadService = fileUploadService;
         }
 
         public IActionResult Index()
@@ -28,17 +32,37 @@ namespace MyWebApplication.Controllers
         //POST
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(GatePass obj)
+        public async Task<IActionResult> Create(GatePass obj, IFormFileCollection files)
         {
+            // Debug: Check if files are received
+            System.Diagnostics.Debug.WriteLine($"Files received: {files?.Count ?? 0}");
+            
             if (ModelState.IsValid)
             {
+                // Save the GatePass first to get the ID
                 _db.GatePasses.Add(obj);
                 _db.SaveChanges();
+
+                // Handle file uploads using the service
+                if (files != null && files.Count > 0)
+                {
+                    System.Diagnostics.Debug.WriteLine($"Processing {files.Count} files");
+                    var documents = await _fileUploadService.SaveFilesAsync(files, obj.Id);
+                    _db.GatePassDocuments.AddRange(documents);
+                    _db.SaveChanges();
+                    System.Diagnostics.Debug.WriteLine($"Saved {documents.Count} documents to database");
+                }
+                else
+                {
+                    System.Diagnostics.Debug.WriteLine("No files to process");
+                }
+
                 TempData["success"] = "Gate Pass application submitted successfully";
                 return RedirectToAction("Index");
             }
             return View(obj);
         }
+
 
         //GET
         [HttpGet]
@@ -48,7 +72,9 @@ namespace MyWebApplication.Controllers
             {
                 return NotFound();
             }
-            var gatePass = _db.GatePasses.Find(id);
+            var gatePass = _db.GatePasses
+                .Include(g => g.Documents)
+                .FirstOrDefault(g => g.Id == id);
             if (gatePass == null)
             {
                 return NotFound();
@@ -82,15 +108,18 @@ namespace MyWebApplication.Controllers
         //POST
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(GatePass obj)
+        public async Task<IActionResult> Edit(GatePass obj, List<IFormFile> files)
         {
-            var existingGatePass = _db.GatePasses.Find(obj.Id);
+            var existingGatePass = _db.GatePasses
+                .Include(g => g.Documents)
+                .FirstOrDefault(g => g.Id == obj.Id);
+                
             if (existingGatePass == null)
             {
                 return NotFound();
             }
-            
-            // Only allow editing if status is Pending
+
+            // Check if the gate pass can be edited
             if (existingGatePass.Status != "Pending")
             {
                 TempData["error"] = "Gate Pass can only be edited when status is Pending";
@@ -101,6 +130,7 @@ namespace MyWebApplication.Controllers
             {
                 // Update all editable fields
                 existingGatePass.Name = obj.Name;
+                existingGatePass.Address = obj.Address;
                 existingGatePass.RegistrationExpiryDate = obj.RegistrationExpiryDate;
                 existingGatePass.Department = obj.Department;
                 existingGatePass.Faculty = obj.Faculty;
@@ -109,14 +139,41 @@ namespace MyWebApplication.Controllers
                 existingGatePass.Maker = obj.Maker;
                 existingGatePass.Color = obj.Color;
                 existingGatePass.VehiclePlateNo = obj.VehiclePlateNo;
-                existingGatePass.AttachedDocuments = obj.AttachedDocuments;
                 existingGatePass.Date = obj.Date;
+                existingGatePass.Remarks = obj.Remarks;
+
+                // Handle file uploads if any new files are provided
+                if (files != null && files.Count > 0 && files.Any(f => f.Length > 0))
+                {
+                    try
+                    {
+                        var validFiles = files.Where(f => f.Length > 0).ToList();
+                        var formFileCollection = new FormFileCollection();
+                        foreach (var file in validFiles)
+                        {
+                            formFileCollection.Add(file);
+                        }
+                        
+                        var documents = await _fileUploadService.SaveFilesAsync(formFileCollection, existingGatePass.Id);
+                        
+                        foreach (var document in documents)
+                        {
+                            _db.GatePassDocuments.Add(document);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        TempData["error"] = $"Error uploading files: {ex.Message}";
+                        return View(existingGatePass);
+                    }
+                }
                 
                 _db.SaveChanges();
-                TempData["success"] = "Gate Pass updated successfully";
+                TempData["success"] = "Gate Pass updated successfully" + 
+                    (files?.Any(f => f.Length > 0) == true ? $" with {files.Count(f => f.Length > 0)} new file(s)" : "");
                 return RedirectToAction("Index");
             }
-            return View(obj);
+            return View(existingGatePass);
         }
 
 

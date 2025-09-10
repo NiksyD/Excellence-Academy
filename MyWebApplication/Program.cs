@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using MyWebApplication.Data;
+using MyWebApplication.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,9 @@ builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
     builder.Configuration.GetConnectionString("DefaultConnection")
 ));
+
+// Register file upload service
+builder.Services.AddScoped<IFileUploadService, FileUploadService>();
 var app = builder.Build();
 
 
