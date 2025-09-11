@@ -102,6 +102,66 @@
                 </div>
             </div>
 
+            <!-- Attached Documents -->
+            @if (Model.Documents != null && Model.Documents.Any())
+            {
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header bg-light">
+                        <h5 class="mb-0">
+                            <i class="fas fa-paperclip me-2"></i>Attached Documents
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row g-3">
+                            @foreach (var document in Model.Documents)
+                            {
+                                <div class="col-md-6">
+                                    <div class="border rounded p-3 h-100">
+                                        <div class="d-flex align-items-center mb-2">
+                                            @if (document.ContentType.Contains("pdf"))
+                                            {
+                                                <i class="fas fa-file-pdf fa-2x text-danger me-3"></i>
+                                            }
+                                            else if (document.ContentType.Contains("word") || document.ContentType.Contains("document"))
+                                            {
+                                                <i class="fas fa-file-word fa-2x text-primary me-3"></i>
+                                            }
+                                            else if (document.ContentType.Contains("image"))
+                                            {
+                                                <i class="fas fa-file-image fa-2x text-success me-3"></i>
+                                            }
+                                            else
+                                            {
+                                                <i class="fas fa-file fa-2x text-muted me-3"></i>
+                                            }
+                                            <div class="flex-grow-1">
+                                                <h6 class="mb-1">@document.FileName</h6>
+                                                <small class="text-muted">
+                                                    @(Math.Round((double)document.FileSize / 1024 / 1024, 2)) MB • 
+                                                    Uploaded @document.UploadedAt.ToString("MMM dd, yyyy")
+                                                </small>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex gap-2">
+                                            <a href="/uploads/gatepasses/@document.StoredFileName" 
+                                               target="_blank" 
+                                               class="btn btn-outline-primary btn-sm">
+                                                <i class="fas fa-eye me-1"></i>View
+                                            </a>
+                                            <a href="/uploads/gatepasses/@document.StoredFileName" 
+                                               download="@document.FileName" 
+                                               class="btn btn-outline-success btn-sm">
+                                                <i class="fas fa-download me-1"></i>Download
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+
             <!-- Approval Form -->
             <div class="card shadow-lg">
                 <div class="card-header bg-success text-white">

@@ -1,25 +1,21 @@
 // Real-time preview functionality
 function updatePreview() {
-    const name = document.getElementById('Name')?.value || '';
-    const department = document.getElementById('Department')?.value || '';
-    const plateNo = document.getElementById('VehiclePlateNo')?.value || '';
-    const vehicleType = document.getElementById('VehicleType')?.value || '';
+    const name = document.getElementById('Name').value || '';
+    const department = document.getElementById('Department').value || '';
+    const plateNo = document.getElementById('VehiclePlateNo').value || '';
+    const vehicleType = document.getElementById('VehicleType').value || '';
     
     const previewName = document.getElementById('previewName');
     const previewDepartment = document.getElementById('previewDepartment');
     const previewVehicle = document.getElementById('previewVehicle');
     
-    if (previewName) previewName.textContent = name || 'Applicant Name';
-    if (previewDepartment) previewDepartment.textContent = department || 'Department';
-    if (previewVehicle) previewVehicle.textContent = `${plateNo} - ${vehicleType}`.trim() || 'Vehicle Info';
+    previewName.textContent = name || 'Applicant Name';
+    previewDepartment.textContent = department || 'Department';
+    previewVehicle.textContent = `${plateNo} - ${vehicleType}`.trim() || 'Vehicle Info';
 }
 
-// File upload variables
-let selectedFiles = [];
-
-// Initialize everything when DOM is ready
+// Add event listeners for real-time preview
 document.addEventListener('DOMContentLoaded', function() {
-    // Real-time preview setup
     const inputs = ['Name', 'Department', 'VehiclePlateNo', 'VehicleType'];
     inputs.forEach(id => {
         const element = document.getElementById(id);
@@ -28,52 +24,43 @@ document.addEventListener('DOMContentLoaded', function() {
             element.addEventListener('change', updatePreview);
         }
     });
-
-    // Form validation
-    const form = document.getElementById('editGatePassForm');
-    if (form) {
-        form.addEventListener('submit', function(e) {
-            const requiredFields = ['Name', 'Department', 'Address', 'VehiclePlateNo', 'VehicleType'];
-            let isValid = true;
-            
-            requiredFields.forEach(field => {
-                const input = document.getElementById(field);
-                if (input && !input.value.trim()) {
-                    isValid = false;
-                    input.classList.add('is-invalid');
-                } else if (input) {
-                    input.classList.remove('is-invalid');
-                }
-            });
-            
-            if (!isValid) {
-                e.preventDefault();
-                alert('Please fill in all required fields.');
-            }
-        });
-    }
-
-    // Auto-uppercase plate number
-    const plateInput = document.getElementById('VehiclePlateNo');
-    if (plateInput) {
-        plateInput.addEventListener('input', function(e) {
-            e.target.value = e.target.value.toUpperCase();
-            updatePreview();
-        });
-    }
-
-    // Initialize file upload
-    initializeFileUpload();
 });
 
-function initializeFileUpload() {
+// Form validation enhancement
+document.getElementById('editGatePassForm').addEventListener('submit', function(e) {
+    const requiredFields = ['Name', 'Department', 'Address', 'VehiclePlateNo', 'VehicleType'];
+    let isValid = true;
+    
+    requiredFields.forEach(field => {
+        const input = document.getElementById(field);
+        if (!input.value.trim()) {
+            isValid = false;
+            input.classList.add('is-invalid');
+        } else {
+            input.classList.remove('is-invalid');
+        }
+    });
+    
+    if (!isValid) {
+        e.preventDefault();
+        alert('Please fill in all required fields.');
+    }
+});
+
+// Auto-uppercase plate number
+document.getElementById('VehiclePlateNo').addEventListener('input', function(e) {
+    e.target.value = e.target.value.toUpperCase();
+    updatePreview();
+});
+
+// File Upload Functionality
+document.addEventListener('DOMContentLoaded', function() {
     const fileUploadArea = document.getElementById('fileUploadArea');
     const fileInput = document.getElementById('fileInput');
     const fileListContainer = document.getElementById('fileListContainer');
     const fileList = document.getElementById('fileList');
     const fileCount = document.getElementById('fileCount');
-
-    if (!fileUploadArea || !fileInput) return;
+    let selectedFiles = [];
 
     // Drag and drop functionality
     fileUploadArea.addEventListener('dragover', function(e) {
@@ -113,7 +100,7 @@ function initializeFileUpload() {
     function handleFiles(files) {
         const validFiles = files.filter(file => {
             const validTypes = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'image/jpeg', 'image/jpg', 'image/png'];
-            const maxSize = 10 * 1024 * 1024; // 10MB
+            const maxSize = 5 * 1024 * 1024; // 5MB
 
             if (!validTypes.includes(file.type)) {
                 showFileError(`File "${file.name}" is not a supported format. Please upload PDF, DOC, DOCX, JPG, or PNG files.`);
@@ -121,7 +108,7 @@ function initializeFileUpload() {
             }
 
             if (file.size > maxSize) {
-                showFileError(`File "${file.name}" is too large. Maximum file size is 10MB.`);
+                showFileError(`File "${file.name}" is too large. Maximum file size is 5MB.`);
                 return false;
             }
 
@@ -131,12 +118,6 @@ function initializeFileUpload() {
         if (validFiles.length > 0) {
             selectedFiles = [...selectedFiles, ...validFiles];
             updateFileList();
-            
-            // Update the file input with all selected files
-            const dt = new DataTransfer();
-            selectedFiles.forEach(file => dt.items.add(file));
-            fileInput.files = dt.files;
-            
             showSuccessMessage(`${validFiles.length} file(s) selected successfully.`);
         }
     }
@@ -258,5 +239,39 @@ function initializeFileUpload() {
                 }
             }, 3000);
         }
+    }
+});
+
+// Delete document functionality
+function deleteDocument(documentId, fileName) {
+    if (confirm(`Are you sure you want to delete "${fileName}"? This action cannot be undone.`)) {
+        fetch(`/GatePass/DeleteDocument/${documentId}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value
+            }
+        })
+        .then(response => {
+            if (response.ok) {
+                // Remove the document element from the DOM
+                const documentElement = document.querySelector(`button[onclick*="${documentId}"]`).closest('.col-md-6');
+                documentElement.remove();
+                
+                // Check if there are any documents left
+                const remainingDocs = document.querySelectorAll('.existing-files-container .col-md-6');
+                if (remainingDocs.length === 0) {
+                    document.querySelector('.existing-files-container').remove();
+                }
+                
+                showSuccessMessage(`"${fileName}" has been deleted successfully.`);
+            } else {
+                showFileError(`Failed to delete "${fileName}". Please try again.`);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            showFileError(`An error occurred while deleting "${fileName}".`);
+        });
     }
 }

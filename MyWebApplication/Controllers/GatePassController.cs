@@ -10,11 +10,13 @@ namespace MyWebApplication.Controllers
     {
         private readonly ApplicationDbContext _db;
         private readonly IFileUploadService _fileUploadService;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public GatePassController(ApplicationDbContext db, IFileUploadService fileUploadService)
+        public GatePassController(ApplicationDbContext db, IFileUploadService fileUploadService, IWebHostEnvironment webHostEnvironment)
         {
             _db = db;
             _fileUploadService = fileUploadService;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         public IActionResult Index()
@@ -89,7 +91,7 @@ namespace MyWebApplication.Controllers
             {
                 return NotFound();
             }
-            var gatePass = _db.GatePasses.Find(id);
+            var gatePass = _db.GatePasses.Include(g => g.Documents).FirstOrDefault(g => g.Id == id);
             if (gatePass == null)
             {
                 return NotFound();
@@ -108,18 +110,15 @@ namespace MyWebApplication.Controllers
         //POST
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(GatePass obj, List<IFormFile> files)
+        public async Task<IActionResult> Edit(GatePass obj, IFormFileCollection files)
         {
-            var existingGatePass = _db.GatePasses
-                .Include(g => g.Documents)
-                .FirstOrDefault(g => g.Id == obj.Id);
-                
+            var existingGatePass = _db.GatePasses.Find(obj.Id);
             if (existingGatePass == null)
             {
                 return NotFound();
             }
-
-            // Check if the gate pass can be edited
+            
+            // Only allow editing if status is Pending
             if (existingGatePass.Status != "Pending")
             {
                 TempData["error"] = "Gate Pass can only be edited when status is Pending";
@@ -130,7 +129,6 @@ namespace MyWebApplication.Controllers
             {
                 // Update all editable fields
                 existingGatePass.Name = obj.Name;
-                existingGatePass.Address = obj.Address;
                 existingGatePass.RegistrationExpiryDate = obj.RegistrationExpiryDate;
                 existingGatePass.Department = obj.Department;
                 existingGatePass.Faculty = obj.Faculty;
@@ -140,40 +138,23 @@ namespace MyWebApplication.Controllers
                 existingGatePass.Color = obj.Color;
                 existingGatePass.VehiclePlateNo = obj.VehiclePlateNo;
                 existingGatePass.Date = obj.Date;
-                existingGatePass.Remarks = obj.Remarks;
-
-                // Handle file uploads if any new files are provided
-                if (files != null && files.Count > 0 && files.Any(f => f.Length > 0))
-                {
-                    try
-                    {
-                        var validFiles = files.Where(f => f.Length > 0).ToList();
-                        var formFileCollection = new FormFileCollection();
-                        foreach (var file in validFiles)
-                        {
-                            formFileCollection.Add(file);
-                        }
-                        
-                        var documents = await _fileUploadService.SaveFilesAsync(formFileCollection, existingGatePass.Id);
-                        
-                        foreach (var document in documents)
-                        {
-                            _db.GatePassDocuments.Add(document);
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        TempData["error"] = $"Error uploading files: {ex.Message}";
-                        return View(existingGatePass);
-                    }
-                }
                 
                 _db.SaveChanges();
-                TempData["success"] = "Gate Pass updated successfully" + 
-                    (files?.Any(f => f.Length > 0) == true ? $" with {files.Count(f => f.Length > 0)} new file(s)" : "");
+
+                // Handle file uploads using the service
+                if (files != null && files.Count > 0)
+                {
+                    System.Diagnostics.Debug.WriteLine($"Processing {files.Count} files for edit");
+                    var documents = await _fileUploadService.SaveFilesAsync(files, obj.Id);
+                    _db.GatePassDocuments.AddRange(documents);
+                    _db.SaveChanges();
+                    System.Diagnostics.Debug.WriteLine($"Saved {documents.Count} new documents to database");
+                }
+                
+                TempData["success"] = "Gate Pass updated successfully";
                 return RedirectToAction("Index");
             }
-            return View(existingGatePass);
+            return View(obj);
         }
 
 
@@ -185,7 +166,9 @@ namespace MyWebApplication.Controllers
             {
                 return NotFound();
             }
-            var gatePass = _db.GatePasses.Find(id);
+            var gatePass = _db.GatePasses
+                .Include(g => g.Documents)
+                .FirstOrDefault(g => g.Id == id);
             if (gatePass == null)
             {
                 return NotFound();
@@ -251,6 +234,44 @@ namespace MyWebApplication.Controllers
 
             _db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> DeleteDocument(int id)
+        {
+            var document = await _db.GatePassDocuments.FindAsync(id);
+            if (document == null)
+            {
+                return NotFound();
+            }
+
+            // Check if the associated GatePass is still editable (Pending status)
+            var gatePass = await _db.GatePasses.FindAsync(document.GatePassId);
+            if (gatePass == null || gatePass.Status != "Pending")
+            {
+                return BadRequest("Documents can only be deleted when the Gate Pass status is Pending");
+            }
+
+            try
+            {
+                // Delete the physical file
+                var filePath = Path.Combine(_webHostEnvironment.WebRootPath, "uploads", "gatepasses", document.StoredFileName);
+                if (System.IO.File.Exists(filePath))
+                {
+                    System.IO.File.Delete(filePath);
+                }
+
+                // Remove from database
+                _db.GatePassDocuments.Remove(document);
+                await _db.SaveChangesAsync();
+
+                return Ok();
+            }
+            catch (Exception)
+            {
+                // Log the error (you might want to use a proper logging framework)
+                return StatusCode(500, "An error occurred while deleting the document");
+            }
         }
     }
 }
