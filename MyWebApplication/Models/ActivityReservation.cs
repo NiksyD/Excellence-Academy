@@ -62,8 +62,6 @@ namespace MyWebApplication.Models
         [Display(Name = "Source of Funds")]
         public string SourceOfFunds { get; set; } = string.Empty;
 
-        [Display(Name = "Attached Documents")]
-        public string? AttachedDocuments { get; set; }
 
         [Display(Name = "Status")]
         public string Status { get; set; } = "Pending";
@@ -79,5 +77,8 @@ namespace MyWebApplication.Models
 
         [Display(Name = "Remarks")]
         public string? Remarks { get; set; }
+
+        // Navigation property for file attachments
+        public virtual ICollection<ActivityReservationDocument> Documents { get; set; } = new List<ActivityReservationDocument>();
     }
 }

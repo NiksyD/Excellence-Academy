@@ -1,0 +1,250 @@
+@model MyWebApplication.Models.LockerRequest
+
+@{
+    ViewData["Title"] = "Locker Request Details - Excellence Academy";
+}
+
+<!-- Header Section -->
+<section class="bg-info text-white py-4" style="background: linear-gradient(135deg, #17a2b8 0%, #138496 100%);">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <h1 class="display-6 fw-bold mb-2">
+                    <i class="fas fa-key me-3"></i>Locker Request Details
+                </h1>
+                <p class="lead mb-0">Request #@Model.Id - @Model.Name</p>
+            </div>
+            <div class="col-md-4 text-md-end">
+                <a asp-action="Index" class="btn btn-light btn-lg rounded-pill px-4">
+                    <i class="fas fa-arrow-left me-2"></i>Back to List
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Main Content -->
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <!-- Status Card -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col-md-8">
+                            <h5 class="mb-1">Request #@Model.Id</h5>
+                            <p class="text-muted mb-0">Submitted on @Model.DateCreated.ToString("MMMM dd, yyyy 'at' hh:mm tt")</p>
+                        </div>
+                        <div class="col-md-4 text-md-end">
+                            @if (Model.Status == "Pending")
+                            {
+                                <span class="badge bg-warning text-dark fs-6 px-3 py-2">
+                                    <i class="fas fa-clock me-1"></i>Pending Review
+                                </span>
+                            }
+                            else if (Model.Status == "Approved")
+                            {
+                                <span class="badge bg-success fs-6 px-3 py-2">
+                                    <i class="fas fa-check me-1"></i>Approved
+                                </span>
+                            }
+                            else if (Model.Status == "Rejected")
+                            {
+                                <span class="badge bg-danger fs-6 px-3 py-2">
+                                    <i class="fas fa-times me-1"></i>Rejected
+                                </span>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Request Details Card -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-light">
+                    <h5 class="mb-0">
+                        <i class="fas fa-info-circle me-2 text-primary"></i>Request Information
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row g-4">
+                        <!-- Personal Information -->
+                        <div class="col-md-6">
+                            <h6 class="text-primary mb-3">
+                                <i class="fas fa-user me-2"></i>Personal Information
+                            </h6>
+                            <div class="mb-3">
+                                <label class="form-label fw-bold text-muted">Full Name</label>
+                                <p class="mb-0">@Model.Name</p>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label fw-bold text-muted">ID Number</label>
+                                <p class="mb-0">@Model.IdNumber</p>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label fw-bold text-muted">Contact Number</label>
+                                <p class="mb-0">@Model.ContactNumber</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Locker Information -->
+                        <div class="col-md-6">
+                            <h6 class="text-primary mb-3">
+                                <i class="fas fa-key me-2"></i>Locker Information
+                            </h6>
+                            <div class="mb-3">
+                                <label class="form-label fw-bold text-muted">Locker Number</label>
+                                <p class="mb-0 fw-bold">@Model.LockerNumber</p>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label fw-bold text-muted">Semester</label>
+                                <p class="mb-0">@Model.Semester</p>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label fw-bold text-muted">Terms Accepted</label>
+                                <p class="mb-0">
+                                    @if (Model.TermsAccepted)
+                                    {
+                                        <span class="badge bg-success">
+                                            <i class="fas fa-check me-1"></i>Yes
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-danger">
+                                            <i class="fas fa-times me-1"></i>No
+                                        </span>
+                                    }
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Attached Documents -->
+            @if (Model.Documents != null && Model.Documents.Any())
+            {
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header bg-light">
+                        <h5 class="mb-0">
+                            <i class="fas fa-paperclip me-2"></i>Attached Documents
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row g-3">
+                            @foreach (var document in Model.Documents)
+                            {
+                                <div class="col-md-6">
+                                    <div class="border rounded p-3 h-100">
+                                        <div class="d-flex align-items-center mb-2">
+                                            @if (document.ContentType.Contains("pdf"))
+                                            {
+                                                <i class="fas fa-file-pdf fa-2x text-danger me-3"></i>
+                                            }
+                                            else if (document.ContentType.Contains("word") || document.ContentType.Contains("document"))
+                                            {
+                                                <i class="fas fa-file-word fa-2x text-primary me-3"></i>
+                                            }
+                                            else if (document.ContentType.Contains("image"))
+                                            {
+                                                <i class="fas fa-file-image fa-2x text-success me-3"></i>
+                                            }
+                                            else
+                                            {
+                                                <i class="fas fa-file fa-2x text-muted me-3"></i>
+                                            }
+                                            <div class="flex-grow-1">
+                                                <h6 class="mb-1">@document.FileName</h6>
+                                                <small class="text-muted">
+                                                    @(Math.Round((double)document.FileSize / 1024 / 1024, 2)) MB • 
+                                                    Uploaded @document.UploadedAt.ToString("MMM dd, yyyy")
+                                                </small>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex gap-2">
+                                            <a href="/uploads/lockerrequests/@document.StoredFileName" 
+                                               target="_blank" 
+                                               class="btn btn-outline-primary btn-sm">
+                                                <i class="fas fa-eye me-1"></i>View
+                                            </a>
+                                            <a href="/uploads/lockerrequests/@document.StoredFileName" 
+                                               download="@document.FileName" 
+                                               class="btn btn-outline-success btn-sm">
+                                                <i class="fas fa-download me-1"></i>Download
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+
+            <!-- Approval Information -->
+            @if (Model.Status != "Pending")
+            {
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header bg-light">
+                        <h5 class="mb-0">
+                            <i class="fas fa-clipboard-check me-2 text-success"></i>Approval Information
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label fw-bold text-muted">Approved/Rejected By</label>
+                                    <p class="mb-0">@Model.ApprovedBy</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label fw-bold text-muted">Decision Date</label>
+                                    <p class="mb-0">@Model.ApprovalDate?.ToString("MMMM dd, yyyy 'at' hh:mm tt")</p>
+                                </div>
+                            </div>
+                            @if (!string.IsNullOrEmpty(Model.Remarks))
+                            {
+                                <div class="col-12">
+                                    <div class="mb-3">
+                                        <label class="form-label fw-bold text-muted">Remarks</label>
+                                        <div class="alert alert-info">
+                                            <i class="fas fa-comment me-2"></i>@Model.Remarks
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+
+            <!-- Action Buttons -->
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <a asp-action="Index" class="btn btn-outline-secondary btn-lg rounded-pill px-4">
+                            <i class="fas fa-arrow-left me-2"></i>Back to List
+                        </a>
+                        <div class="d-flex gap-3">
+                            @if (Model.Status == "Pending")
+                            {
+                                <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary btn-lg rounded-pill px-4">
+                                    <i class="fas fa-edit me-2"></i>Edit Request
+                                </a>
+                                <a asp-action="Review" asp-route-id="@Model.Id" class="btn btn-success btn-lg rounded-pill px-4">
+                                    <i class="fas fa-clipboard-check me-2"></i>Review Request
+                                </a>
+                                <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger btn-lg rounded-pill px-4">
+                                    <i class="fas fa-trash me-2"></i>Delete Request
+                                </a>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

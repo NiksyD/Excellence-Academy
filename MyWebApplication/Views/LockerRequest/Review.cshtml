@@ -1,0 +1,344 @@
+@model MyWebApplication.Models.LockerRequest
+@{
+    ViewData["Title"] = "Review Locker Request - Excellence Academy";
+}
+
+<!-- Header Section -->
+<section class="bg-success text-white py-4" style="background: linear-gradient(135deg, #28a745 0%, #20c997 100%);">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <h1 class="display-6 fw-bold mb-2">
+                    <i class="fas fa-check-circle me-3"></i>Review Locker Request
+                </h1>
+                <p class="lead mb-0">Review and approve locker request application</p>
+            </div>
+            <div class="col-md-4 text-md-end">
+                <a asp-action="Index" class="btn btn-light btn-lg rounded-pill px-4">
+                    <i class="fas fa-arrow-left me-2"></i>Back to List
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Main Content -->
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <!-- Application Summary Card -->
+            <div class="card shadow-lg mb-4">
+                <div class="card-header bg-light">
+                    <h5 class="mb-0">
+                        <i class="fas fa-file-alt me-2 text-primary"></i>
+                        Locker Request Application #@Model.Id
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <!-- Applicant Information -->
+                        <div class="col-md-6">
+                            <h6 class="text-primary mb-3">
+                                <i class="fas fa-user me-2"></i>Applicant Information
+                            </h6>
+                            <div class="mb-3">
+                                <label class="form-label fw-medium">Full Name</label>
+                                <p class="mb-1">@Model.Name</p>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label fw-medium">ID Number</label>
+                                <p class="mb-1">@Model.IdNumber</p>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label fw-medium">Contact Number</label>
+                                <p class="mb-1">@Model.ContactNumber</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Locker Information -->
+                        <div class="col-md-6">
+                            <h6 class="text-primary mb-3">
+                                <i class="fas fa-key me-2"></i>Locker Information
+                            </h6>
+                            <div class="mb-3">
+                                <label class="form-label fw-medium">Locker Number</label>
+                                <p class="mb-1 fw-bold">@Model.LockerNumber</p>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label fw-medium">Semester</label>
+                                <p class="mb-1">@Model.Semester</p>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label fw-medium">Terms Accepted</label>
+                                <p class="mb-1">
+                                    @if (Model.TermsAccepted)
+                                    {
+                                        <span class="badge bg-success">
+                                            <i class="fas fa-check me-1"></i>Yes
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-danger">
+                                            <i class="fas fa-times me-1"></i>No
+                                        </span>
+                                    }
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <hr class="my-4">
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label fw-medium">Application Date</label>
+                                <p class="mb-1">@Model.DateCreated.ToString("MMMM dd, yyyy")</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Attached Documents -->
+            @if (Model.Documents != null && Model.Documents.Any())
+            {
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header bg-light">
+                        <h5 class="mb-0">
+                            <i class="fas fa-paperclip me-2"></i>Attached Documents
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row g-3">
+                            @foreach (var document in Model.Documents)
+                            {
+                                <div class="col-md-6">
+                                    <div class="border rounded p-3 h-100">
+                                        <div class="d-flex align-items-center mb-2">
+                                            @if (document.ContentType.Contains("pdf"))
+                                            {
+                                                <i class="fas fa-file-pdf fa-2x text-danger me-3"></i>
+                                            }
+                                            else if (document.ContentType.Contains("word") || document.ContentType.Contains("document"))
+                                            {
+                                                <i class="fas fa-file-word fa-2x text-primary me-3"></i>
+                                            }
+                                            else if (document.ContentType.Contains("image"))
+                                            {
+                                                <i class="fas fa-file-image fa-2x text-success me-3"></i>
+                                            }
+                                            else
+                                            {
+                                                <i class="fas fa-file fa-2x text-muted me-3"></i>
+                                            }
+                                            <div class="flex-grow-1">
+                                                <h6 class="mb-1">@document.FileName</h6>
+                                                <small class="text-muted">
+                                                    @(Math.Round((double)document.FileSize / 1024 / 1024, 2)) MB • 
+                                                    Uploaded @document.UploadedAt.ToString("MMM dd, yyyy")
+                                                </small>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex gap-2">
+                                            <a href="/uploads/lockerrequests/@document.StoredFileName" 
+                                               target="_blank" 
+                                               class="btn btn-outline-primary btn-sm">
+                                                <i class="fas fa-eye me-1"></i>View
+                                            </a>
+                                            <a href="/uploads/lockerrequests/@document.StoredFileName" 
+                                               download="@document.FileName" 
+                                               class="btn btn-outline-success btn-sm">
+                                                <i class="fas fa-download me-1"></i>Download
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+
+            <!-- Approval Form -->
+            <div class="card shadow-lg">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0">
+                        <i class="fas fa-clipboard-check me-2"></i>
+                        Approval Decision
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Review" method="post">
+                        <input type="hidden" asp-for="Id" />
+                        <input type="hidden" asp-for="Name" />
+                        <input type="hidden" asp-for="IdNumber" />
+                        <input type="hidden" asp-for="LockerNumber" />
+                        <input type="hidden" asp-for="Semester" />
+                        <input type="hidden" asp-for="ContactNumber" />
+                        <input type="hidden" asp-for="TermsAccepted" />
+                        <input type="hidden" asp-for="DateCreated" />
+                        <input type="hidden" asp-for="Status" />
+
+                        <div class="mb-4">
+                            <label asp-for="Remarks" class="form-label fw-medium">
+                                <i class="fas fa-comment me-2"></i>Approval Remarks
+                            </label>
+                            <textarea asp-for="Remarks" class="form-control" rows="4" 
+                                      placeholder="Enter approval remarks or additional conditions..."></textarea>
+                            <span asp-validation-for="Remarks" class="text-danger"></span>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <a asp-action="Index" class="btn btn-outline-secondary btn-lg rounded-pill px-4">
+                                        <i class="fas fa-times me-2"></i>Cancel
+                                    </a>
+                                    <div class="d-flex gap-3">
+                                        <button type="button" class="btn btn-danger btn-lg rounded-pill px-4"
+                                                data-bs-toggle="modal" data-bs-target="#rejectModal">
+                                            <i class="fas fa-times-circle me-2"></i>Reject Application
+                                        </button>
+                                        <button type="button" class="btn btn-success btn-lg rounded-pill px-5"
+                                                data-bs-toggle="modal" data-bs-target="#approveModal">
+                                            <i class="fas fa-check-circle me-2"></i>Approve Application
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Guidelines Card -->
+            <div class="card mt-4 border-0 bg-light">
+                <div class="card-body">
+                    <h6 class="text-primary mb-3">
+                        <i class="fas fa-info-circle me-2"></i>Approval Guidelines
+                    </h6>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul class="list-unstyled mb-0">
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Verify student ID and contact information</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Check locker availability</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul class="list-unstyled mb-0">
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Confirm semester enrollment</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Review attached documents</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Approve Confirmation Modal -->
+<div class="modal fade" id="approveModal" tabindex="-1" aria-labelledby="approveModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-success text-white">
+                <h5 class="modal-title" id="approveModalLabel">
+                    <i class="fas fa-check-circle me-2"></i>Approve Locker Request
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center mb-3">
+                    <i class="fas fa-check-circle text-success" style="font-size: 3rem;"></i>
+                </div>
+                <p class="text-center mb-3">Are you sure you want to <strong>approve</strong> this locker request?</p>
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle me-2"></i>
+                    <strong>Locker Request #@Model.Id</strong> for <strong>@Model.Name</strong> will be approved and the applicant will be notified.
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                    <i class="fas fa-times me-2"></i>Cancel
+                </button>
+                <button type="button" class="btn btn-success" onclick="submitApproval('approve')">
+                    <i class="fas fa-check-circle me-2"></i>Confirm Approval
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Reject Confirmation Modal -->
+<div class="modal fade" id="rejectModal" tabindex="-1" aria-labelledby="rejectModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title" id="rejectModalLabel">
+                    <i class="fas fa-times-circle me-2"></i>Reject Locker Request
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center mb-3">
+                    <i class="fas fa-times-circle text-danger" style="font-size: 3rem;"></i>
+                </div>
+                <p class="text-center mb-3">Are you sure you want to <strong>reject</strong> this locker request?</p>
+                <div class="alert alert-warning">
+                    <i class="fas fa-exclamation-triangle me-2"></i>
+                    <strong>Locker Request #@Model.Id</strong> for <strong>@Model.Name</strong> will be rejected. Please ensure you have provided a clear reason in the remarks field.
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                    <i class="fas fa-times me-2"></i>Cancel
+                </button>
+                <button type="button" class="btn btn-danger" onclick="submitApproval('reject')">
+                    <i class="fas fa-times-circle me-2"></i>Confirm Rejection
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        function submitApproval(action) {
+            // Find the form by method and action
+            const form = document.querySelector('form[method="post"]');
+            if (!form) {
+                console.error('Form not found');
+                return;
+            }
+            
+            // Remove any existing action inputs to avoid duplicates
+            const existingActionInput = form.querySelector('input[name="action"]');
+            if (existingActionInput) {
+                existingActionInput.remove();
+            }
+            
+            // Create a hidden input for the action
+            const actionInput = document.createElement('input');
+            actionInput.type = 'hidden';
+            actionInput.name = 'action';
+            actionInput.value = action;
+            form.appendChild(actionInput);
+            
+            // Close the modal
+            const modal = document.querySelector('.modal.show');
+            if (modal) {
+                const modalInstance = bootstrap.Modal.getInstance(modal);
+                if (modalInstance) {
+                    modalInstance.hide();
+                }
+            }
+            
+            // Submit the form
+            form.submit();
+        }
+    </script>
+}

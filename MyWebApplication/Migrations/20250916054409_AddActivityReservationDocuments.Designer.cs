@@ -12,8 +12,8 @@ using MyWebApplication.Data;
 namespace MyWebApplication.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250910053406_UpdateGatePassDocuments")]
-    partial class UpdateGatePassDocuments
+    [Migration("20250916054409_AddActivityReservationDocuments")]
+    partial class AddActivityReservationDocuments
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -42,9 +42,6 @@ namespace MyWebApplication.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("ApprovedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("AttachedDocuments")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("DateCreated")
@@ -110,6 +107,50 @@ namespace MyWebApplication.Migrations
                     b.ToTable("ActivityReservations");
                 });
 
+            modelBuilder.Entity("MyWebApplication.Models.ActivityReservationDocument", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ActivityReservationId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ContentType")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("FileName")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("FilePath")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<long>("FileSize")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("StoredFileName")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<DateTime>("UploadedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ActivityReservationId");
+
+                    b.ToTable("ActivityReservationDocuments");
+                });
+
             modelBuilder.Entity("MyWebApplication.Models.GatePass", b =>
                 {
                     b.Property<int>("Id")
@@ -127,9 +168,6 @@ namespace MyWebApplication.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("ApprovedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("AttachedDocuments")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Color")
@@ -233,6 +271,107 @@ namespace MyWebApplication.Migrations
                     b.ToTable("GatePassDocuments");
                 });
 
+            modelBuilder.Entity("MyWebApplication.Models.LockerRequest", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime?>("ApprovalDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ApprovedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ContactNumber")
+                        .IsRequired()
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("IdNumber")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("LockerNumber")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Remarks")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Semester")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TermsAccepted")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("LockerRequests");
+                });
+
+            modelBuilder.Entity("MyWebApplication.Models.LockerRequestDocument", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ContentType")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("FileName")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("FilePath")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<long>("FileSize")
+                        .HasColumnType("bigint");
+
+                    b.Property<int>("LockerRequestId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("StoredFileName")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<DateTime>("UploadedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LockerRequestId");
+
+                    b.ToTable("LockerRequestDocuments");
+                });
+
             modelBuilder.Entity("MyWebApplication.Models.Student", b =>
                 {
                     b.Property<int>("Id")
@@ -265,6 +404,17 @@ namespace MyWebApplication.Migrations
                     b.ToTable("Students");
                 });
 
+            modelBuilder.Entity("MyWebApplication.Models.ActivityReservationDocument", b =>
+                {
+                    b.HasOne("MyWebApplication.Models.ActivityReservation", "ActivityReservation")
+                        .WithMany("Documents")
+                        .HasForeignKey("ActivityReservationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ActivityReservation");
+                });
+
             modelBuilder.Entity("MyWebApplication.Models.GatePassDocument", b =>
                 {
                     b.HasOne("MyWebApplication.Models.GatePass", "GatePass")
@@ -276,7 +426,28 @@ namespace MyWebApplication.Migrations
                     b.Navigation("GatePass");
                 });
 
+            modelBuilder.Entity("MyWebApplication.Models.LockerRequestDocument", b =>
+                {
+                    b.HasOne("MyWebApplication.Models.LockerRequest", "LockerRequest")
+                        .WithMany("Documents")
+                        .HasForeignKey("LockerRequestId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("LockerRequest");
+                });
+
+            modelBuilder.Entity("MyWebApplication.Models.ActivityReservation", b =>
+                {
+                    b.Navigation("Documents");
+                });
+
             modelBuilder.Entity("MyWebApplication.Models.GatePass", b =>
+                {
+                    b.Navigation("Documents");
+                });
+
+            modelBuilder.Entity("MyWebApplication.Models.LockerRequest", b =>
                 {
                     b.Navigation("Documents");
                 });

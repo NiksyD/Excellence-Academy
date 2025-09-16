@@ -147,7 +147,7 @@
             </div>
 
             <!-- Equipment & Documents -->
-            @if (!string.IsNullOrEmpty(Model.EquipmentFacilitiesNeeded) || !string.IsNullOrEmpty(Model.AttachedDocuments) || !string.IsNullOrEmpty(Model.Remarks))
+            @if (!string.IsNullOrEmpty(Model.EquipmentFacilitiesNeeded) || !string.IsNullOrEmpty(Model.Remarks))
             {
                 <div class="card shadow-sm mb-4">
                     <div class="card-header bg-light">
@@ -162,13 +162,6 @@
                                 <div class="col-12">
                                     <label class="form-label fw-bold text-muted">Equipment & Facilities Needed</label>
                                     <p class="mb-0">@Model.EquipmentFacilitiesNeeded</p>
-                                </div>
-                            }
-                            @if (!string.IsNullOrEmpty(Model.AttachedDocuments))
-                            {
-                                <div class="col-12">
-                                    <label class="form-label fw-bold text-muted">Attached Documents</label>
-                                    <p class="mb-0">@Model.AttachedDocuments</p>
                                 </div>
                             }
                             @if (!string.IsNullOrEmpty(Model.Remarks))
@@ -186,6 +179,37 @@
 
         <!-- Right Column - Actions & Timeline -->
         <div class="col-lg-4">
+            <!-- Supporting Documents -->
+            @if (Model.Documents != null && Model.Documents.Any())
+            {
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header bg-light">
+                        <h6 class="mb-0">
+                            <i class="fas fa-file-alt me-2"></i>Supporting Documents (@Model.Documents.Count())
+                        </h6>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="list-group list-group-flush">
+                            @foreach (var document in Model.Documents)
+                            {
+                                <div class="list-group-item d-flex justify-content-between align-items-center">
+                                    <div class="d-flex align-items-center">
+                                        <i class="fas fa-file-@(document.ContentType.Contains("pdf") ? "pdf" : document.ContentType.Contains("image") ? "image" : "alt") text-primary me-3"></i>
+                                        <div>
+                                            <div class="fw-medium small">@document.FileName</div>
+                                            <small class="text-muted">@((document.FileSize / 1024.0).ToString("F1")) KB</small>
+                                        </div>
+                                    </div>
+                                    <a href="@Url.Content($"~/{document.FilePath}")" target="_blank" class="btn btn-outline-primary btn-sm">
+                                        <i class="fas fa-download"></i>
+                                    </a>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+
             <!-- Action Buttons -->
             <div class="card shadow-sm mb-4">
                 <div class="card-header bg-light">

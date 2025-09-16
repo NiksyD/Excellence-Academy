@@ -54,7 +54,7 @@
                         </span>
                     </div>
 
-                    <form asp-action="Edit" method="post" id="editActivityReservationForm">
+                    <form asp-action="Edit" method="post" enctype="multipart/form-data" id="activityReservationForm">
                         <div class="row g-4">
                             <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
                             
@@ -246,15 +246,114 @@
                                 <hr class="mb-4">
                             </div>
                             
-                            <div class="col-md-12">
-                                <div class="form-floating mb-3">
-                                    <textarea asp-for="AttachedDocuments" class="form-control" placeholder="Attached Documents" style="height: 100px"></textarea>
-                                    <label asp-for="AttachedDocuments" class="form-label">
-                                        <i class="fas fa-file-alt me-2"></i>Attached Documents
-                                    </label>
-                                    <span asp-validation-for="AttachedDocuments" class="text-danger small"></span>
+                            <!-- Existing Documents -->
+                            @if (Model.Documents != null && Model.Documents.Any())
+                            {
+                                <div class="col-12">
+                                    <div class="card border-success">
+                                        <div class="card-header bg-success text-white">
+                                            <h6 class="mb-0">
+                                                <i class="fas fa-paperclip me-2"></i>
+                                                Current Documents (@Model.Documents.Count())
+                                            </h6>
+                                        </div>
+                                        <div class="card-body p-0">
+                                            <div class="list-group list-group-flush">
+                                                @foreach (var document in Model.Documents)
+                                                {
+                                                    <div class="list-group-item d-flex justify-content-between align-items-center">
+                                                        <div class="d-flex align-items-center">
+                                                            <i class="fas fa-file-@(document.ContentType.Contains("pdf") ? "pdf" : document.ContentType.Contains("image") ? "image" : "alt") text-primary me-3"></i>
+                                                            <div>
+                                                                <div class="fw-medium">@document.FileName</div>
+                                                                <small class="text-muted">
+                                                                    Uploaded: @document.UploadedAt.ToString("MMM dd, yyyy HH:mm")
+                                                                </small>
+                                                            </div>
+                                                        </div>
+                                                        <a href="@Url.Content($"~/{document.FilePath}")" target="_blank" class="btn btn-outline-primary btn-sm rounded-pill">
+                                                            <i class="fas fa-download me-1"></i>Download
+                                                        </a>
+                                                    </div>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
+                            }
+                            
+                            <!-- Add New Documents -->
+                            <div class="col-12 @(Model.Documents != null && Model.Documents.Any() ? "mt-3" : "")">
+                                <!-- Enhanced File Upload Area -->
+                                <div id="fileUploadArea" class="file-upload-zone border border-2 border-dashed rounded-3 p-5 text-center mb-4 position-relative" style="border-color: #dee2e6; background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%); transition: all 0.3s ease; min-height: 200px;">
+                                    <div class="upload-content">
+                                        <div class="upload-icon mb-3">
+                                            <i class="fas fa-cloud-upload-alt fa-4x text-primary opacity-75"></i>
+                                        </div>
+                                        <h4 class="fw-bold text-dark mb-2">Drag & Drop Files Here</h4>
+                                        <p class="text-muted mb-3">or click to browse and select multiple files</p>
+                                        
+                                        <!-- Hidden File Input -->
+                                        <input type="file" id="fileInput" name="files" multiple accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" style="display: none;">
+                                        
+                                        <!-- Browse Button -->
+                                        <button type="button" class="btn btn-primary btn-lg rounded-pill px-4 py-2 mb-3" onclick="document.getElementById('fileInput').click()">
+                                            <i class="fas fa-folder-open me-2"></i>Browse Files
+                                        </button>
+                                        
+                                        <!-- File Format Info -->
+                                        <div class="file-format-info mt-3">
+                                            <div class="row justify-content-center">
+                                                <div class="col-auto">
+                                                    <div class="d-flex align-items-center gap-3 flex-wrap justify-content-center">
+                                                        <span class="badge bg-danger-subtle text-danger px-3 py-2">
+                                                            <i class="fas fa-file-pdf me-1"></i>PDF
+                                                        </span>
+                                                        <span class="badge bg-primary-subtle text-primary px-3 py-2">
+                                                            <i class="fas fa-file-word me-1"></i>DOC/DOCX
+                                                        </span>
+                                                        <span class="badge bg-success-subtle text-success px-3 py-2">
+                                                            <i class="fas fa-file-image me-1"></i>JPG/PNG
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <small class="text-muted d-block mt-2">
+                                                <i class="fas fa-info-circle me-1"></i>Maximum file size: 5MB per file
+                                            </small>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Upload Progress Overlay (hidden by default) -->
+                                    <div id="uploadProgress" class="upload-progress position-absolute top-0 start-0 w-100 h-100 d-none align-items-center justify-content-center bg-white bg-opacity-90 rounded-3">
+                                        <div class="text-center">
+                                            <div class="spinner-border text-primary mb-3" role="status">
+                                                <span class="visually-hidden">Uploading...</span>
+                                            </div>
+                                            <h5 class="text-primary">Processing Files...</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- File List Container -->
+                                <div id="fileListContainer" class="mt-3" style="display: none;">
+                                    <div class="card">
+                                        <div class="card-header bg-primary text-white">
+                                            <h6 class="mb-0">
+                                                <i class="fas fa-paperclip me-2"></i>
+                                                New Files to Upload (<span id="fileCount">0</span>)
+                                            </h6>
+                                        </div>
+                                        <div class="card-body p-0">
+                                            <div id="fileList" class="list-group list-group-flush"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- File Upload Errors -->
+                                <div id="fileErrors" class="mt-3"></div>
                             </div>
+                            
                         </div>
                         
                         <!-- Form Actions -->
@@ -309,4 +408,5 @@
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
+    <script src="~/js/ActivityReservation/edit.js"></script>
 }

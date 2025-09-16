@@ -1,16 +1,20 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using MyWebApplication.Data;
 using MyWebApplication.Models;
+using MyWebApplication.Services;
 
 namespace MyWebApplication.Controllers
 {
     public class ActivityReservationController : Controller
     {
         private readonly ApplicationDbContext _db;
+        private readonly IFileUploadService _fileUploadService;
 
-        public ActivityReservationController(ApplicationDbContext db)
+        public ActivityReservationController(ApplicationDbContext db, IFileUploadService fileUploadService)
         {
             _db = db;
+            _fileUploadService = fileUploadService;
         }
 
         public IActionResult Index()
@@ -28,12 +32,21 @@ namespace MyWebApplication.Controllers
         //POST
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(ActivityReservation obj)
+        public async Task<IActionResult> Create(ActivityReservation obj, IFormFileCollection files)
         {
             if (ModelState.IsValid)
             {
                 _db.ActivityReservations.Add(obj);
-                _db.SaveChanges();
+                await _db.SaveChangesAsync();
+
+                // Handle file uploads if any
+                if (files != null && files.Count > 0)
+                {
+                    var documents = await _fileUploadService.SaveActivityReservationFilesAsync(files, obj.Id);
+                    _db.ActivityReservationDocuments.AddRange(documents);
+                    await _db.SaveChangesAsync();
+                }
+
                 TempData["success"] = "Activity reservation submitted successfully";
                 return RedirectToAction("Index");
             }
@@ -48,7 +61,9 @@ namespace MyWebApplication.Controllers
             {
                 return NotFound();
             }
-            var activityReservation = _db.ActivityReservations.Find(id);
+            var activityReservation = _db.ActivityReservations
+                .Include(ar => ar.Documents)
+                .FirstOrDefault(ar => ar.Id == id);
             if (activityReservation == null)
             {
                 return NotFound();
@@ -63,7 +78,9 @@ namespace MyWebApplication.Controllers
             {
                 return NotFound();
             }
-            var activityReservation = _db.ActivityReservations.Find(id);
+            var activityReservation = _db.ActivityReservations
+                .Include(ar => ar.Documents)
+                .FirstOrDefault(ar => ar.Id == id);
             if (activityReservation == null)
             {
                 return NotFound();
@@ -82,7 +99,7 @@ namespace MyWebApplication.Controllers
         //POST
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(ActivityReservation obj)
+        public async Task<IActionResult> Edit(ActivityReservation obj, IFormFileCollection files)
         {
             var existingReservation = _db.ActivityReservations.Find(obj.Id);
             if (existingReservation == null)
@@ -113,9 +130,17 @@ namespace MyWebApplication.Controllers
                 existingReservation.EquipmentFacilitiesNeeded = obj.EquipmentFacilitiesNeeded;
                 existingReservation.NatureOfActivity = obj.NatureOfActivity;
                 existingReservation.SourceOfFunds = obj.SourceOfFunds;
-                existingReservation.AttachedDocuments = obj.AttachedDocuments;
                 
-                _db.SaveChanges();
+                await _db.SaveChangesAsync();
+
+                // Handle file uploads if any
+                if (files != null && files.Count > 0)
+                {
+                    var documents = await _fileUploadService.SaveActivityReservationFilesAsync(files, obj.Id);
+                    _db.ActivityReservationDocuments.AddRange(documents);
+                    await _db.SaveChangesAsync();
+                }
+                
                 TempData["success"] = "Activity reservation updated successfully";
                 return RedirectToAction("Index");
             }
@@ -130,17 +155,12 @@ namespace MyWebApplication.Controllers
             {
                 return NotFound();
             }
-            var activityReservation = _db.ActivityReservations.Find(id);
+            var activityReservation = _db.ActivityReservations
+                .Include(ar => ar.Documents)
+                .FirstOrDefault(ar => ar.Id == id);
             if (activityReservation == null)
             {
                 return NotFound();
-            }
-            
-            // Only allow review if status is Pending
-            if (activityReservation.Status != "Pending")
-            {
-                TempData["error"] = "Activity reservation can only be reviewed when status is Pending";
-                return RedirectToAction("Index");
             }
             
             return View(activityReservation);

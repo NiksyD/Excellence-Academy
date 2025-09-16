@@ -13,5 +13,8 @@ namespace MyWebApplication.Data
         public DbSet<GatePass> GatePasses { get; set; }
         public DbSet<GatePassDocument> GatePassDocuments { get; set; }
         public DbSet<ActivityReservation> ActivityReservations { get; set; }
+        public DbSet<LockerRequest> LockerRequests { get; set; }
+        public DbSet<LockerRequestDocument> LockerRequestDocuments { get; set; }
+        public DbSet<ActivityReservationDocument> ActivityReservationDocuments { get; set; }
     }
 }
