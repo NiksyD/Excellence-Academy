@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- https://go.microsoft.com/fwlink/?LinkID=208121. -->
+<Project>
+  <PropertyGroup>
+    <_PublishTargetUrl>C:\Users\nikop\dev_folder\MyWebApplication\MyWebApplication\bin\Release\net8.0\publish\</_PublishTargetUrl>
+    <History>True|2025-10-15T01:09:08.8176428Z||;True|2025-10-15T08:56:16.5135577+08:00||;True|2025-10-15T08:55:36.3383460+08:00||;True|2025-10-15T08:50:52.2318811+08:00||;True|2025-10-15T08:45:20.3529954+08:00||;True|2025-10-15T08:26:29.6903636+08:00||;True|2025-09-17T22:22:49.4352714+08:00||;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+</Project>
