@@ -1,7 +1,7 @@
-@model MyWebApplication.Models.LockerRequest
+@model MyWebApplication.Models.GatePass
 
 @{
-    ViewData["Title"] = "Delete Locker Request - Excellence Academy";
+    ViewData["Title"] = "Delete Gate Pass - Excellence Academy";
 }
 
 <!-- Header Section -->
@@ -10,9 +10,9 @@
         <div class="row align-items-center">
             <div class="col-md-8 mb-3 mb-md-0">
                 <h1 class="display-6 fw-bold mb-2">
-                    <i class="fas fa-trash-alt me-3"></i>Delete Locker Request
+                    <i class="fas fa-trash-alt me-3"></i>Delete Gate Pass
                 </h1>
-                <p class="lead mb-0">Confirm deletion of locker request</p>
+                <p class="lead mb-0">Confirm deletion of gate pass application</p>
             </div>
             <div class="col-md-4 text-md-end">
                 <a asp-action="Index" class="btn btn-light btn-lg rounded px-4">
@@ -41,37 +41,59 @@
                         <strong>Warning:</strong> This action cannot be undone. All associated documents will also be permanently deleted.
                     </div>
 
-                    <!-- Request Summary -->
+                    <!-- Gate Pass Summary -->
                     <div class="row mb-4">
                         <div class="col-md-6">
-                            <h6 class="text-muted mb-3">Request Details</h6>
+                            <h6 class="text-muted mb-3">Applicant Details</h6>
                             <div class="mb-2">
-                                <strong>Request ID:</strong> #@Model.Id
+                                <strong>Gate Pass ID:</strong> #@Model.Id
                             </div>
                             <div class="mb-2">
                                 <strong>Applicant:</strong> @Model.Name
                             </div>
                             <div class="mb-2">
-                                <strong>ID Number:</strong> @Model.IdNumber
+                                <strong>Address:</strong> @Model.Address
                             </div>
                             <div class="mb-2">
-                                <strong>Locker Number:</strong> @Model.LockerNumber
+                                <strong>Department:</strong> @Model.Department
+                            </div>
+                            <div class="mb-2">
+                                <strong>Faculty:</strong> @Model.Faculty
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <h6 class="text-muted mb-3">Additional Information</h6>
+                            <h6 class="text-muted mb-3">Vehicle Details</h6>
                             <div class="mb-2">
-                                <strong>Semester:</strong> @Model.Semester
+                                <strong>Vehicle Type:</strong> @Model.VehicleType
                             </div>
                             <div class="mb-2">
-                                <strong>Contact:</strong> @Model.ContactNumber
+                                <strong>Plate Number:</strong> @Model.VehiclePlateNo
+                            </div>
+                            <div class="mb-2">
+                                <strong>Maker:</strong> @Model.Maker
+                            </div>
+                            <div class="mb-2">
+                                <strong>Color:</strong> @Model.Color
                             </div>
                             <div class="mb-2">
                                 <strong>Status:</strong> 
                                 <span class="badge bg-warning text-dark">@Model.Status</span>
                             </div>
                             <div class="mb-2">
-                                <strong>Date Created:</strong> @Model.DateCreated.ToString("MMM dd, yyyy")
+                                <strong>Date Applied:</strong> @Model.Date.ToString("MMM dd, yyyy")
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Additional Information -->
+                    <div class="mb-4">
+                        <h6 class="text-muted mb-3">Additional Information</h6>
+                        <div class="row">
+                            <div class="col-md-6 mb-2">
+                                <strong>Course/Year:</strong> @Model.CourseYear
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <strong>Registration Expiry:</strong> @(Model.RegistrationExpiryDate?.ToString("MMM dd, yyyy") ?? "N/A")
                             </div>
                         </div>
                     </div>
@@ -124,7 +146,7 @@
                                 <i class="fas fa-times me-2"></i>Cancel
                             </a>
                             <button type="button" class="btn btn-danger btn-lg rounded px-5" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal">
-                                <i class="fas fa-trash-alt me-2"></i>Delete Request
+                                <i class="fas fa-trash-alt me-2"></i>Delete Gate Pass
                             </button>
                         </div>
                     </form>
@@ -148,12 +170,13 @@
                 <div class="text-center mb-3">
                     <i class="fas fa-exclamation-triangle text-danger" style="font-size: 3rem;"></i>
                 </div>
-                <p class="text-center mb-3">Are you absolutely sure you want to delete this locker request?</p>
+                <p class="text-center mb-3">Are you absolutely sure you want to delete this gate pass application?</p>
                 <div class="alert alert-danger">
                     <i class="fas fa-exclamation-triangle me-2"></i>
                     This will permanently delete:
                     <ul class="mb-0 mt-2">
-                        <li>Locker Request #@Model.Id for <strong>@Model.Name</strong></li>
+                        <li>Gate Pass #@Model.Id for <strong>@Model.Name</strong></li>
+                        <li>Vehicle: <strong>@Model.VehiclePlateNo</strong> (@Model.VehicleType)</li>
                         @if (Model.Documents != null && Model.Documents.Any())
                         {
                             <li>@Model.Documents.Count attached document(s)</li>
@@ -187,3 +210,4 @@
         }
     </script>
 }
+

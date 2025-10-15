@@ -5,17 +5,17 @@
 }
 
 <!-- Header Section -->
-<section class="bg-primary text-white py-4" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+<section class="bg-primary text-white py-5" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
     <div class="container">
         <div class="row align-items-center">
-            <div class="col-md-8">
+            <div class="col-md-8 mb-3 mb-md-0">
                 <h1 class="display-5 fw-bold mb-2">
                     <i class="fas fa-key me-3"></i>Locker Requests
                 </h1>
                 <p class="lead mb-0">Manage student locker requests and assignments</p>
             </div>
             <div class="col-md-4 text-md-end">
-                <a asp-action="Create" class="btn btn-light btn-lg rounded-pill px-4">
+                <a asp-action="Create" class="btn btn-light btn-lg rounded px-4">
                     <i class="fas fa-plus me-2"></i>New Request
                 </a>
             </div>
@@ -26,48 +26,79 @@
 <!-- Main Content -->
 <div class="container py-5">
     <!-- Statistics Cards -->
-    <div class="row mb-4">
-        <div class="col-md-3">
-            <div class="card border-0 shadow-sm h-100">
+    <div class="row mb-5">
+        <div class="col-md-3 col-6 mb-3">
+            <div class="card bg-primary text-white h-100">
                 <div class="card-body text-center">
-                    <div class="text-primary mb-2">
-                        <i class="fas fa-clipboard-list fa-2x"></i>
-                    </div>
-                    <h5 class="card-title">Total Requests</h5>
-                    <h3 class="text-primary mb-0">@Model.Count()</h3>
+                    <i class="fas fa-clipboard-list fa-2x mb-2"></i>
+                    <h4 class="fw-bold">@Model.Count()</h4>
+                    <p class="mb-0">Total Requests</p>
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
-            <div class="card border-0 shadow-sm h-100">
+        <div class="col-md-3 col-6 mb-3">
+            <div class="card bg-warning text-white h-100">
                 <div class="card-body text-center">
-                    <div class="text-warning mb-2">
-                        <i class="fas fa-clock fa-2x"></i>
-                    </div>
-                    <h5 class="card-title">Pending</h5>
-                    <h3 class="text-warning mb-0">@Model.Count(l => l.Status == "Pending")</h3>
+                    <i class="fas fa-clock fa-2x mb-2"></i>
+                    <h4 class="fw-bold">@Model.Count(l => l.Status == "Pending")</h4>
+                    <p class="mb-0">Pending</p>
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
-            <div class="card border-0 shadow-sm h-100">
+        <div class="col-md-3 col-6 mb-3">
+            <div class="card bg-success text-white h-100">
                 <div class="card-body text-center">
-                    <div class="text-success mb-2">
-                        <i class="fas fa-check-circle fa-2x"></i>
-                    </div>
-                    <h5 class="card-title">Approved</h5>
-                    <h3 class="text-success mb-0">@Model.Count(l => l.Status == "Approved")</h3>
+                    <i class="fas fa-check-circle fa-2x mb-2"></i>
+                    <h4 class="fw-bold">@Model.Count(l => l.Status == "Approved")</h4>
+                    <p class="mb-0">Approved</p>
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
-            <div class="card border-0 shadow-sm h-100">
+        <div class="col-md-3 col-6 mb-3">
+            <div class="card bg-danger text-white h-100">
                 <div class="card-body text-center">
-                    <div class="text-danger mb-2">
-                        <i class="fas fa-times-circle fa-2x"></i>
+                    <i class="fas fa-times-circle fa-2x mb-2"></i>
+                    <h4 class="fw-bold">@Model.Count(l => l.Status == "Rejected")</h4>
+                    <p class="mb-0">Rejected</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Search and Filter Section -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+            <div class="row align-items-center g-3">
+                <div class="col-md-4">
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-search"></i></span>
+                        <input type="text" class="form-control" placeholder="Search locker requests..." id="searchInput">
                     </div>
-                    <h5 class="card-title">Rejected</h5>
-                    <h3 class="text-danger mb-0">@Model.Count(l => l.Status == "Rejected")</h3>
+                </div>
+                <div class="col-md-3">
+                    <select class="form-select" id="statusFilter">
+                        <option value="">All Status</option>
+                        <option value="Pending">Pending</option>
+                        <option value="Approved">Approved</option>
+                        <option value="Rejected">Rejected</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <select class="form-select" id="semesterFilter">
+                        <option value="">All Semesters</option>
+                        @if (Model != null)
+                        {
+                            @foreach (var semester in Model.Select(l => l.Semester).Distinct().Where(s => !string.IsNullOrEmpty(s)))
+                            {
+                                <option value="@semester">@semester</option>
+                            }
+                        }
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <button class="btn btn-outline-primary w-100" onclick="exportToCSV()">
+                        <i class="fas fa-download me-2"></i>Export
+                    </button>
                 </div>
             </div>
         </div>

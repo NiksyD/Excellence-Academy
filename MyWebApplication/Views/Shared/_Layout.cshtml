@@ -53,11 +53,11 @@
                             </a>
                         </li>
                     </ul>
-                    <div class="d-flex">
-                        <a href="#contact" class="btn btn-outline-primary me-2 rounded-pill px-3">
-                            <i class="fas fa-calendar-alt me-1"></i>Schedule Visit
+                    <div class="d-flex flex-column flex-lg-row gap-2">
+                        <a href="@Url.Action("Index", "Home")#contact" class="btn btn-outline-primary rounded px-3 schedule-visit-btn">
+                            <i class="fas fa-calendar-check me-1"></i>Schedule Visit
                         </a>
-                        <a href="#contact" class="btn btn-primary rounded-pill px-3">
+                        <a asp-controller="Student" asp-action="Create" class="btn btn-primary rounded px-3">
                             <i class="fas fa-user-plus me-1"></i>Apply Now
                         </a>
                     </div>

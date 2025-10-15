@@ -217,5 +217,73 @@ namespace MyWebApplication.Controllers
             _db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        //GET
+        public IActionResult Delete(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            var activityReservation = _db.ActivityReservations
+                .Include(ar => ar.Documents)
+                .FirstOrDefault(ar => ar.Id == id);
+            if (activityReservation == null)
+            {
+                return NotFound();
+            }
+
+            // Only allow deletion if status is Pending
+            if (activityReservation.Status != "Pending")
+            {
+                TempData["error"] = "Activity reservation can only be deleted when status is Pending";
+                return RedirectToAction("Index");
+            }
+
+            return View(activityReservation);
+        }
+
+        //POST
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var activityReservation = _db.ActivityReservations
+                .Include(ar => ar.Documents)
+                .FirstOrDefault(ar => ar.Id == id);
+            if (activityReservation == null)
+            {
+                return NotFound();
+            }
+
+            // Only allow deletion if status is Pending
+            if (activityReservation.Status != "Pending")
+            {
+                TempData["error"] = "Activity reservation can only be deleted when status is Pending";
+                return RedirectToAction("Index");
+            }
+
+            // Delete associated documents first
+            if (activityReservation.Documents != null && activityReservation.Documents.Any())
+            {
+                foreach (var doc in activityReservation.Documents)
+                {
+                    // Delete physical file
+                    var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", doc.FilePath.TrimStart('/'));
+                    if (System.IO.File.Exists(filePath))
+                    {
+                        System.IO.File.Delete(filePath);
+                    }
+                }
+                _db.ActivityReservationDocuments.RemoveRange(activityReservation.Documents);
+            }
+
+            // Delete the reservation
+            _db.ActivityReservations.Remove(activityReservation);
+            await _db.SaveChangesAsync();
+
+            TempData["success"] = $"Activity Reservation #{activityReservation.Id} for {activityReservation.ActivityTitle} has been deleted successfully";
+            return RedirectToAction("Index");
+        }
     }
 }

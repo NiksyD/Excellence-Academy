@@ -273,5 +273,73 @@ namespace MyWebApplication.Controllers
                 return StatusCode(500, "An error occurred while deleting the document");
             }
         }
+
+        //GET
+        public IActionResult Delete(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            var gatePass = _db.GatePasses
+                .Include(g => g.Documents)
+                .FirstOrDefault(g => g.Id == id);
+            if (gatePass == null)
+            {
+                return NotFound();
+            }
+
+            // Only allow deletion if status is Pending
+            if (gatePass.Status != "Pending")
+            {
+                TempData["error"] = "Gate Pass can only be deleted when status is Pending";
+                return RedirectToAction("Index");
+            }
+
+            return View(gatePass);
+        }
+
+        //POST
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var gatePass = _db.GatePasses
+                .Include(g => g.Documents)
+                .FirstOrDefault(g => g.Id == id);
+            if (gatePass == null)
+            {
+                return NotFound();
+            }
+
+            // Only allow deletion if status is Pending
+            if (gatePass.Status != "Pending")
+            {
+                TempData["error"] = "Gate Pass can only be deleted when status is Pending";
+                return RedirectToAction("Index");
+            }
+
+            // Delete associated documents first
+            if (gatePass.Documents != null && gatePass.Documents.Any())
+            {
+                foreach (var doc in gatePass.Documents)
+                {
+                    // Delete physical file
+                    var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", doc.FilePath.TrimStart('/'));
+                    if (System.IO.File.Exists(filePath))
+                    {
+                        System.IO.File.Delete(filePath);
+                    }
+                }
+                _db.GatePassDocuments.RemoveRange(gatePass.Documents);
+            }
+
+            // Delete the gate pass
+            _db.GatePasses.Remove(gatePass);
+            await _db.SaveChangesAsync();
+
+            TempData["success"] = $"Gate Pass #{gatePass.Id} for {gatePass.Name} has been deleted successfully";
+            return RedirectToAction("Index");
+        }
     }
 }

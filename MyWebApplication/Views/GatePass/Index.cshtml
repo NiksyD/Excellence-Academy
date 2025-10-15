@@ -4,17 +4,17 @@
 }
 
 <!-- Header Section -->
-<section class="bg-primary text-white py-4" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+<section class="bg-primary text-white py-5" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
 	<div class="container">
 		<div class="row align-items-center">
-			<div class="col-md-8">
+			<div class="col-md-8 mb-3 mb-md-0">
 				<h1 class="display-5 fw-bold mb-2">
 					<i class="fas fa-id-card me-3"></i>Gate Pass Management
 				</h1>
 				<p class="lead mb-0">Manage vehicle gate pass applications and approvals</p>
 			</div>
 			<div class="col-md-4 text-md-end">
-				<a asp-controller="GatePass" asp-action="Create" class="btn btn-light btn-lg rounded-pill px-4">
+				<a asp-controller="GatePass" asp-action="Create" class="btn btn-light btn-lg rounded px-4">
 					<i class="fas fa-plus me-2"></i>New Gate Pass
 				</a>
 			</div>
@@ -67,7 +67,7 @@
 	<!-- Search and Filter Section -->
 	<div class="card shadow-sm mb-4">
 		<div class="card-body">
-			<div class="row align-items-center">
+			<div class="row align-items-center g-3">
 				<div class="col-md-4">
 					<div class="input-group">
 						<span class="input-group-text"><i class="fas fa-search"></i></span>
@@ -204,6 +204,11 @@
 												   class="btn btn-outline-success btn-sm" 
 												   title="Review Application">
 													<i class="fas fa-clipboard-check"></i>
+												</a>
+												<a asp-action="Delete" asp-route-id="@gatePass.Id" 
+												   class="btn btn-outline-danger btn-sm" 
+												   title="Delete Application">
+													<i class="fas fa-trash"></i>
 												</a>
 											}
 										</div>
