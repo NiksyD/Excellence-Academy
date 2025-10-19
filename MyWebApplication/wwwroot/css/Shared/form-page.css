@@ -1,0 +1,1346 @@
+/* ============================================
+   SHARED FORM PAGE STYLES - MAC THEME
+   Professional, reusable design for all form pages
+   ============================================ */
+
+/* Form Header - Glass Morphism */
+.form-header {
+    background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 100%);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(37, 99, 235, 0.1);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+    padding: 3rem 0;
+}
+
+.form-header h1 {
+    color: #1e293b;
+    font-weight: 700;
+    font-size: 2.5rem;
+}
+
+.form-header .lead {
+    color: #64748b;
+    font-size: 1.1rem;
+}
+
+.form-header i.header-icon {
+    color: #2563eb;
+}
+
+/* Form Card - Mac Style */
+.form-card {
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.85) 100%);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 
+        0 8px 24px rgba(0, 0, 0, 0.06),
+        inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    margin-bottom: 2rem;
+}
+
+.form-card-header {
+    background: linear-gradient(145deg, rgba(248, 250, 252, 0.8) 0%, rgba(241, 245, 249, 0.6) 100%);
+    border-bottom: 1px solid rgba(203, 213, 225, 0.3);
+    padding: 1.5rem 2rem;
+}
+
+.form-card-header h5 {
+    color: #1e293b;
+    font-weight: 600;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.form-card-header i {
+    color: #2563eb;
+    font-size: 1.25rem;
+}
+
+.form-card-body {
+    padding: 2.5rem 2rem;
+}
+
+/* Form Groups */
+.form-group-mac {
+    margin-bottom: 1.75rem;
+}
+
+.form-label-mac {
+    color: #334155;
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.form-label-mac i {
+    color: #2563eb;
+    font-size: 0.875rem;
+}
+
+.form-label-mac .required {
+    color: #dc2626;
+    margin-left: 0.25rem;
+}
+
+/* Form Controls - Mac Style */
+.form-control-mac {
+    background: rgba(248, 250, 252, 0.8);
+    border: 1.5px solid rgba(203, 213, 225, 0.5);
+    border-radius: 12px;
+    padding: 0.875rem 1.25rem;
+    color: #1e293b;
+    font-size: 0.95rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.form-control-mac:focus {
+    background: white;
+    border-color: #2563eb;
+    box-shadow: 
+        0 0 0 4px rgba(37, 99, 235, 0.1),
+        0 2px 8px rgba(37, 99, 235, 0.15);
+    outline: none;
+}
+
+.form-control-mac::placeholder {
+    color: #94a3b8;
+}
+
+.form-control-mac:disabled {
+    background: rgba(241, 245, 249, 0.5);
+    color: #94a3b8;
+    cursor: not-allowed;
+}
+
+/* Select Controls */
+.form-select-mac {
+    background: rgba(248, 250, 252, 0.8) url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%232563eb' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e") no-repeat right 0.75rem center/16px 12px;
+    border: 1.5px solid rgba(203, 213, 225, 0.5);
+    border-radius: 12px;
+    padding: 0.875rem 2.5rem 0.875rem 1.25rem;
+    color: #1e293b;
+    font-size: 0.95rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    appearance: none;
+}
+
+.form-select-mac:focus {
+    background-color: white;
+    border-color: #2563eb;
+    box-shadow: 
+        0 0 0 4px rgba(37, 99, 235, 0.1),
+        0 2px 8px rgba(37, 99, 235, 0.15);
+    outline: none;
+}
+
+/* Textarea */
+.form-textarea-mac {
+    min-height: 120px;
+    resize: vertical;
+    width: 100%;
+}
+
+/* File Input */
+.form-file-mac {
+    padding: 0.75rem 1rem;
+}
+
+.form-file-mac::file-selector-button {
+    background: linear-gradient(145deg, rgba(37, 99, 235, 0.1) 0%, rgba(37, 99, 235, 0.05) 100%);
+    border: 1px solid rgba(37, 99, 235, 0.2);
+    border-radius: 8px;
+    color: #2563eb;
+    padding: 0.5rem 1rem;
+    margin-right: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.form-file-mac::file-selector-button:hover {
+    background: linear-gradient(145deg, rgba(37, 99, 235, 0.15) 0%, rgba(37, 99, 235, 0.1) 100%);
+    border-color: rgba(37, 99, 235, 0.3);
+}
+
+/* Help Text */
+.form-help-text {
+    color: #64748b;
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+}
+
+.form-help-text i {
+    color: #2563eb;
+    margin-top: 0.125rem;
+    font-size: 0.75rem;
+}
+
+/* Validation States */
+.form-control-mac.is-invalid,
+.form-select-mac.is-invalid {
+    border-color: #dc2626;
+    background-color: rgba(254, 226, 226, 0.3);
+}
+
+.form-control-mac.is-invalid:focus,
+.form-select-mac.is-invalid:focus {
+    border-color: #dc2626;
+    box-shadow: 
+        0 0 0 4px rgba(220, 38, 38, 0.1),
+        0 2px 8px rgba(220, 38, 38, 0.15);
+}
+
+.invalid-feedback-mac {
+    color: #dc2626;
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.invalid-feedback-mac i {
+    font-size: 0.875rem;
+}
+
+.form-control-mac.is-valid,
+.form-select-mac.is-valid {
+    border-color: #059669;
+    background-color: rgba(209, 250, 229, 0.3);
+}
+
+.valid-feedback-mac {
+    color: #059669;
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Checkboxes and Radios */
+.form-check-mac {
+    padding-left: 0;
+    margin-bottom: 1rem;
+}
+
+.form-check-input-mac {
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(203, 213, 225, 0.5);
+    border-radius: 6px;
+    background-color: rgba(248, 250, 252, 0.8);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.form-check-input-mac:checked {
+    background-color: #2563eb;
+    border-color: #2563eb;
+}
+
+.form-check-input-mac:focus {
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+    outline: none;
+}
+
+.form-check-label-mac {
+    color: #334155;
+    font-size: 0.95rem;
+    margin-left: 0.75rem;
+    cursor: pointer;
+}
+
+/* Button Group */
+.form-actions {
+    display: flex;
+    gap: 1rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(226, 232, 240, 0.5);
+    margin-top: 2rem;
+}
+
+/* Submit Button */
+.btn-submit-mac {
+    flex: 1;
+    padding: 0.875rem 2rem;
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+    border: none;
+    border-radius: 12px;
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 
+        0 4px 12px rgba(37, 99, 235, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    text-decoration: none;
+}
+
+.btn-submit-mac:hover {
+    background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
+    transform: translateY(-2px);
+    box-shadow: 
+        0 6px 20px rgba(37, 99, 235, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.btn-submit-mac:active {
+    transform: translateY(0);
+    box-shadow: 
+        0 2px 8px rgba(37, 99, 235, 0.3),
+        inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Delete Button */
+.btn-delete-mac {
+    flex: 1;
+    padding: 0.875rem 2rem;
+    background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+    border: none;
+    border-radius: 12px;
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 
+        0 4px 12px rgba(220, 38, 38, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    text-decoration: none;
+}
+
+.btn-delete-mac:hover {
+    background: linear-gradient(135deg, #b91c1c 0%, #991b1b 100%);
+    transform: translateY(-2px);
+    box-shadow: 
+        0 6px 20px rgba(220, 38, 38, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    color: white;
+}
+
+.btn-delete-mac:active {
+    transform: translateY(0);
+    box-shadow: 
+        0 2px 8px rgba(220, 38, 38, 0.3),
+        inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Cancel/Back Button */
+.btn-cancel-mac {
+    background: linear-gradient(145deg, rgba(71, 85, 105, 0.1) 0%, rgba(71, 85, 105, 0.05) 100%);
+    border: 1.5px solid rgba(203, 213, 225, 0.5);
+    color: #475569;
+    padding: 0.875rem 2rem;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.btn-cancel-mac:hover {
+    background: linear-gradient(145deg, rgba(71, 85, 105, 0.15) 0%, rgba(71, 85, 105, 0.1) 100%);
+    border-color: rgba(203, 213, 225, 0.8);
+    color: #334155;
+    transform: translateY(-2px);
+}
+
+/* Loading State */
+.btn-loading {
+    position: relative;
+    pointer-events: none;
+}
+
+.btn-loading::after {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: 50%;
+    left: 50%;
+    margin-left: -8px;
+    margin-top: -8px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: spinner 0.6s linear infinite;
+}
+
+@keyframes spinner {
+    to { transform: rotate(360deg); }
+}
+
+/* Form Row */
+.form-row-mac {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 1.75rem;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in-up {
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+/* Responsive */
+@media (max-width: 767.98px) {
+    .form-header h1 {
+        font-size: 1.75rem;
+    }
+    
+    .form-card-body {
+        padding: 1.5rem 1.25rem;
+    }
+    
+    .form-actions {
+        flex-direction: column;
+    }
+    
+    .btn-submit-mac,
+    .btn-cancel-mac {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* File Upload Zone - Mac Style */
+.file-upload-zone-mac {
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.file-upload-zone-mac:hover {
+    border-color: rgba(37, 99, 235, 0.5) !important;
+    background: linear-gradient(145deg, rgba(219, 234, 254, 0.3) 0%, rgba(255, 255, 255, 0.8) 100%) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(37, 99, 235, 0.15);
+}
+
+.file-upload-zone-mac.dragover {
+    border-color: #2563eb !important;
+    background: linear-gradient(145deg, rgba(219, 234, 254, 0.5) 0%, rgba(239, 246, 255, 0.8) 100%) !important;
+    box-shadow: 
+        0 12px 32px rgba(37, 99, 235, 0.2),
+        inset 0 0 0 2px rgba(37, 99, 235, 0.2);
+}
+
+/* File List Items */
+.file-list-item {
+    background: rgba(248, 250, 252, 0.5);
+    border: 1px solid rgba(203, 213, 225, 0.3);
+    border-radius: 10px;
+    padding: 1rem;
+    margin-bottom: 0.75rem;
+    transition: all 0.2s ease;
+}
+
+.file-list-item:hover {
+    background: rgba(248, 250, 252, 0.8);
+    border-color: rgba(37, 99, 235, 0.2);
+    transform: translateX(4px);
+}
+
+.file-list-item .file-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+}
+
+.file-list-item .file-icon.pdf {
+    background: rgba(220, 38, 38, 0.1);
+    color: #dc2626;
+}
+
+.file-list-item .file-icon.doc {
+    background: rgba(37, 99, 235, 0.1);
+    color: #2563eb;
+}
+
+.file-list-item .file-icon.image {
+    background: rgba(5, 150, 105, 0.1);
+    color: #059669;
+}
+
+.file-list-item .remove-file {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: rgba(220, 38, 38, 0.1);
+    border: 1px solid rgba(220, 38, 38, 0.2);
+    color: #dc2626;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.file-list-item .remove-file:hover {
+    background: rgba(220, 38, 38, 0.2);
+    transform: scale(1.1);
+}
+
+/* Page Header (used in Create/Edit/Delete pages) */
+.form-page-header {
+    background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 100%);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(37, 99, 235, 0.1);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+    padding: 3rem 0 2rem;
+    margin-bottom: 2rem;
+}
+
+.page-title {
+    color: #1e293b;
+    font-weight: 700;
+    font-size: 2rem;
+    margin: 0;
+}
+
+.page-subtitle {
+    color: #64748b;
+    font-size: 1rem;
+}
+
+/* Page Icon Wrappers */
+.page-icon-wrapper {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(145deg, rgba(37, 99, 235, 0.15) 0%, rgba(37, 99, 235, 0.05) 100%);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 
+        0 4px 12px rgba(37, 99, 235, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.page-icon-wrapper i {
+    font-size: 1.75rem;
+    color: #2563eb;
+}
+
+/* Delete Page Icon (Red Theme) */
+.page-icon-wrapper-delete {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(145deg, rgba(220, 38, 38, 0.15) 0%, rgba(220, 38, 38, 0.05) 100%);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 
+        0 4px 12px rgba(220, 38, 38, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.page-icon-wrapper-delete i {
+    font-size: 1.75rem;
+    color: #dc2626;
+}
+
+/* Back Button */
+.btn-back {
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.85) 100%);
+    border: 1.5px solid rgba(203, 213, 225, 0.5);
+    color: #475569;
+    padding: 0.75rem 1.5rem;
+    border-radius: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.btn-back:hover {
+    background: linear-gradient(145deg, rgba(255, 255, 255, 1) 0%, rgba(248, 250, 252, 0.95) 100%);
+    border-color: rgba(148, 163, 184, 0.5);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    color: #334155;
+}
+
+/* Delete Confirmation Modal - Mac Style */
+#confirmDeleteModal .modal-content {
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.95) 100%) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.5) !important;
+    border-radius: 20px !important;
+    box-shadow: 
+        0 20px 60px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.5) !important;
+    overflow: hidden !important;
+}
+
+#confirmDeleteModal .modal-header.bg-danger {
+    background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%) !important;
+    border-radius: 20px 20px 0 0 !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+    padding: 1.5rem 2rem !important;
+}
+
+#confirmDeleteModal .modal-header .modal-title {
+    font-weight: 700 !important;
+    font-size: 1.25rem !important;
+    color: white !important;
+}
+
+#confirmDeleteModal .modal-body {
+    padding: 2rem !important;
+}
+
+/* Warning Alert in Modal */
+#confirmDeleteModal .modal-body .alert-warning {
+    background: linear-gradient(145deg, rgba(251, 191, 36, 0.15) 0%, rgba(251, 191, 36, 0.08) 100%) !important;
+    border: 1px solid rgba(251, 191, 36, 0.3) !important;
+    border-radius: 12px !important;
+    color: #92400e !important;
+    padding: 1rem 1.25rem;
+    margin-bottom: 2rem;
+}
+
+#confirmDeleteModal .modal-body .alert-warning strong {
+    color: #78350f;
+}
+
+/* Danger Alert in Modal */
+#confirmDeleteModal .modal-body .alert-danger {
+    background: linear-gradient(145deg, rgba(220, 38, 38, 0.15) 0%, rgba(220, 38, 38, 0.08) 100%) !important;
+    border: 1px solid rgba(220, 38, 38, 0.3) !important;
+    border-radius: 12px !important;
+    color: #7f1d1d !important;
+    padding: 1rem 1.25rem;
+}
+
+#confirmDeleteModal .modal-body .alert-danger strong {
+    color: #7f1d1d;
+}
+
+/* Modal Details Sections */
+#confirmDeleteModal .modal-body h6 {
+    color: #64748b !important;
+    font-weight: 600 !important;
+    font-size: 0.875rem !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+    margin-bottom: 1rem !important;
+}
+
+#confirmDeleteModal .modal-body .mb-2 {
+    padding: 0.5rem 0 !important;
+    border-bottom: 1px solid rgba(226, 232, 240, 0.5) !important;
+}
+
+#confirmDeleteModal .modal-body .mb-2:last-child {
+    border-bottom: none !important;
+}
+
+#confirmDeleteModal .modal-body strong {
+    color: #475569 !important;
+    font-weight: 600 !important;
+}
+
+/* Modal Footer */
+#confirmDeleteModal .modal-footer {
+    background: linear-gradient(145deg, rgba(248, 250, 252, 0.5) 0%, rgba(241, 245, 249, 0.3) 100%) !important;
+    border-top: 1px solid rgba(226, 232, 240, 0.5) !important;
+    border-radius: 0 0 20px 20px !important;
+    padding: 1.5rem 2rem !important;
+    gap: 1rem !important;
+}
+
+/* Modal Buttons - Override Bootstrap */
+#confirmDeleteModal .btn-outline-secondary,
+#confirmDeleteModal .btn.btn-outline-secondary {
+    background: linear-gradient(145deg, rgba(71, 85, 105, 0.1) 0%, rgba(71, 85, 105, 0.05) 100%) !important;
+    border: 1.5px solid rgba(203, 213, 225, 0.5) !important;
+    color: #475569 !important;
+    padding: 0.875rem 2rem !important;
+    border-radius: 12px !important;
+    font-weight: 600 !important;
+    transition: all 0.3s ease !important;
+}
+
+#confirmDeleteModal .btn-outline-secondary:hover {
+    background: linear-gradient(145deg, rgba(71, 85, 105, 0.15) 0%, rgba(71, 85, 105, 0.08) 100%) !important;
+    border-color: rgba(148, 163, 184, 0.6) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+}
+
+#confirmDeleteModal .btn-danger,
+#confirmDeleteModal button[onclick] {
+    background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%) !important;
+    border: none !important;
+    color: white !important;
+    padding: 0.875rem 2rem !important;
+    border-radius: 12px !important;
+    font-weight: 600 !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 
+        0 4px 12px rgba(220, 38, 38, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+}
+
+#confirmDeleteModal .btn-danger:hover,
+#confirmDeleteModal button[onclick]:hover {
+    background: linear-gradient(135deg, #b91c1c 0%, #991b1b 100%) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 
+        0 6px 20px rgba(220, 38, 38, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
+}
+
+/* Modal Badge Styling */
+#confirmDeleteModal .modal-body .badge {
+    padding: 0.375rem 0.75rem !important;
+    border-radius: 8px !important;
+    font-weight: 600 !important;
+    font-size: 0.75rem !important;
+}
+
+#confirmDeleteModal .modal-body .badge.bg-warning {
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%) !important;
+}
+
+/* Delete Page Main Card - Mac Style */
+.card.border-danger {
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.95) 100%) !important;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(220, 38, 38, 0.2) !important;
+    border-radius: 20px !important;
+    overflow: hidden;
+    box-shadow: 
+        0 8px 24px rgba(0, 0, 0, 0.06),
+        inset 0 1px 0 rgba(255, 255, 255, 0.5) !important;
+}
+
+.card.border-danger .card-header.bg-danger {
+    background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%) !important;
+    border-radius: 20px 20px 0 0 !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+    padding: 1.5rem 2rem !important;
+}
+
+.card.border-danger .card-header h5 {
+    font-weight: 700 !important;
+    font-size: 1.25rem !important;
+    color: white !important;
+    margin: 0 !important;
+}
+
+.card.border-danger .card-body {
+    padding: 2rem !important;
+}
+
+.card.border-danger .card-body .alert-warning {
+    background: linear-gradient(145deg, rgba(251, 191, 36, 0.15) 0%, rgba(251, 191, 36, 0.08) 100%) !important;
+    border: 1px solid rgba(251, 191, 36, 0.3) !important;
+    border-radius: 12px !important;
+    color: #92400e !important;
+    padding: 1rem 1.25rem !important;
+}
+
+.card.border-danger .card-body h6 {
+    color: #64748b !important;
+    font-weight: 600 !important;
+    font-size: 0.875rem !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+}
+
+.card.border-danger .card-body .mb-2 {
+    padding: 0.5rem 0 !important;
+    border-bottom: 1px solid rgba(226, 232, 240, 0.3) !important;
+}
+
+.card.border-danger .card-body .mb-2:last-child {
+    border-bottom: none !important;
+}
+
+.card.border-danger .card-body strong {
+    color: #475569 !important;
+    font-weight: 600 !important;
+}
+
+.card.border-danger .card-body .badge.bg-warning {
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%) !important;
+    padding: 0.375rem 0.75rem !important;
+    border-radius: 8px !important;
+    font-weight: 600 !important;
+}
+
+/* Details Page Cards - Mac Style */
+.card.shadow-sm {
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.85) 100%);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 
+        0 8px 24px rgba(0, 0, 0, 0.06),
+        inset 0 1px 0 rgba(255, 255, 255, 0.5) !important;
+}
+
+.card.shadow-sm .card-header {
+    background: linear-gradient(145deg, rgba(248, 250, 252, 0.8) 0%, rgba(241, 245, 249, 0.6) 100%);
+    border-bottom: 1px solid rgba(203, 213, 225, 0.3);
+    padding: 1.5rem 2rem;
+}
+
+.card.shadow-sm .card-header h5,
+.card.shadow-sm .card-header h6 {
+    color: #1e293b;
+    font-weight: 700;
+    margin: 0;
+}
+
+.card.shadow-sm .card-body {
+    padding: 2rem;
+}
+
+.card.shadow-sm .card-body h5 {
+    color: #1e293b;
+    font-weight: 700;
+    font-size: 1.25rem;
+}
+
+.card.shadow-sm .card-body .text-muted {
+    color: #64748b !important;
+}
+
+/* Form Labels in Details Pages */
+.card.shadow-sm .form-label.fw-bold {
+    color: #64748b !important;
+    font-size: 0.75rem !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+    margin-bottom: 0.5rem !important;
+}
+
+.card.shadow-sm .card-body p {
+    color: #1e293b;
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+.card.shadow-sm .card-body p.fw-bold {
+    color: #2563eb !important;
+    font-weight: 600 !important;
+}
+
+.card.shadow-sm .card-body .fw-bold.text-primary {
+    color: #2563eb !important;
+    font-weight: 600 !important;
+}
+
+/* Section Headers in Details Cards */
+.card.shadow-sm .card-body h6.text-primary {
+    color: #2563eb !important;
+    font-weight: 700 !important;
+    font-size: 1rem !important;
+    padding-bottom: 0.75rem !important;
+    border-bottom: 2px solid rgba(37, 99, 235, 0.2) !important;
+    margin-bottom: 1.5rem !important;
+}
+
+.card.shadow-sm .card-body .mb-3 {
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(226, 232, 240, 0.3);
+}
+
+.card.shadow-sm .card-body .mb-3:last-child {
+    border-bottom: none;
+}
+
+.card.shadow-sm .card-body .col-md-6,
+.card.shadow-sm .card-body .col-md-12 {
+    padding-bottom: 1rem;
+}
+
+.card.shadow-sm .card-body .row.g-3 > div:last-child,
+.card.shadow-sm .card-body .row.g-4 > div:last-child {
+    border-bottom: none;
+}
+
+/* Document Cards in Details Pages */
+.card.shadow-sm .card-body .border.rounded {
+    background: linear-gradient(145deg, rgba(248, 250, 252, 0.5) 0%, rgba(241, 245, 249, 0.3) 100%);
+    border: 1px solid rgba(203, 213, 225, 0.5) !important;
+    border-radius: 12px !important;
+    padding: 1.5rem !important;
+    transition: all 0.3s ease;
+}
+
+.card.shadow-sm .card-body .border.rounded:hover {
+    background: linear-gradient(145deg, rgba(248, 250, 252, 0.8) 0%, rgba(241, 245, 249, 0.5) 100%);
+    border-color: rgba(148, 163, 184, 0.5) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.card.shadow-sm .card-body .border.rounded h6 {
+    color: #1e293b;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.card.shadow-sm .card-body .border.rounded small {
+    color: #64748b;
+    font-size: 0.8rem;
+}
+
+/* Small Buttons in Details Pages */
+.card.shadow-sm .btn-sm {
+    padding: 0.5rem 1rem !important;
+    font-size: 0.875rem !important;
+    border-radius: 8px !important;
+    font-weight: 600 !important;
+}
+
+.card.shadow-sm .btn-outline-primary.btn-sm {
+    background: linear-gradient(145deg, rgba(37, 99, 235, 0.05) 0%, rgba(37, 99, 235, 0.02) 100%);
+    border: 1.5px solid rgba(37, 99, 235, 0.3);
+    color: #2563eb;
+}
+
+.card.shadow-sm .btn-outline-primary.btn-sm:hover {
+    background: linear-gradient(145deg, rgba(37, 99, 235, 0.1) 0%, rgba(37, 99, 235, 0.05) 100%);
+    border-color: rgba(37, 99, 235, 0.5);
+    color: #1d4ed8;
+    transform: translateY(-1px);
+}
+
+.card.shadow-sm .btn-outline-success.btn-sm {
+    background: linear-gradient(145deg, rgba(16, 185, 129, 0.05) 0%, rgba(16, 185, 129, 0.02) 100%);
+    border: 1.5px solid rgba(16, 185, 129, 0.3);
+    color: #10b981;
+}
+
+.card.shadow-sm .btn-outline-success.btn-sm:hover {
+    background: linear-gradient(145deg, rgba(16, 185, 129, 0.1) 0%, rgba(16, 185, 129, 0.05) 100%);
+    border-color: rgba(16, 185, 129, 0.5);
+    color: #059669;
+    transform: translateY(-1px);
+}
+
+/* Large Buttons with rounded-pill in Details Pages */
+.card.shadow-sm .btn-lg.rounded-pill {
+    padding: 0.75rem 2rem !important;
+    font-size: 1rem !important;
+    font-weight: 600 !important;
+    border-radius: 50px !important;
+}
+
+.card.shadow-sm .btn-primary.btn-lg {
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+    border: none;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+.card.shadow-sm .btn-primary.btn-lg:hover {
+    background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+}
+
+.card.shadow-sm .btn-success.btn-lg {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    border: none;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.card.shadow-sm .btn-success.btn-lg:hover {
+    background: linear-gradient(135deg, #059669 0%, #047857 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+}
+
+.card.shadow-sm .btn-danger.btn-lg {
+    background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+    border: none;
+    box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+}
+
+.card.shadow-sm .btn-danger.btn-lg:hover {
+    background: linear-gradient(135deg, #b91c1c 0%, #991b1b 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(220, 38, 38, 0.4);
+}
+
+.card.shadow-sm .btn-outline-secondary.btn-lg {
+    background: linear-gradient(145deg, rgba(71, 85, 105, 0.1) 0%, rgba(71, 85, 105, 0.05) 100%);
+    border: 1.5px solid rgba(203, 213, 225, 0.5);
+    color: #475569;
+}
+
+.card.shadow-sm .btn-outline-secondary.btn-lg:hover {
+    background: linear-gradient(145deg, rgba(71, 85, 105, 0.15) 0%, rgba(71, 85, 105, 0.08) 100%);
+    border-color: rgba(148, 163, 184, 0.6);
+    color: #334155;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Alert Info in Details Pages */
+.card.shadow-sm .alert-info {
+    background: linear-gradient(145deg, rgba(6, 182, 212, 0.15) 0%, rgba(6, 182, 212, 0.08) 100%) !important;
+    border: 1px solid rgba(6, 182, 212, 0.3) !important;
+    border-radius: 12px !important;
+    color: #0e7490 !important;
+    padding: 1rem 1.25rem !important;
+}
+
+.card.shadow-sm .list-group-item {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(226, 232, 240, 0.5);
+    padding: 1rem 0;
+}
+
+.card.shadow-sm .list-group-item:last-child {
+    border-bottom: none;
+}
+
+.card.shadow-sm .list-group-item strong {
+    color: #475569;
+    font-weight: 600;
+}
+
+/* Details Page Badge Styling */
+.card.shadow-sm .badge.bg-success {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    font-weight: 600;
+}
+
+.card.shadow-sm .badge.bg-warning {
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%) !important;
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    font-weight: 600;
+}
+
+.card.shadow-sm .badge.bg-danger {
+    background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%) !important;
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    font-weight: 600;
+}
+
+.card.shadow-sm .badge.bg-primary {
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%) !important;
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    font-weight: 600;
+}
+
+/* Action Buttons in Details Cards */
+.card.shadow-sm .btn-primary {
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+    border: none;
+    border-radius: 12px;
+    padding: 0.875rem 1.5rem;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+    width: 100%;
+    text-align: center;
+}
+
+.card.shadow-sm .btn-primary:hover {
+    background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+}
+
+.card.shadow-sm .btn-warning {
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+    border: none;
+    border-radius: 12px;
+    padding: 0.875rem 1.5rem;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+    color: white;
+    width: 100%;
+    text-align: center;
+}
+
+.card.shadow-sm .btn-warning:hover {
+    background: linear-gradient(135deg, #d97706 0%, #b45309 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
+    color: white;
+}
+
+.card.shadow-sm .btn-danger {
+    background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+    border: none;
+    border-radius: 12px;
+    padding: 0.875rem 1.5rem;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+    width: 100%;
+    text-align: center;
+}
+
+.card.shadow-sm .btn-danger:hover {
+    background: linear-gradient(135deg, #b91c1c 0%, #991b1b 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(220, 38, 38, 0.4);
+}
+
+.card.shadow-sm .btn-outline-primary {
+    background: linear-gradient(145deg, rgba(37, 99, 235, 0.1) 0%, rgba(37, 99, 235, 0.05) 100%);
+    border: 1.5px solid rgba(37, 99, 235, 0.3);
+    color: #2563eb;
+    border-radius: 12px;
+    padding: 0.875rem 1.5rem;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    width: 100%;
+    text-align: center;
+}
+
+.card.shadow-sm .btn-outline-primary:hover {
+    background: linear-gradient(145deg, rgba(37, 99, 235, 0.15) 0%, rgba(37, 99, 235, 0.08) 100%);
+    border-color: rgba(37, 99, 235, 0.5);
+    color: #1d4ed8;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+}
+
+.card.shadow-sm .btn-outline-secondary {
+    background: linear-gradient(145deg, rgba(71, 85, 105, 0.1) 0%, rgba(71, 85, 105, 0.05) 100%);
+    border: 1.5px solid rgba(203, 213, 225, 0.5);
+    color: #475569;
+    border-radius: 12px;
+    padding: 0.875rem 1.5rem;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    width: 100%;
+    text-align: center;
+}
+
+.card.shadow-sm .btn-outline-secondary:hover {
+    background: linear-gradient(145deg, rgba(71, 85, 105, 0.15) 0%, rgba(71, 85, 105, 0.08) 100%);
+    border-color: rgba(148, 163, 184, 0.6);
+    color: #334155;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.card.shadow-sm .btn-outline-danger {
+    background: linear-gradient(145deg, rgba(220, 38, 38, 0.1) 0%, rgba(220, 38, 38, 0.05) 100%);
+    border: 1.5px solid rgba(220, 38, 38, 0.3);
+    color: #dc2626;
+    border-radius: 12px;
+    padding: 0.875rem 1.5rem;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    width: 100%;
+    text-align: center;
+}
+
+.card.shadow-sm .btn-outline-danger:hover {
+    background: linear-gradient(145deg, rgba(220, 38, 38, 0.15) 0%, rgba(220, 38, 38, 0.08) 100%);
+    border-color: rgba(220, 38, 38, 0.5);
+    color: #b91c1c;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(220, 38, 38, 0.2);
+}
+
+/* Quick Stats Cards */
+.bg-primary.text-white {
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%) !important;
+    border: none !important;
+    border-radius: 16px !important;
+    padding: 2rem !important;
+    box-shadow: 0 8px 24px rgba(37, 99, 235, 0.3) !important;
+}
+
+.bg-success.text-white {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+    border: none !important;
+    border-radius: 16px !important;
+    padding: 1.5rem !important;
+    box-shadow: 0 8px 24px rgba(16, 185, 129, 0.3) !important;
+}
+
+.bg-info.text-white {
+    background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%) !important;
+    border: none !important;
+    border-radius: 16px !important;
+    padding: 1.5rem !important;
+    box-shadow: 0 8px 24px rgba(6, 182, 212, 0.3) !important;
+}
+
+.bg-warning.text-white {
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%) !important;
+    border: none !important;
+    border-radius: 16px !important;
+    padding: 1.5rem !important;
+    box-shadow: 0 8px 24px rgba(245, 158, 11, 0.3) !important;
+}
+
+.bg-primary.text-white h4,
+.bg-primary.text-white h5 {
+    font-size: 2.5rem !important;
+    font-weight: 700 !important;
+    margin-bottom: 0.5rem !important;
+    color: white !important;
+}
+
+.bg-success.text-white h4,
+.bg-success.text-white h5,
+.bg-info.text-white h4,
+.bg-info.text-white h5,
+.bg-warning.text-white h4,
+.bg-warning.text-white h5 {
+    font-size: 1.75rem !important;
+    font-weight: 700 !important;
+    margin-bottom: 0.5rem !important;
+    color: white !important;
+}
+
+.bg-primary.text-white small,
+.bg-success.text-white small,
+.bg-info.text-white small,
+.bg-warning.text-white small {
+    font-size: 0.875rem !important;
+    font-weight: 600 !important;
+    color: rgba(255, 255, 255, 0.9) !important;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* Full Card Quick Stats (for other pages) */
+.card.bg-primary,
+.card.bg-success,
+.card.bg-info,
+.card.bg-warning {
+    border: none !important;
+    border-radius: 16px !important;
+    overflow: hidden;
+}
+
+.card.bg-primary {
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%) !important;
+    box-shadow: 0 8px 24px rgba(37, 99, 235, 0.3) !important;
+}
+
+.card.bg-success {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+    box-shadow: 0 8px 24px rgba(16, 185, 129, 0.3) !important;
+}
+
+.card.bg-info {
+    background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%) !important;
+    box-shadow: 0 8px 24px rgba(6, 182, 212, 0.3) !important;
+}
+
+.card.bg-warning {
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%) !important;
+    box-shadow: 0 8px 24px rgba(245, 158, 11, 0.3) !important;
+}
+
+.card.bg-primary .card-body,
+.card.bg-success .card-body,
+.card.bg-info .card-body,
+.card.bg-warning .card-body {
+    padding: 2rem !important;
+    text-align: center;
+}
+
+.card.bg-primary h2,
+.card.bg-success h2,
+.card.bg-info h2,
+.card.bg-warning h2 {
+    font-size: 3rem !important;
+    font-weight: 700 !important;
+    margin-bottom: 0.5rem !important;
+    color: white !important;
+}
+
+.card.bg-primary p,
+.card.bg-success p,
+.card.bg-info p,
+.card.bg-warning p {
+    font-size: 1rem !important;
+    font-weight: 600 !important;
+    color: rgba(255, 255, 255, 0.9) !important;
+    margin: 0 !important;
+}
+
+/* Modal Backdrop */
+.modal-backdrop.show {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+}

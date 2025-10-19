@@ -4,24 +4,33 @@
     ViewData["Title"] = "Delete Locker Request - Excellence Academy";
 }
 
+@section Styles {
+    <link rel="stylesheet" href="~/css/Shared/form-page.css" />
+}
+
 <!-- Header Section -->
-<section class="bg-danger text-white py-5" style="background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);">
+<div class="form-page-header">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-md-8 mb-3 mb-md-0">
-                <h1 class="display-6 fw-bold mb-2">
-                    <i class="fas fa-trash-alt me-3"></i>Delete Locker Request
-                </h1>
-                <p class="lead mb-0">Confirm deletion of locker request</p>
+                <div class="d-flex align-items-center mb-3">
+                    <div class="page-icon-wrapper-delete me-3">
+                        <i class="fas fa-trash-alt"></i>
+                    </div>
+                    <div>
+                        <h1 class="page-title mb-1">Delete Locker Request</h1>
+                        <p class="page-subtitle mb-0">Confirm deletion of locker request</p>
+                    </div>
+                </div>
             </div>
             <div class="col-md-4 text-md-end">
-                <a asp-action="Index" class="btn btn-light btn-lg rounded px-4">
-                    <i class="fas fa-arrow-left me-2"></i>Back to List
+                <a asp-action="Index" class="btn-back">
+                    <i class="fas fa-arrow-left"></i>Back to List
                 </a>
             </div>
         </div>
     </div>
-</section>
+</div>
 
 <!-- Main Content -->
 <div class="container py-5">
@@ -119,12 +128,12 @@
                         <input type="hidden" asp-for="Id" />
                         @Html.AntiForgeryToken()
                         
-                        <div class="d-flex flex-column flex-sm-row justify-content-between align-items-stretch gap-3">
-                            <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-outline-secondary btn-lg rounded px-4">
-                                <i class="fas fa-times me-2"></i>Cancel
+                        <div class="form-actions">
+                            <a asp-action="Details" asp-route-id="@Model.Id" class="btn-cancel-mac">
+                                <i class="fas fa-times"></i>Cancel
                             </a>
-                            <button type="button" class="btn btn-danger btn-lg rounded px-5" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal">
-                                <i class="fas fa-trash-alt me-2"></i>Delete Request
+                            <button type="button" class="btn-delete-mac" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal">
+                                <i class="fas fa-trash-alt"></i>Delete Request
                             </button>
                         </div>
                     </form>

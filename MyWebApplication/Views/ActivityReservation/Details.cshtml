@@ -5,23 +5,28 @@
 }
 
 <!-- Header Section -->
-<section class="bg-primary text-white py-4" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+<div class="form-page-header">
     <div class="container">
         <div class="row align-items-center">
-            <div class="col-md-8">
-                <h1 class="display-5 fw-bold mb-2">
-                    <i class="fas fa-calendar-alt me-3"></i>Reservation Details
-                </h1>
-                <p class="lead mb-0">Reservation #@Model.Id - @Model.ActivityTitle</p>
+            <div class="col-md-8 mb-3 mb-md-0">
+                <div class="d-flex align-items-center mb-3">
+                    <div class="page-icon-wrapper me-3">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <div>
+                        <h1 class="page-title mb-1">Reservation Details</h1>
+                        <p class="page-subtitle mb-0">Reservation #@Model.Id - @Model.ActivityTitle</p>
+                    </div>
+                </div>
             </div>
             <div class="col-md-4 text-md-end">
-                <a asp-action="Index" class="btn btn-light rounded-pill px-4">
-                    <i class="fas fa-arrow-left me-2"></i>Back to Reservations
+                <a asp-action="Index" class="btn-back">
+                    <i class="fas fa-arrow-left"></i>Back to Reservations
                 </a>
             </div>
         </div>
     </div>
-</section>
+</div>
 
 <!-- Main Content -->
 <div class="container py-5">
@@ -294,5 +299,6 @@
 </div>
 
 @section Styles {
+    <link rel="stylesheet" href="~/css/Shared/form-page.css" />
     <link rel="stylesheet" href="~/css/ActivityReservation/details.css" />
 }

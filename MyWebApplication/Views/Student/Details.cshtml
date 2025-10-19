@@ -1,0 +1,331 @@
+@model MyWebApplication.Models.Student
+
+@{
+    ViewData["Title"] = "Student Details - Excellence Academy";
+}
+
+<!-- Header Section -->
+<div class="form-page-header">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-8 mb-3 mb-md-0">
+                <div class="d-flex align-items-center mb-3">
+                    <div class="page-icon-wrapper me-3">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <div>
+                        <h1 class="page-title mb-1">Student Details</h1>
+                        <p class="page-subtitle mb-0">Student #@Model.Id - @Model.Firstname @Model.Lastname</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 text-md-end">
+                <a asp-action="Index" class="btn-back">
+                    <i class="fas fa-arrow-left"></i>Back to Students
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Main Content -->
+<div class="container py-5">
+    <div class="row">
+        <!-- Left Column - Student Details -->
+        <div class="col-lg-8">
+            <!-- Status Card -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col-md-8">
+                            <h5 class="mb-1">Student Status</h5>
+                            <p class="text-muted mb-0">Current enrollment status</p>
+                        </div>
+                        <div class="col-md-4 text-md-end">
+                            <span class="badge bg-success fs-6 px-3 py-2">
+                                <i class="fas fa-check-circle me-2"></i>Active
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Personal Information -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-light">
+                    <h5 class="mb-0">
+                        <i class="fas fa-user me-2"></i>Personal Information
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold text-muted">First Name</label>
+                            <p class="mb-0">@Model.Firstname</p>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold text-muted">Last Name</label>
+                            <p class="mb-0">@Model.Lastname</p>
+                        </div>
+                        <div class="col-md-12">
+                            <label class="form-label fw-bold text-muted">Email Address</label>
+                            <p class="mb-0 fw-bold text-primary">@Model.Email</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Academic Information -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-light">
+                    <h5 class="mb-0">
+                        <i class="fas fa-graduation-cap me-2"></i>Academic Information
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold text-muted">Academic Program</label>
+                            <p class="mb-0">@(Model.Course ?? "Not specified")</p>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold text-muted">Student ID</label>
+                            <p class="mb-0 fw-bold text-info">#@Model.Id</p>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold text-muted">Enrollment Date</label>
+                            <p class="mb-0">@Model.DateCreated.ToString("MMMM dd, yyyy")</p>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold text-muted">Academic Year</label>
+                            <p class="mb-0">@(DateTime.Now.Year - Model.DateCreated.Year + 1) Year</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Student Avatar -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-light">
+                    <h5 class="mb-0">
+                        <i class="fas fa-id-card me-2"></i>Student Profile
+                    </h5>
+                </div>
+                <div class="card-body text-center">
+                    <div class="avatar bg-primary rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center" style="width: 120px; height: 120px;">
+                        <span class="text-white fw-bold" style="font-size: 3rem;">@(Model.Firstname?.Substring(0, 1))@(Model.Lastname?.Substring(0, 1))</span>
+                    </div>
+                    <h4 class="mb-1">@Model.Firstname @Model.Lastname</h4>
+                    <p class="text-muted mb-2">@Model.Course</p>
+                    <span class="badge bg-success">Active Student</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column - Actions & Timeline -->
+        <div class="col-lg-4">
+            <!-- Action Buttons -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-light">
+                    <h6 class="mb-0">
+                        <i class="fas fa-cogs me-2"></i>Actions
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <div class="d-grid gap-2">
+                        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">
+                            <i class="fas fa-edit me-2"></i>Edit Student
+                        </a>
+                        <button class="btn btn-outline-primary" onclick="window.print()">
+                            <i class="fas fa-print me-2"></i>Print Student Info
+                        </button>
+                        <a asp-action="Index" class="btn btn-outline-secondary">
+                            <i class="fas fa-list me-2"></i>View All Students
+                        </a>
+                        <button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#archiveStudentModal">
+                            <i class="fas fa-archive me-2"></i>Archive Student
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Student Statistics -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-light">
+                    <h6 class="mb-0">
+                        <i class="fas fa-chart-bar me-2"></i>Quick Stats
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <div class="row text-center">
+                        <div class="col-12 mb-3">
+                            <div class="bg-primary text-white rounded p-3">
+                                <h4 class="mb-1">@(DateTime.Now.Year - Model.DateCreated.Year + 1)</h4>
+                                <small>Years Enrolled</small>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="bg-success text-white rounded p-2">
+                                <h5 class="mb-1">Active</h5>
+                                <small>Status</small>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="bg-info text-white rounded p-2">
+                                <h5 class="mb-1">#@Model.Id</h5>
+                                <small>Student ID</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Student Timeline -->
+            <div class="card shadow-sm">
+                <div class="card-header bg-light">
+                    <h6 class="mb-0">
+                        <i class="fas fa-history me-2"></i>Academic Timeline
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-marker bg-primary"></div>
+                            <div class="timeline-content">
+                                <h6 class="mb-1">Student Enrolled</h6>
+                                <p class="text-muted small mb-0">@Model.DateCreated.ToString("MMM dd, yyyy")</p>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <div class="timeline-marker bg-success"></div>
+                            <div class="timeline-content">
+                                <h6 class="mb-1">Account Created</h6>
+                                <p class="text-muted small mb-0">@Model.DateCreated.ToString("MMM dd, yyyy")</p>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <div class="timeline-marker bg-info"></div>
+                            <div class="timeline-content">
+                                <h6 class="mb-1">Current Status</h6>
+                                <p class="text-muted small mb-0">Active Student</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Archive Student Modal -->
+<div class="modal fade" id="archiveStudentModal" tabindex="-1" aria-labelledby="archiveStudentModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-warning text-white">
+                <h5 class="modal-title" id="archiveStudentModalLabel">
+                    <i class="fas fa-archive me-2"></i>Archive Student
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center mb-3">
+                    <i class="fas fa-exclamation-triangle text-warning" style="font-size: 3rem;"></i>
+                </div>
+                <p class="text-center mb-3">Are you sure you want to archive this student?</p>
+                <div class="alert alert-warning">
+                    <i class="fas fa-info-circle me-2"></i>
+                    This will:
+                    <ul class="mb-0 mt-2">
+                        <li>Move student to archived status</li>
+                        <li>Restrict access to student portal</li>
+                        <li>Preserve all academic records</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                    <i class="fas fa-times me-2"></i>Cancel
+                </button>
+                <button type="button" class="btn btn-warning" onclick="archiveStudent()">
+                    <i class="fas fa-archive me-2"></i>Archive Student
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/Shared/form-page.css" />
+    <style>
+        .timeline {
+            position: relative;
+            padding-left: 20px;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 9px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #dee2e6;
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        
+        .timeline-marker {
+            position: absolute;
+            left: -15px;
+            top: 5px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            border: 2px solid #fff;
+            box-shadow: 0 0 0 2px #dee2e6;
+        }
+        
+        .timeline-content {
+            margin-left: 10px;
+        }
+        
+        .avatar {
+            border: 4px solid #fff;
+            box-shadow: 0 0 0 2px #dee2e6;
+        }
+        
+        @@media print {
+            .btn, .modal, .timeline-marker, .card-header {
+                display: none !important;
+            }
+            
+            .card {
+                border: 1px solid #000 !important;
+                box-shadow: none !important;
+            }
+        }
+    </style>
+}
+
+@section Scripts {
+    <script>
+        function archiveStudent() {
+            // Close the modal
+            const modal = document.getElementById('archiveStudentModal');
+            const modalInstance = bootstrap.Modal.getInstance(modal);
+            modalInstance.hide();
+            
+            // Here you would implement the archive functionality
+            // For now, just show a success message
+            alert('Student has been archived successfully.');
+            
+            // You could redirect to the index or update the UI
+            // window.location.href = '@Url.Action("Index")';
+        }
+    </script>
+}

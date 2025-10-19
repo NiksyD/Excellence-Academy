@@ -4,19 +4,23 @@
     ViewData["Title"] = "Edit Activity Reservation - Excellence Academy";
 }
 
-<!-- Header Section -->
-<section class="bg-primary text-white py-4" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+@section Styles {
+    <link rel="stylesheet" href="~/css/Shared/form-page.css" asp-append-version="true" />
+}
+
+<!-- Header Section - Mac Style -->
+<section class="form-header">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-md-8">
-                <h1 class="display-5 fw-bold mb-2">
-                    <i class="fas fa-edit me-3"></i>Edit Activity Reservation
+                <h1 class="mb-2">
+                    <i class="fas fa-edit me-3 header-icon"></i>Edit Activity Reservation
                 </h1>
-                <p class="lead mb-0">Update reservation for @Model.ActivityTitle</p>
+                <p class="lead mb-0">Update activity reservation details</p>
             </div>
             <div class="col-md-4 text-md-end">
-                <a asp-action="Index" class="btn btn-light rounded px-4">
-                    <i class="fas fa-arrow-left me-2"></i>Back to Reservations
+                <a asp-action="Index" class="btn-cancel-mac">
+                    <i class="fas fa-arrow-left"></i>Back to List
                 </a>
             </div>
         </div>
@@ -26,19 +30,18 @@
 <!-- Main Content -->
 <div class="container py-5">
     <div class="row justify-content-center">
-        <div class="col-lg-10">
-            <div class="card shadow-lg border-0">
-                <div class="card-header bg-light py-4">
-                    <h4 class="mb-0 text-center">
-                        <i class="fas fa-clipboard-list text-primary me-2"></i>
-                        Activity Reservation Update
-                    </h4>
+        <div class="col-lg-8">
+            <div class="form-card fade-in-up" style="animation-delay: 0.1s">
+                <div class="form-card-header">
+                    <h5>
+                        <i class="fas fa-edit"></i>Edit Reservation Details
+                    </h5>
                 </div>
-                <div class="card-body p-5">
+                <div class="form-card-body">
                     <!-- Reservation Info Alert -->
-                    <div class="alert alert-info d-flex align-items-center mb-4">
-                        <i class="fas fa-info-circle me-2"></i>
-                        <span>Reservation ID: <strong>#@Model.Id</strong> | Status: 
+                    <div class="alert alert-warning mb-4">
+                        <i class="fas fa-exclamation-triangle me-2"></i>
+                        <strong>Note:</strong> You are editing Activity Reservation <strong>#@Model.Id</strong> | Current Status: 
                             @if (Model.Status == "Pending")
                             {
                                 <span class="badge bg-warning">Pending</span>
@@ -73,22 +76,22 @@
                             </div>
                             
                             <div class="col-md-6">
-                                <div class="form-floating mb-3">
-                                    <input asp-for="OrganizationName" class="form-control" placeholder="Name of Organization" />
-                                    <label asp-for="OrganizationName" class="form-label">
-                                        <i class="fas fa-building me-2"></i>Name of Organization
+                                <div class="form-group-mac">
+                                    <label asp-for="OrganizationName" class="form-label-mac">
+                                        <i class="fas fa-building"></i>Name of Organization<span class="required">*</span>
                                     </label>
-                                    <span asp-validation-for="OrganizationName" class="text-danger small"></span>
+                                    <input asp-for="OrganizationName" class="form-control-mac" placeholder="Enter organization name" />
+                                    <span asp-validation-for="OrganizationName" class="invalid-feedback-mac"></span>
                                 </div>
                             </div>
                             
                             <div class="col-md-6">
-                                <div class="form-floating mb-3">
-                                    <input asp-for="FormDate" class="form-control" type="date" />
-                                    <label asp-for="FormDate" class="form-label">
-                                        <i class="fas fa-calendar me-2"></i>Form Date
+                                <div class="form-group-mac">
+                                    <label asp-for="FormDate" class="form-label-mac">
+                                        <i class="fas fa-calendar"></i>Form Date<span class="required">*</span>
                                     </label>
-                                    <span asp-validation-for="FormDate" class="text-danger small"></span>
+                                    <input asp-for="FormDate" class="form-control-mac" type="date" />
+                                    <span asp-validation-for="FormDate" class="invalid-feedback-mac"></span>
                                 </div>
                             </div>
 
@@ -101,68 +104,71 @@
                             </div>
                             
                             <div class="col-md-12">
-                                <div class="form-floating mb-3">
-                                    <input asp-for="ActivityTitle" class="form-control" placeholder="Activity Title" />
-                                    <label asp-for="ActivityTitle" class="form-label">
-                                        <i class="fas fa-star me-2"></i>Activity Title
+                                <div class="form-group-mac">
+                                    <label asp-for="ActivityTitle" class="form-label-mac">
+                                        <i class="fas fa-star"></i>Activity Title<span class="required">*</span>
                                     </label>
-                                    <span asp-validation-for="ActivityTitle" class="text-danger small"></span>
+                                    <input asp-for="ActivityTitle" class="form-control-mac" placeholder="Enter activity title" />
+                                    <span asp-validation-for="ActivityTitle" class="invalid-feedback-mac"></span>
                                 </div>
                             </div>
                             
                             <div class="col-md-6">
-                                <div class="form-floating mb-3">
-                                    <input asp-for="Venue" class="form-control" placeholder="Venue" />
-                                    <label asp-for="Venue" class="form-label">
-                                        <i class="fas fa-map-marker-alt me-2"></i>Venue
+                                <div class="form-group-mac">
+                                    <label asp-for="Venue" class="form-label-mac">
+                                        <i class="fas fa-map-marker-alt"></i>Venue<span class="required">*</span>
                                     </label>
-                                    <span asp-validation-for="Venue" class="text-danger small"></span>
+                                    <input asp-for="Venue" class="form-control-mac" placeholder="Enter venue" />
+                                    <span asp-validation-for="Venue" class="invalid-feedback-mac"></span>
                                 </div>
                             </div>
                             
                             <div class="col-md-6">
-                                <div class="form-floating mb-3">
-                                    <input asp-for="DateNeeded" class="form-control" type="date" />
-                                    <label asp-for="DateNeeded" class="form-label">
-                                        <i class="fas fa-calendar-day me-2"></i>Date Needed
+                                <div class="form-group-mac">
+                                    <label asp-for="DateNeeded" class="form-label-mac">
+                                        <i class="fas fa-calendar-day"></i>Date Needed<span class="required">*</span>
                                     </label>
-                                    <span asp-validation-for="DateNeeded" class="text-danger small"></span>
+                                    <input asp-for="DateNeeded" class="form-control-mac" type="date" />
+                                    <span asp-validation-for="DateNeeded" class="invalid-feedback-mac"></span>
                                 </div>
                             </div>
                             
                             <div class="col-md-6">
-                                <div class="form-floating mb-3">
-                                    <input asp-for="TimeFrom" class="form-control" type="time" />
-                                    <label asp-for="TimeFrom" class="form-label">
-                                        <i class="fas fa-clock me-2"></i>Time From
+                                <div class="form-group-mac">
+                                    <label asp-for="TimeFrom" class="form-label-mac">
+                                        <i class="fas fa-clock"></i>Time From<span class="required">*</span>
                                     </label>
-                                    <span asp-validation-for="TimeFrom" class="text-danger small"></span>
+                                    <input asp-for="TimeFrom" class="form-control-mac" type="time" />
+                                    <span asp-validation-for="TimeFrom" class="invalid-feedback-mac"></span>
                                 </div>
                             </div>
                             
                             <div class="col-md-6">
-                                <div class="form-floating mb-3">
-                                    <input asp-for="TimeTo" class="form-control" type="time" />
-                                    <label asp-for="TimeTo" class="form-label">
-                                        <i class="fas fa-clock me-2"></i>Time To
+                                <div class="form-group-mac">
+                                    <label asp-for="TimeTo" class="form-label-mac">
+                                        <i class="fas fa-clock"></i>Time To<span class="required">*</span>
                                     </label>
-                                    <span asp-validation-for="TimeTo" class="text-danger small"></span>
+                                    <input asp-for="TimeTo" class="form-control-mac" type="time" />
+                                    <span asp-validation-for="TimeTo" class="invalid-feedback-mac"></span>
                                 </div>
                             </div>
                             
                             <div class="col-md-6">
-                                <div class="form-floating mb-3">
-                                    <input asp-for="Speaker" class="form-control" placeholder="Speaker (Optional)" />
-                                    <label asp-for="Speaker" class="form-label">
-                                        <i class="fas fa-microphone me-2"></i>Speaker
+                                <div class="form-group-mac">
+                                    <label asp-for="Speaker" class="form-label-mac">
+                                        <i class="fas fa-microphone"></i>Speaker
                                     </label>
-                                    <span asp-validation-for="Speaker" class="text-danger small"></span>
+                                    <input asp-for="Speaker" class="form-control-mac" placeholder="Enter speaker name (optional)" />
+                                    <span asp-validation-for="Speaker" class="invalid-feedback-mac"></span>
                                 </div>
                             </div>
                             
                             <div class="col-md-6">
-                                <div class="form-floating mb-3">
-                                    <select asp-for="NatureOfActivity" class="form-select">
+                                <div class="form-group-mac">
+                                    <label asp-for="NatureOfActivity" class="form-label-mac">
+                                        <i class="fas fa-tag"></i>Nature of Activity<span class="required">*</span>
+                                    </label>
+                                    <select asp-for="NatureOfActivity" class="form-select-mac">
                                         <option value="">Select Nature of Activity</option>
                                         <option value="Conference">Conference</option>
                                         <option value="Seminar">Seminar</option>
@@ -174,30 +180,27 @@
                                         <option value="Exhibition">Exhibition</option>
                                         <option value="Other">Other</option>
                                     </select>
-                                    <label asp-for="NatureOfActivity" class="form-label">
-                                        <i class="fas fa-tag me-2"></i>Nature of Activity
-                                    </label>
-                                    <span asp-validation-for="NatureOfActivity" class="text-danger small"></span>
+                                    <span asp-validation-for="NatureOfActivity" class="invalid-feedback-mac"></span>
                                 </div>
                             </div>
                             
                             <div class="col-md-12">
-                                <div class="form-floating mb-3">
-                                    <textarea asp-for="Participants" class="form-control" placeholder="Participants" style="height: 100px"></textarea>
-                                    <label asp-for="Participants" class="form-label">
-                                        <i class="fas fa-users me-2"></i>Participants
+                                <div class="form-group-mac">
+                                    <label asp-for="Participants" class="form-label-mac">
+                                        <i class="fas fa-users"></i>Participants<span class="required">*</span>
                                     </label>
-                                    <span asp-validation-for="Participants" class="text-danger small"></span>
+                                    <textarea asp-for="Participants" class="form-control-mac form-textarea-mac" placeholder="Enter participants details" style="min-height: 100px;"></textarea>
+                                    <span asp-validation-for="Participants" class="invalid-feedback-mac"></span>
                                 </div>
                             </div>
                             
                             <div class="col-md-12">
-                                <div class="form-floating mb-3">
-                                    <textarea asp-for="PurposeObjective" class="form-control" placeholder="Purpose/Objective" style="height: 120px"></textarea>
-                                    <label asp-for="PurposeObjective" class="form-label">
-                                        <i class="fas fa-bullseye me-2"></i>Purpose/Objective
+                                <div class="form-group-mac">
+                                    <label asp-for="PurposeObjective" class="form-label-mac">
+                                        <i class="fas fa-bullseye"></i>Purpose/Objective<span class="required">*</span>
                                     </label>
-                                    <span asp-validation-for="PurposeObjective" class="text-danger small"></span>
+                                    <textarea asp-for="PurposeObjective" class="form-control-mac form-textarea-mac" placeholder="Enter purpose/objective" style="min-height: 120px;"></textarea>
+                                    <span asp-validation-for="PurposeObjective" class="invalid-feedback-mac"></span>
                                 </div>
                             </div>
 
@@ -210,18 +213,21 @@
                             </div>
                             
                             <div class="col-md-12">
-                                <div class="form-floating mb-3">
-                                    <textarea asp-for="EquipmentFacilitiesNeeded" class="form-control" placeholder="Equipment & Other Facilities Needed" style="height: 100px"></textarea>
-                                    <label asp-for="EquipmentFacilitiesNeeded" class="form-label">
-                                        <i class="fas fa-tools me-2"></i>Equipment & Other Facilities Needed
+                                <div class="form-group-mac">
+                                    <label asp-for="EquipmentFacilitiesNeeded" class="form-label-mac">
+                                        <i class="fas fa-tools"></i>Equipment & Other Facilities Needed
                                     </label>
-                                    <span asp-validation-for="EquipmentFacilitiesNeeded" class="text-danger small"></span>
+                                    <textarea asp-for="EquipmentFacilitiesNeeded" class="form-control-mac form-textarea-mac" placeholder="Enter equipment and facilities needed (optional)" style="min-height: 100px;"></textarea>
+                                    <span asp-validation-for="EquipmentFacilitiesNeeded" class="invalid-feedback-mac"></span>
                                 </div>
                             </div>
                             
                             <div class="col-md-6">
-                                <div class="form-floating mb-3">
-                                    <select asp-for="SourceOfFunds" class="form-select">
+                                <div class="form-group-mac">
+                                    <label asp-for="SourceOfFunds" class="form-label-mac">
+                                        <i class="fas fa-dollar-sign"></i>Source of Funds
+                                    </label>
+                                    <select asp-for="SourceOfFunds" class="form-select-mac">
                                         <option value="">Select Source of Funds</option>
                                         <option value="Department Budget">Department Budget</option>
                                         <option value="Organization Budget">Organization Budget</option>
@@ -231,10 +237,7 @@
                                         <option value="Self-Funded">Self-Funded</option>
                                         <option value="N/A">N/A</option>
                                     </select>
-                                    <label asp-for="SourceOfFunds" class="form-label">
-                                        <i class="fas fa-dollar-sign me-2"></i>Source of Funds
-                                    </label>
-                                    <span asp-validation-for="SourceOfFunds" class="text-danger small"></span>
+                                    <span asp-validation-for="SourceOfFunds" class="invalid-feedback-mac"></span>
                                 </div>
                             </div>
 
@@ -284,21 +287,21 @@
                             
                             <!-- Add New Documents -->
                             <div class="col-12 @(Model.Documents != null && Model.Documents.Any() ? "mt-3" : "")">
-                                <!-- Enhanced File Upload Area -->
-                                <div id="fileUploadArea" class="file-upload-zone border border-2 border-dashed rounded-3 p-5 text-center mb-4 position-relative" style="border-color: #dee2e6; background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%); transition: all 0.3s ease; min-height: 200px;">
+                                <!-- Enhanced File Upload Area - Mac Style -->
+                                <div id="fileUploadArea" class="file-upload-zone-mac border border-2 border-dashed rounded-3 p-5 text-center mb-4 position-relative" style="border-color: rgba(37, 99, 235, 0.3); background: linear-gradient(145deg, rgba(248, 250, 252, 0.8) 0%, rgba(255, 255, 255, 0.6) 100%); transition: all 0.3s ease; min-height: 200px;">
                                     <div class="upload-content">
                                         <div class="upload-icon mb-3">
-                                            <i class="fas fa-cloud-upload-alt fa-4x text-primary opacity-75"></i>
+                                            <i class="fas fa-cloud-upload-alt fa-4x" style="color: #2563eb; opacity: 0.7;"></i>
                                         </div>
-                                        <h4 class="fw-bold text-dark mb-2">Drag & Drop Files Here</h4>
-                                        <p class="text-muted mb-3">or click to browse and select multiple files</p>
+                                        <h4 class="fw-bold mb-2" style="color: #1e293b;">Drag & Drop Files Here</h4>
+                                        <p class="text-muted mb-3" style="color: #64748b;">or click to browse and select multiple files</p>
                                         
                                         <!-- Hidden File Input -->
                                         <input type="file" id="fileInput" name="files" multiple accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" style="display: none;">
                                         
                                         <!-- Browse Button -->
-                                        <button type="button" class="btn btn-primary btn-lg rounded px-4 py-2 mb-3" onclick="document.getElementById('fileInput').click()">
-                                            <i class="fas fa-folder-open me-2"></i>Browse Files
+                                        <button type="button" class="btn-submit-mac mb-3" onclick="document.getElementById('fileInput').click()" style="padding: 0.75rem 2rem;">
+                                            <i class="fas fa-folder-open"></i>Browse Files
                                         </button>
                                         
                                         <!-- File Format Info -->
@@ -336,16 +339,16 @@
                                 </div>
                                 
                                 <!-- File List Container -->
-                                <div id="fileListContainer" class="mt-3" style="display: none;">
-                                    <div class="card">
-                                        <div class="card-header bg-primary text-white">
-                                            <h6 class="mb-0">
-                                                <i class="fas fa-paperclip me-2"></i>
-                                                New Files to Upload (<span id="fileCount">0</span>)
-                                            </h6>
+                                <div id="fileList" class="file-list-container" style="display: none;">
+                                    <div class="form-card" style="margin-top: 1.5rem;">
+                                        <div class="form-card-header" style="background: linear-gradient(145deg, rgba(37, 99, 235, 0.1) 0%, rgba(37, 99, 235, 0.05) 100%);">
+                                            <h5 style="color: #2563eb; font-size: 1rem;">
+                                                <i class="fas fa-paperclip"></i>Selected Files
+                                                <span id="fileCount" class="badge-id" style="margin-left: 0.75rem; background: white; color: #2563eb; border: 1px solid rgba(37, 99, 235, 0.3);">0</span>
+                                            </h5>
                                         </div>
-                                        <div class="card-body p-0">
-                                            <div id="fileList" class="list-group list-group-flush"></div>
+                                        <div class="form-card-body" style="padding: 1rem;">
+                                            <div id="fileItems" class="list-group list-group-flush"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -359,18 +362,13 @@
                         <!-- Form Actions -->
                         <div class="row mt-5">
                             <div class="col-12">
-                                <div class="d-flex flex-column flex-md-row justify-content-between align-items-stretch align-items-md-center gap-3">
-                                    <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-outline-info btn-lg rounded px-4">
-                                        <i class="fas fa-eye me-2"></i>View Details
+                                <div class="form-actions">
+                                    <a asp-action="Details" asp-route-id="@Model.Id" class="btn-cancel-mac">
+                                        <i class="fas fa-times"></i>Cancel
                                     </a>
-                                    <div class="d-flex flex-column flex-sm-row gap-2">
-                                        <a asp-action="Index" class="btn btn-outline-secondary btn-lg rounded px-4">
-                                            <i class="fas fa-times me-2"></i>Cancel
-                                        </a>
-                                        <button type="submit" class="btn btn-success btn-lg rounded px-5">
-                                            <i class="fas fa-save me-2"></i>Update Reservation
-                                        </button>
-                                    </div>
+                                    <button type="submit" class="btn-submit-mac">
+                                        <i class="fas fa-save"></i>Update Activity Reservation
+                                    </button>
                                 </div>
                             </div>
                         </div>

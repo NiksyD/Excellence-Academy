@@ -35,6 +35,22 @@ namespace MyWebApplication.Controllers
             }
             return View(obj);
         }
+        
+        //GET
+        public IActionResult Details(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            var student = _db.Students.Find(id);
+            if (student == null)
+            {
+                return NotFound();
+            }
+            return View(student);
+        }
+        
         //GET
         [HttpGet]
         public IActionResult Edit(int? id)

@@ -3,19 +3,23 @@
 	ViewData["Title"] = "Edit Student - Excellence Academy";
 }
 
-<!-- Header Section -->
-<section class="bg-primary text-white py-4" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+@section Styles {
+	<link rel="stylesheet" href="~/css/Shared/form-page.css" asp-append-version="true" />
+}
+
+<!-- Header Section - Mac Style -->
+<section class="form-header">
 	<div class="container">
 		<div class="row align-items-center">
-			<div class="col-md-8">
-				<h1 class="display-5 fw-bold mb-2">
-					<i class="fas fa-user-edit me-3"></i>Edit Student
+			<div class="col-md-8 mb-3 mb-md-0">
+				<h1 class="mb-2">
+					<i class="fas fa-edit me-3 header-icon"></i>Edit Student
 				</h1>
 				<p class="lead mb-0">Update student information for @Model.Firstname @Model.Lastname</p>
 			</div>
 			<div class="col-md-4 text-md-end">
-				<a asp-action="Index" class="btn btn-light rounded px-4">
-					<i class="fas fa-arrow-left me-2"></i>Back to Students
+				<a asp-action="Index" class="btn-cancel-mac">
+					<i class="fas fa-arrow-left"></i>Back to List
 				</a>
 			</div>
 		</div>
@@ -26,21 +30,21 @@
 <div class="container py-5">
 	<div class="row justify-content-center">
 		<div class="col-lg-8">
-			<div class="card shadow-lg border-0">
-				<div class="card-header bg-light py-4">
-					<h4 class="mb-0 text-center">
-						<i class="fas fa-graduation-cap text-primary me-2"></i>
-						Student Information Update
-					</h4>
+			<div class="form-card fade-in-up" style="animation-delay: 0.1s">
+				<div class="form-card-header">
+					<h5>
+						<i class="fas fa-edit"></i>
+						Edit Student Information
+					</h5>
 				</div>
-				<div class="card-body p-5">
+				<div class="form-card-body">
 					<form method="post" asp-action="Edit" id="editStudentForm">
 						<div class="row g-4">
 							<!-- Student ID (Read-only) -->
 							<div class="col-12">
-								<div class="alert alert-info d-flex align-items-center">
-									<i class="fas fa-info-circle me-2"></i>
-									<span>Student ID: <strong>#@Model.Id</strong></span>
+								<div class="alert alert-warning">
+									<i class="fas fa-exclamation-triangle me-2"></i>
+									<strong>Note:</strong> You are editing Student <strong>#@Model.Id</strong>
 								</div>
 							</div>
 							
@@ -55,32 +59,32 @@
 							<input type="hidden" asp-for="Id" />
 							
 							<div class="col-md-6">
-								<div class="form-floating mb-3">
-									<input asp-for="Firstname" class="form-control" placeholder="First Name" />
-									<label asp-for="Firstname" class="form-label">
-										<i class="fas fa-user me-2"></i>First Name
+								<div class="form-group-mac">
+									<label asp-for="Firstname" class="form-label-mac">
+										<i class="fas fa-user"></i>First Name<span class="required">*</span>
 									</label>
-									<span asp-validation-for="Firstname" class="text-danger small"></span>
+									<input asp-for="Firstname" class="form-control-mac" placeholder="Enter first name" />
+									<span asp-validation-for="Firstname" class="invalid-feedback-mac"></span>
 								</div>
 							</div>
 							
 							<div class="col-md-6">
-								<div class="form-floating mb-3">
-									<input asp-for="Lastname" class="form-control" placeholder="Last Name" />
-									<label asp-for="Lastname" class="form-label">
-										<i class="fas fa-user me-2"></i>Last Name
+								<div class="form-group-mac">
+									<label asp-for="Lastname" class="form-label-mac">
+										<i class="fas fa-user"></i>Last Name<span class="required">*</span>
 									</label>
-									<span asp-validation-for="Lastname" class="text-danger small"></span>
+									<input asp-for="Lastname" class="form-control-mac" placeholder="Enter last name" />
+									<span asp-validation-for="Lastname" class="invalid-feedback-mac"></span>
 								</div>
 							</div>
 							
 							<div class="col-md-6">
-								<div class="form-floating mb-3">
-									<input asp-for="Email" type="email" class="form-control" placeholder="Email Address" />
-									<label asp-for="Email" class="form-label">
-										<i class="fas fa-envelope me-2"></i>Email Address
+								<div class="form-group-mac">
+									<label asp-for="Email" class="form-label-mac">
+										<i class="fas fa-envelope"></i>Email Address<span class="required">*</span>
 									</label>
-									<span asp-validation-for="Email" class="text-danger small"></span>
+									<input asp-for="Email" type="email" class="form-control-mac" placeholder="student@email.com" />
+									<span asp-validation-for="Email" class="invalid-feedback-mac"></span>
 								</div>
 							</div>
 							
@@ -93,8 +97,11 @@
 							</div>
 							
 							<div class="col-md-6">
-								<div class="form-floating mb-3">
-									<select asp-for="Course" class="form-select">
+								<div class="form-group-mac">
+									<label asp-for="Course" class="form-label-mac">
+										<i class="fas fa-graduation-cap"></i>Academic Program<span class="required">*</span>
+									</label>
+									<select asp-for="Course" class="form-select-mac">
 										<option value="">Select a Program</option>
 										<option value="Science & Technology">Science & Technology</option>
 										<option value="Arts & Humanities">Arts & Humanities</option>
@@ -103,20 +110,17 @@
 										<option value="Medicine">Medicine</option>
 										<option value="Computer Science">Computer Science</option>
 									</select>
-									<label asp-for="Course" class="form-label">
-										<i class="fas fa-graduation-cap me-2"></i>Academic Program
-									</label>
-									<span asp-validation-for="Course" class="text-danger small"></span>
+									<span asp-validation-for="Course" class="invalid-feedback-mac"></span>
 								</div>
 							</div>
 							
 							<div class="col-md-6">
-								<div class="form-floating mb-3">
-									<input asp-for="DateCreated" type="date" class="form-control" />
-									<label asp-for="DateCreated" class="form-label">
-										<i class="fas fa-calendar me-2"></i>Enrollment Date
+								<div class="form-group-mac">
+									<label asp-for="DateCreated" class="form-label-mac">
+										<i class="fas fa-calendar"></i>Enrollment Date<span class="required">*</span>
 									</label>
-									<span asp-validation-for="DateCreated" class="text-danger small"></span>
+									<input asp-for="DateCreated" type="date" class="form-control-mac" />
+									<span asp-validation-for="DateCreated" class="invalid-feedback-mac"></span>
 								</div>
 							</div>
 							
@@ -145,18 +149,13 @@
 						<!-- Form Actions -->
 						<div class="row mt-5">
 							<div class="col-12">
-								<div class="d-flex flex-column flex-md-row justify-content-between align-items-stretch align-items-md-center gap-3">
-									<a asp-action="Index" class="btn btn-outline-secondary btn-lg rounded px-4">
-										<i class="fas fa-times me-2"></i>Cancel
+								<div class="form-actions">
+									<a asp-action="Details" asp-route-id="@Model.Id" class="btn-cancel-mac">
+										<i class="fas fa-times"></i>Cancel
 									</a>
-									<div class="d-flex flex-column flex-sm-row gap-2">
-										<a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-outline-info btn-lg rounded px-4">
-											<i class="fas fa-eye me-2"></i>View Details
-										</a>
-										<button type="submit" class="btn btn-success btn-lg rounded px-5">
-											<i class="fas fa-save me-2"></i>Update Student
-										</button>
-									</div>
+									<button type="submit" class="btn-submit-mac">
+										<i class="fas fa-save"></i>Update Student
+									</button>
 								</div>
 							</div>
 						</div>

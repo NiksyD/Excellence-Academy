@@ -4,19 +4,23 @@
     ViewData["Title"] = "New Locker Request - Excellence Academy";
 }
 
-<!-- Header Section -->
-<section class="bg-primary text-white py-4" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+@section Styles {
+    <link rel="stylesheet" href="~/css/Shared/form-page.css" asp-append-version="true" />
+}
+
+<!-- Header Section - Mac Style -->
+<section class="form-header">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-md-8">
-                <h1 class="display-5 fw-bold mb-2">
-                    <i class="fas fa-key me-3"></i>New Locker Request
+                <h1 class="mb-2">
+                    <i class="fas fa-key me-3 header-icon"></i>New Locker Request
                 </h1>
                 <p class="lead mb-0">Submit your locker assignment request</p>
             </div>
             <div class="col-md-4 text-md-end">
-                <a asp-action="Index" class="btn btn-light btn-lg rounded px-4">
-                    <i class="fas fa-arrow-left me-2"></i>Back to List
+                <a asp-action="Index" class="btn-cancel-mac">
+                    <i class="fas fa-arrow-left"></i>Back to List
                 </a>
             </div>
         </div>
@@ -27,14 +31,14 @@
 <div class="container py-5">
     <div class="row justify-content-center">
         <div class="col-lg-8">
-            <div class="card shadow-lg">
-                <div class="card-header bg-light py-4">
-                    <h4 class="mb-0 text-center">
-                        <i class="fas fa-key text-primary me-2"></i>
+            <div class="form-card fade-in-up" style="animation-delay: 0.1s">
+                <div class="form-card-header">
+                    <h5>
+                        <i class="fas fa-key"></i>
                         Locker Request Form
-                    </h4>
+                    </h5>
                 </div>
-                <div class="card-body p-4">
+                <div class="form-card-body">
                     <form asp-action="Create" method="post" enctype="multipart/form-data" id="createLockerRequestForm">
                         <div class="row g-4">
                             <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
@@ -48,32 +52,32 @@
                             </div>
                             
                             <div class="col-md-6">
-                                <div class="form-floating mb-3">
-                                    <input asp-for="Name" class="form-control" placeholder="Full Name" />
-                                    <label asp-for="Name" class="form-label">
-                                        <i class="fas fa-user me-2"></i>Full Name
+                                <div class="form-group-mac">
+                                    <label asp-for="Name" class="form-label-mac">
+                                        <i class="fas fa-user"></i>Full Name<span class="required">*</span>
                                     </label>
-                                    <span asp-validation-for="Name" class="text-danger small"></span>
+                                    <input asp-for="Name" class="form-control-mac" placeholder="Enter full name" />
+                                    <span asp-validation-for="Name" class="invalid-feedback-mac"></span>
                                 </div>
                             </div>
                             
                             <div class="col-md-6">
-                                <div class="form-floating mb-3">
-                                    <input asp-for="IdNumber" class="form-control" placeholder="ID Number" />
-                                    <label asp-for="IdNumber" class="form-label">
-                                        <i class="fas fa-id-card me-2"></i>ID Number
+                                <div class="form-group-mac">
+                                    <label asp-for="IdNumber" class="form-label-mac">
+                                        <i class="fas fa-id-card"></i>ID Number<span class="required">*</span>
                                     </label>
-                                    <span asp-validation-for="IdNumber" class="text-danger small"></span>
+                                    <input asp-for="IdNumber" class="form-control-mac" placeholder="Enter ID number" />
+                                    <span asp-validation-for="IdNumber" class="invalid-feedback-mac"></span>
                                 </div>
                             </div>
                             
                             <div class="col-md-6">
-                                <div class="form-floating mb-3">
-                                    <input asp-for="ContactNumber" class="form-control" placeholder="Contact Number" />
-                                    <label asp-for="ContactNumber" class="form-label">
-                                        <i class="fas fa-phone me-2"></i>Contact Number
+                                <div class="form-group-mac">
+                                    <label asp-for="ContactNumber" class="form-label-mac">
+                                        <i class="fas fa-phone"></i>Contact Number<span class="required">*</span>
                                     </label>
-                                    <span asp-validation-for="ContactNumber" class="text-danger small"></span>
+                                    <input asp-for="ContactNumber" class="form-control-mac" placeholder="Enter contact number" />
+                                    <span asp-validation-for="ContactNumber" class="invalid-feedback-mac"></span>
                                 </div>
                             </div>
 
@@ -86,28 +90,28 @@
                             </div>
                             
                             <div class="col-md-6">
-                                <div class="form-floating mb-3">
-                                    <input asp-for="LockerNumber" class="form-control" placeholder="Locker Number" />
-                                    <label asp-for="LockerNumber" class="form-label">
-                                        <i class="fas fa-hashtag me-2"></i>Locker Number
+                                <div class="form-group-mac">
+                                    <label asp-for="LockerNumber" class="form-label-mac">
+                                        <i class="fas fa-hashtag"></i>Locker Number<span class="required">*</span>
                                     </label>
-                                    <span asp-validation-for="LockerNumber" class="text-danger small"></span>
+                                    <input asp-for="LockerNumber" class="form-control-mac" placeholder="Enter locker number" />
+                                    <span asp-validation-for="LockerNumber" class="invalid-feedback-mac"></span>
                                 </div>
                             </div>
                             
                             <div class="col-md-6">
-                                <div class="form-floating mb-3">
-                                    <select asp-for="Semester" class="form-select">
+                                <div class="form-group-mac">
+                                    <label asp-for="Semester" class="form-label-mac">
+                                        <i class="fas fa-calendar"></i>Semester<span class="required">*</span>
+                                    </label>
+                                    <select asp-for="Semester" class="form-select-mac">
                                         <option value="">Select Semester</option>
                                         <option value="First Semester">First Semester</option>
                                         <option value="Second Semester">Second Semester</option>
                                         <option value="Summer">Summer</option>
                                         <option value="Whole Year">Whole Year</option>
                                     </select>
-                                    <label asp-for="Semester" class="form-label">
-                                        <i class="fas fa-calendar me-2"></i>Semester
-                                    </label>
-                                    <span asp-validation-for="Semester" class="text-danger small"></span>
+                                    <span asp-validation-for="Semester" class="invalid-feedback-mac"></span>
                                 </div>
                             </div>
 
@@ -124,21 +128,21 @@
                                     <i class="fas fa-file-alt me-2"></i>Attached Study Load and Registration
                                 </label>
                 
-                                <!-- Enhanced File Upload Area -->
-                                <div id="fileUploadArea" class="file-upload-zone border border-2 border-dashed rounded-3 p-5 text-center mb-4 position-relative" style="border-color: #dee2e6; background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%); transition: all 0.3s ease; min-height: 200px;">
+                                <!-- Enhanced File Upload Area - Mac Style -->
+                                <div id="fileUploadArea" class="file-upload-zone-mac border border-2 border-dashed rounded-3 p-5 text-center mb-4 position-relative" style="border-color: rgba(37, 99, 235, 0.3); background: linear-gradient(145deg, rgba(248, 250, 252, 0.8) 0%, rgba(255, 255, 255, 0.6) 100%); transition: all 0.3s ease; min-height: 200px;">
                                     <div class="upload-content">
                                         <div class="upload-icon mb-3">
-                                            <i class="fas fa-cloud-upload-alt fa-4x text-primary opacity-75"></i>
+                                            <i class="fas fa-cloud-upload-alt fa-4x" style="color: #2563eb; opacity: 0.7;"></i>
                                         </div>
-                                        <h4 class="fw-bold text-dark mb-2">Drag & Drop Files Here</h4>
-                                        <p class="text-muted mb-3">or click to browse and select multiple files</p>
+                                        <h4 class="fw-bold mb-2" style="color: #1e293b;">Drag & Drop Files Here</h4>
+                                        <p class="text-muted mb-3" style="color: #64748b;">or click to browse and select multiple files</p>
                         
                                         <!-- Hidden File Input -->
                                         <input type="file" id="fileInput" name="files" multiple accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" style="display: none;">
                         
                                         <!-- Browse Button -->
-                                        <button type="button" class="btn btn-primary btn-lg rounded px-4 py-2 mb-3" onclick="document.getElementById('fileInput').click()">
-                                            <i class="fas fa-folder-open me-2"></i>Browse Files
+                                        <button type="button" class="btn-submit-mac mb-3" onclick="document.getElementById('fileInput').click()" style="padding: 0.75rem 2rem;">
+                                            <i class="fas fa-folder-open"></i>Browse Files
                                         </button>
                         
                                         <!-- File Format Info -->
@@ -146,13 +150,13 @@
                                             <div class="row justify-content-center">
                                                 <div class="col-auto">
                                                     <div class="d-flex align-items-center gap-3 flex-wrap justify-content-center">
-                                                        <span class="badge bg-danger-subtle text-danger px-3 py-2">
+                                                        <span class="badge-status" style="background: linear-gradient(145deg, rgba(220, 38, 38, 0.15) 0%, rgba(220, 38, 38, 0.1) 100%); color: #dc2626; border: 1px solid rgba(220, 38, 38, 0.2); padding: 0.5rem 1rem;">
                                                             <i class="fas fa-file-pdf me-1"></i>PDF
                                                         </span>
-                                                        <span class="badge bg-primary-subtle text-primary px-3 py-2">
+                                                        <span class="badge-status" style="background: linear-gradient(145deg, rgba(37, 99, 235, 0.15) 0%, rgba(37, 99, 235, 0.1) 100%); color: #2563eb; border: 1px solid rgba(37, 99, 235, 0.2); padding: 0.5rem 1rem;">
                                                             <i class="fas fa-file-word me-1"></i>DOC/DOCX
                                                         </span>
-                                                        <span class="badge bg-success-subtle text-success px-3 py-2">
+                                                        <span class="badge-status" style="background: linear-gradient(145deg, rgba(5, 150, 105, 0.15) 0%, rgba(5, 150, 105, 0.1) 100%); color: #059669; border: 1px solid rgba(5, 150, 105, 0.2); padding: 0.5rem 1rem;">
                                                             <i class="fas fa-file-image me-1"></i>JPG/PNG
                                                         </span>
                                                     </div>
@@ -176,22 +180,19 @@
                                 </div>
                 
                                 <!-- File List Container -->
-                                <div id="fileListContainer" class="file-list-container d-none">
-                                    <div class="card shadow-sm">
-                                        <div class="card-header text-white d-flex justify-content-between align-items-center">
-                                            <h6 class="mb-0">
-                                                <i class="fas fa-files me-2"></i>Selected Files
-                                            </h6>
-                                            <span id="fileCount" class="badge bg-light text-primary">0</span>
+                                <div id="fileList" class="file-list-container" style="display: none;">
+                                    <div class="form-card" style="margin-top: 1.5rem;">
+                                        <div class="form-card-header" style="background: linear-gradient(145deg, rgba(37, 99, 235, 0.1) 0%, rgba(37, 99, 235, 0.05) 100%);">
+                                            <h5 style="color: #2563eb; font-size: 1rem;">
+                                                <i class="fas fa-paperclip"></i>Selected Files
+                                                <span id="fileCount" class="badge-id" style="margin-left: 0.75rem; background: white; color: #2563eb; border: 1px solid rgba(37, 99, 235, 0.3);">0</span>
+                                            </h5>
                                         </div>
-                                        <div class="card-body p-0">
-                                            <ul id="fileList" class="list-group list-group-flush">
-                                                <!-- Files will be added here dynamically -->
-                                            </ul>
+                                        <div class="form-card-body" style="padding: 1rem;">
+                                            <div id="fileItems" class="list-group list-group-flush"></div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
 
                             <!-- Terms and Conditions -->
                             <div class="col-12 mt-4">
@@ -203,18 +204,15 @@
                                     <span asp-validation-for="TermsAccepted" class="text-danger small d-block"></span>
                                 </div>
                             </div>
+                        </div>
 
-                            <!-- Submit Button -->
-                            <div class="col-12 mt-4">
-                                <div class="d-flex flex-column flex-sm-row justify-content-between align-items-stretch gap-3">
-                                    <a asp-action="Index" class="btn btn-outline-secondary btn-lg rounded px-4">
-                                        <i class="fas fa-times me-2"></i>Cancel
-                                    </a>
-                                    <button type="submit" class="btn btn-primary btn-lg rounded px-5">
-                                        <i class="fas fa-paper-plane me-2"></i>Submit Request
-                                    </button>
-                                </div>
-                            </div>
+                        <div class="form-actions">
+                            <a asp-action="Index" class="btn-cancel-mac">
+                                <i class="fas fa-times"></i>Cancel
+                            </a>
+                            <button type="submit" class="btn-submit-mac">
+                                <i class="fas fa-paper-plane"></i>Submit Request
+                            </button>
                         </div>
                     </form>
                 </div>

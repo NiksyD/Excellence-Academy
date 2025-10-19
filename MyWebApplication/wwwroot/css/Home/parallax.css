@@ -1,0 +1,385 @@
+/* ============================================
+   PARALLAX EFFECTS & ANIMATIONS
+   Excellence Academy Landing Page
+   ============================================ */
+
+/* Parallax Container */
+.parallax-container {
+    position: relative;
+    overflow: hidden;
+    will-change: transform;
+}
+
+.parallax-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+/* ============================================
+   FLOATING SHAPES
+   ============================================ */
+
+.floating-shapes {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.shape {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    animation: float 6s ease-in-out infinite;
+    will-change: transform;
+}
+
+.shape-1 {
+    width: 80px;
+    height: 80px;
+    top: 20%;
+    left: 10%;
+    animation-delay: 0s;
+}
+
+.shape-2 {
+    width: 60px;
+    height: 60px;
+    top: 60%;
+    left: 80%;
+    animation-delay: 2s;
+}
+
+.shape-3 {
+    width: 100px;
+    height: 100px;
+    top: 80%;
+    left: 20%;
+    animation-delay: 4s;
+}
+
+.shape-4 {
+    width: 40px;
+    height: 40px;
+    top: 30%;
+    left: 70%;
+    animation-delay: 1s;
+}
+
+.shape-5 {
+    width: 120px;
+    height: 120px;
+    top: 10%;
+    left: 60%;
+    animation-delay: 3s;
+}
+
+.shape-6 {
+    width: 50px;
+    height: 50px;
+    top: 70%;
+    left: 50%;
+    animation-delay: 5s;
+}
+
+/* ============================================
+   PARTICLES SYSTEM
+   ============================================ */
+
+.particles-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+    animation: particle-float 8s linear infinite;
+    will-change: transform;
+}
+
+.particle:nth-child(1) { left: 10%; animation-delay: 0s; }
+.particle:nth-child(2) { left: 20%; animation-delay: 1s; }
+.particle:nth-child(3) { left: 30%; animation-delay: 2s; }
+.particle:nth-child(4) { left: 40%; animation-delay: 3s; }
+.particle:nth-child(5) { left: 60%; animation-delay: 4s; }
+.particle:nth-child(6) { left: 70%; animation-delay: 5s; }
+.particle:nth-child(7) { left: 80%; animation-delay: 6s; }
+.particle:nth-child(8) { left: 90%; animation-delay: 7s; }
+
+/* ============================================
+   WAVE ANIMATION FOR CTA SECTION
+   ============================================ */
+
+.wave-animation {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="rgba(255,255,255,0.1)"></path></svg>') repeat-x;
+    animation: wave-move 10s linear infinite;
+}
+
+/* ============================================
+   FLOATING DOTS FOR CTA
+   ============================================ */
+
+.floating-dots {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.dot {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 50%;
+    animation: float-vertical 4s ease-in-out infinite;
+}
+
+.dot:nth-child(1) { left: 15%; top: 20%; animation-delay: 0s; }
+.dot:nth-child(2) { left: 35%; top: 60%; animation-delay: 1s; }
+.dot:nth-child(3) { left: 55%; top: 30%; animation-delay: 2s; }
+.dot:nth-child(4) { left: 75%; top: 70%; animation-delay: 3s; }
+.dot:nth-child(5) { left: 85%; top: 40%; animation-delay: 4s; }
+
+/* ============================================
+   KEYFRAME ANIMATIONS
+   ============================================ */
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(180deg); }
+}
+
+@keyframes particle-float {
+    0% { transform: translateY(100vh) scale(0); }
+    10% { transform: translateY(90vh) scale(1); }
+    90% { transform: translateY(-10vh) scale(1); }
+    100% { transform: translateY(-20vh) scale(0); }
+}
+
+@keyframes wave-move {
+    0% { background-position-x: 0; }
+    100% { background-position-x: 1200px; }
+}
+
+@keyframes float-vertical {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+}
+
+@keyframes fade-in-up {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* ============================================
+   SCROLL REVEAL ANIMATIONS
+   ============================================ */
+
+.fade-in-up {
+    animation: fade-in-up 1s ease forwards;
+}
+
+.scroll-reveal {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.8s ease;
+}
+
+.scroll-reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.scroll-reveal[data-delay="100"].revealed {
+    transition-delay: 0.1s;
+}
+
+.scroll-reveal[data-delay="200"].revealed {
+    transition-delay: 0.2s;
+}
+
+.scroll-reveal[data-delay="300"].revealed {
+    transition-delay: 0.3s;
+}
+
+/* ============================================
+   BUTTON ANIMATIONS
+   ============================================ */
+
+.btn-pulse {
+    animation: pulse 2s infinite;
+}
+
+.btn-hover-glow:hover {
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+    transform: translateY(-2px);
+    transition: all 0.3s ease;
+}
+
+.btn-hover-slide {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-hover-slide::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+}
+
+.btn-hover-slide:hover::before {
+    left: 100%;
+}
+
+/* ============================================
+   ICON ANIMATIONS
+   ============================================ */
+
+.icon-hover {
+    transition: transform 0.3s ease;
+}
+
+.icon-hover:hover {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.rotating-icon {
+    animation: rotate 20s linear infinite;
+}
+
+.floating-element {
+    animation: float-vertical 3s ease-in-out infinite;
+    will-change: transform;
+}
+
+/* ============================================
+   ENHANCED CARD EFFECTS
+   ============================================ */
+
+.program-card {
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.program-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1) !important;
+    border-color: rgba(102, 126, 234, 0.3);
+}
+
+.testimonial-card {
+    transition: all 0.3s ease;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+}
+
+.feature-item {
+    transition: all 0.3s ease;
+}
+
+.feature-item:hover {
+    transform: translateX(15px);
+}
+
+.feature-item:hover .feature-icon i {
+    transform: scale(1.1);
+    color: #667eea !important;
+}
+
+/* ============================================
+   HERO SECTION ENHANCEMENTS
+   ============================================ */
+
+.hero-section {
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-section .container {
+    position: relative;
+    z-index: 2;
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+/* Mobile optimizations */
+@media (max-width: 991.98px) {
+    .min-vh-50 {
+        min-height: 50vh !important;
+    }
+    .shape {
+        display: none;
+    }
+    .particle {
+        display: none;
+    }
+}
+
+@media (min-width: 992px) {
+    .min-vh-lg-70 {
+        min-height: 70vh !important;
+    }
+    .display-lg-3 {
+        font-size: calc(1.525rem + 3.3vw) !important;
+    }
+    .display-md-4 {
+        font-size: calc(1.475rem + 2.7vw) !important;
+    }
+    .fs-lg-4 {
+        font-size: 1.5rem !important;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .display-5 {
+        font-size: 2rem !important;
+    }
+}
+
+/* ============================================
+   SMOOTH SCROLL BEHAVIOR
+   ============================================ */
+
+html {
+    scroll-behavior: smooth;
+}
