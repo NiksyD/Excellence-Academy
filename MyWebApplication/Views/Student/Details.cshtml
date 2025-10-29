@@ -142,9 +142,9 @@
                         <a asp-action="Index" class="btn btn-outline-secondary">
                             <i class="fas fa-list me-2"></i>View All Students
                         </a>
-                        <button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#archiveStudentModal">
-                            <i class="fas fa-archive me-2"></i>Archive Student
-                        </button>
+                        <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-outline-danger">
+                            <i class="fas fa-trash me-2"></i>Delete Student
+                        </a>
                     </div>
                 </div>
             </div>
@@ -219,43 +219,6 @@
     </div>
 </div>
 
-<!-- Archive Student Modal -->
-<div class="modal fade" id="archiveStudentModal" tabindex="-1" aria-labelledby="archiveStudentModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header bg-warning text-white">
-                <h5 class="modal-title" id="archiveStudentModalLabel">
-                    <i class="fas fa-archive me-2"></i>Archive Student
-                </h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="text-center mb-3">
-                    <i class="fas fa-exclamation-triangle text-warning" style="font-size: 3rem;"></i>
-                </div>
-                <p class="text-center mb-3">Are you sure you want to archive this student?</p>
-                <div class="alert alert-warning">
-                    <i class="fas fa-info-circle me-2"></i>
-                    This will:
-                    <ul class="mb-0 mt-2">
-                        <li>Move student to archived status</li>
-                        <li>Restrict access to student portal</li>
-                        <li>Preserve all academic records</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-                    <i class="fas fa-times me-2"></i>Cancel
-                </button>
-                <button type="button" class="btn btn-warning" onclick="archiveStudent()">
-                    <i class="fas fa-archive me-2"></i>Archive Student
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
-
 @section Styles {
     <link rel="stylesheet" href="~/css/Shared/form-page.css" />
     <style>
@@ -312,20 +275,3 @@
     </style>
 }
 
-@section Scripts {
-    <script>
-        function archiveStudent() {
-            // Close the modal
-            const modal = document.getElementById('archiveStudentModal');
-            const modalInstance = bootstrap.Modal.getInstance(modal);
-            modalInstance.hide();
-            
-            // Here you would implement the archive functionality
-            // For now, just show a success message
-            alert('Student has been archived successfully.');
-            
-            // You could redirect to the index or update the UI
-            // window.location.href = '@Url.Action("Index")';
-        }
-    </script>
-}

@@ -3,7 +3,7 @@
 <Project>
   <PropertyGroup>
     <_PublishTargetUrl>C:\Users\nikop\dev_folder\MyWebApplication\MyWebApplication\bin\Release\net8.0\publish\</_PublishTargetUrl>
-    <History>True|2025-10-19T18:46:47.6457429Z||;True|2025-10-15T13:12:57.8999008+08:00||;True|2025-10-15T09:14:41.3093303+08:00||;</History>
+    <History>True|2025-10-19T19:06:43.3288220Z||;True|2025-10-20T02:46:47.6457429+08:00||;True|2025-10-15T13:12:57.8999008+08:00||;True|2025-10-15T09:14:41.3093303+08:00||;</History>
     <LastFailureDetails />
   </PropertyGroup>
 </Project>
