@@ -392,3 +392,38 @@ input:-webkit-autofill:active{
   border-bottom: 1px solid var(--border-subtle);
   vertical-align: middle;
 }
+
+/* ============================================
+   IDENTITY / MANAGE PROFILE NAV
+   ============================================ */
+.nav-pills .nav-link {
+    color: var(--text-muted);
+    font-weight: 500;
+    border-radius: 6px;
+    padding: 1rem 1.5rem;
+    transition: all 0.2s;
+}
+
+.nav-pills .nav-link:hover {
+    background-color: rgba(30, 41, 59, 0.03);
+    color: var(--primary);
+    transform: translateX(4px);
+}
+
+.nav-pills .nav-link.active {
+    background-color: var(--primary) !important;
+    color: var(--accent) !important;
+    border-left: 4px solid var(--accent);
+    box-shadow: var(--shadow-md);
+    border-radius: 4px; /* Slight rounding but distinct */
+}
+
+.nav-pills .nav-link i {
+    color: var(--accent); /* Icons always gold-ish */
+    opacity: 0.8;
+}
+
+.nav-pills .nav-link.active i {
+    color: var(--accent);
+    opacity: 1;
+}
