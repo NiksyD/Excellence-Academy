@@ -1,11 +1,14 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using MyWebApplication.Data;
 using MyWebApplication.Models;
 using MyWebApplication.Services;
+using System.Security.Claims;
 
 namespace MyWebApplication.Controllers
 {
+    [Authorize]
     public class GatePassController : Controller
     {
         private readonly ApplicationDbContext _db;
@@ -36,6 +39,9 @@ namespace MyWebApplication.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(GatePass obj, IFormFileCollection files)
         {
+            // Set User Owner
+            obj.UserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
             // Debug: Check if files are received
             System.Diagnostics.Debug.WriteLine($"Files received: {files?.Count ?? 0}");
             
@@ -96,6 +102,13 @@ namespace MyWebApplication.Controllers
             {
                 return NotFound();
             }
+
+            // Authorization Check: Allow if Admin OR Owner
+            var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (gatePass.UserId != currentUserId && !User.IsInRole("Admin"))
+            {
+                return Forbid();
+            }
             
             // Only allow editing if status is Pending
             if (gatePass.Status != "Pending")
@@ -116,6 +129,13 @@ namespace MyWebApplication.Controllers
             if (existingGatePass == null)
             {
                 return NotFound();
+            }
+
+            // Authorization Check: Allow if Admin OR Owner
+            var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (existingGatePass.UserId != currentUserId && !User.IsInRole("Admin"))
+            {
+                return Forbid();
             }
             
             // Only allow editing if status is Pending
@@ -160,6 +180,7 @@ namespace MyWebApplication.Controllers
 
         //GET
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public IActionResult Review(int? id)
         {
             if (id == null || id == 0)
@@ -187,6 +208,7 @@ namespace MyWebApplication.Controllers
         //POST
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public IActionResult Review(GatePass gatePass, string action)
         {
             var existingGatePass = _db.GatePasses.Find(gatePass.Id);
@@ -287,6 +309,13 @@ namespace MyWebApplication.Controllers
             if (gatePass == null)
             {
                 return NotFound();
+            }
+
+            // Authorization Check: Allow if Admin OR Owner
+            var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (gatePass.UserId != currentUserId && !User.IsInRole("Admin"))
+            {
+                return Forbid();
             }
 
             // Only allow deletion if status is Pending

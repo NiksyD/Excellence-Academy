@@ -1,8 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
 using MyWebApplication.Data;
 using MyWebApplication.Models;
+using Microsoft.AspNetCore.Authorization;
+
 namespace MyWebApplication.Controllers
 {
+    [Authorize]
     public class StudentController : Controller
     {
         private readonly ApplicationDbContext _db;
@@ -17,6 +20,7 @@ namespace MyWebApplication.Controllers
             return View(objStudentList);
         }
         //GET
+        [AllowAnonymous]
         public IActionResult Create()
         {
             return View();
@@ -24,6 +28,7 @@ namespace MyWebApplication.Controllers
         //POST
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AllowAnonymous]
         public IActionResult Create(Student obj)
         {
             if (ModelState.IsValid)
@@ -53,6 +58,7 @@ namespace MyWebApplication.Controllers
         
         //GET
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public IActionResult Edit(int? id)
         {
             if (id == null || id == 0)
@@ -69,6 +75,7 @@ namespace MyWebApplication.Controllers
         //POST
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public IActionResult Edit(Student student)
         {
             if (ModelState.IsValid)
@@ -82,6 +89,7 @@ namespace MyWebApplication.Controllers
         }
         //GET
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public IActionResult Delete(int? id)
         {
             if (id == null || id == 0)
@@ -98,6 +106,7 @@ namespace MyWebApplication.Controllers
         //POST
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public IActionResult DeletePOST(int? id)
         {
             var student = _db.Students.Find(id);

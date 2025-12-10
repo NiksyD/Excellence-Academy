@@ -1,131 +1,99 @@
 @{
-    ViewData["Title"] = "Welcome to Excellence Academy";
+    ViewData["Title"] = "Welcome";
 }
 
-<!-- Hero Section with Parallax -->
-<section class="hero-section bg-primary text-white py-5 mb-0 parallax-container" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
-    <!-- Animated Background Elements -->
-    <div class="parallax-bg">
-        <div class="floating-shapes">
-            <div class="shape shape-1"></div>
-            <div class="shape shape-2"></div>
-            <div class="shape shape-3"></div>
-            <div class="shape shape-4"></div>
-            <div class="shape shape-5"></div>
-            <div class="shape shape-6"></div>
-        </div>
-        <div class="particles-container">
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-        </div>
-    </div>
-    
-    <div class="container position-relative">
-        <div class="row align-items-center min-vh-50 min-vh-lg-70">
-            <div class="col-lg-6 mb-4 mb-lg-0 text-center text-lg-start hero-content">
-                <h1 class="display-4 display-lg-3 fw-bold mb-3 mb-lg-4 fade-in-up">Excellence Academy</h1>
-                <p class="lead mb-4 fs-5 fs-lg-4 fade-in-up" style="animation-delay: 0.2s;">Empowering minds, shaping futures. Join our community of learners where innovation meets tradition in education.</p>
-                <div class="d-flex flex-column flex-sm-row justify-content-center justify-content-lg-start gap-3 fade-in-up" style="animation-delay: 0.4s;">
-                    <a asp-controller="Student" asp-action="Create" class="btn btn-light btn-lg px-4 py-3 rounded btn-pulse">
-                        <i class="fas fa-user-plus me-2"></i>Apply Now
-                    </a>
-                    <a href="#programs" class="btn btn-outline-light btn-lg px-4 py-3 rounded btn-hover-glow">
-                        <i class="fas fa-compass me-2"></i>Explore Programs
-                    </a>
+<!-- Hero Section -->
+<section style="background-color: var(--bg-sidebar); color: white; padding: 6rem 0; position: relative; overflow: hidden;">
+    <div class="container position-relative z-1">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <h1 class="display-3 fw-bold mb-4" style="font-family: 'Playfair Display', serif; letter-spacing: -1px; color: white;">Excellence Academy</h1>
+                <p class="lead mb-5" style="color: #94A3B8; font-weight: 300; line-height: 1.8;">Empowering the next generation of leaders through rigorous academic tradition and modern innovation. Your journey to excellence begins here.</p>
+                <div class="d-flex gap-3">
+                    <a asp-controller="Student" asp-action="Create" class="btn btn-accent btn-lg px-5 py-3 rounded-1" style="font-weight: 600; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px;">Apply Now</a>
+                    <a href="#programs" class="btn btn-outline-light btn-lg px-5 py-3 rounded-1" style="font-weight: 600; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px;">Explore Programs</a>
                 </div>
             </div>
-            <div class="col-lg-6 text-center d-none d-lg-block">
-                <div class="hero-image-container floating-element">
-                    <div class="hero-image-placeholder bg-white bg-opacity-10 rounded-4 p-5" style="min-height: 300px; display: flex; align-items: center; justify-content: center;">
-                        <i class="fas fa-graduation-cap rotating-icon" style="font-size: 8rem; opacity: 0.7;"></i>
-                    </div>
+            <div class="col-lg-6 d-none d-lg-block text-center">
+                <!-- Abstract "Prestige" illustration using FontAwesome -->
+                <div style="font-size: 15rem; color: rgba(212, 175, 55, 0.1);">
+                    <i class="fas fa-university"></i>
                 </div>
+            </div>
+        </div>
+    </div>
+    <!-- Decorative background element -->
+    <div style="position: absolute; top: -50%; right: -20%; width: 800px; height: 800px; border-radius: 50%; border: 100px solid rgba(255,255,255,0.03);"></div>
+</section>
+
+<!-- Stats Strip -->
+<section class="py-5 border-bottom" style="background-color: white;">
+    <div class="container">
+        <div class="row text-center g-4">
+            <div class="col-md-3">
+                <h2 class="fw-bold mb-0" style="color: var(--primary); font-size: 2.5rem;">2,500+</h2>
+                <small class="text-uppercase text-muted fw-bold" style="letter-spacing: 1px;">Students</small>
+            </div>
+            <div class="col-md-3">
+                <h2 class="fw-bold mb-0" style="color: var(--primary); font-size: 2.5rem;">150+</h2>
+                <small class="text-uppercase text-muted fw-bold" style="letter-spacing: 1px;">Faculty</small>
+            </div>
+            <div class="col-md-3">
+                <h2 class="fw-bold mb-0" style="color: var(--primary); font-size: 2.5rem;">98%</h2>
+                <small class="text-uppercase text-muted fw-bold" style="letter-spacing: 1px;">Grad Rate</small>
+            </div>
+            <div class="col-md-3">
+                <h2 class="fw-bold mb-0" style="color: var(--primary); font-size: 2.5rem;">50</h2>
+                <small class="text-uppercase text-muted fw-bold" style="letter-spacing: 1px;">Years</small>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Stats Section with Counter Animation -->
-<section class="stats-section py-4 py-md-5 bg-light parallax-section" data-scroll-speed="0.5">
-    <div class="container">
-        <div class="row text-center g-3">
-            <div class="col-6 col-md-3">
-                <div class="stat-item scroll-reveal" data-delay="0">
-                    <h3 class="display-5 display-md-4 fw-bold text-primary mb-2 counter" data-target="2500">0</h3>
-                    <p class="text-muted mb-0 small">Students</p>
-                </div>
-            </div>
-            <div class="col-6 col-md-3">
-                <div class="stat-item scroll-reveal" data-delay="100">
-                    <h3 class="display-5 display-md-4 fw-bold text-primary mb-2 counter" data-target="150">0</h3>
-                    <p class="text-muted mb-0 small">Faculty Members</p>
-                </div>
-            </div>
-            <div class="col-6 col-md-3">
-                <div class="stat-item scroll-reveal" data-delay="200">
-                    <h3 class="display-5 display-md-4 fw-bold text-primary mb-2 counter" data-target="98">0</h3>
-                    <p class="text-muted mb-0 small">Graduation Rate</p>
-                </div>
-            </div>
-            <div class="col-6 col-md-3">
-                <div class="stat-item scroll-reveal" data-delay="300">
-                    <h3 class="display-5 display-md-4 fw-bold text-primary mb-2 counter" data-target="50">0</h3>
-                    <p class="text-muted mb-0 small">Years of Excellence</p>
-                </div>
-            </div>
+<!-- Programs Section -->
+<section id="programs" class="py-5" style="background-color: var(--bg-app);">
+    <div class="container py-5">
+        <div class="text-center mb-5">
+            <h6 style="color: var(--accent); text-transform: uppercase; letter-spacing: 2px; font-weight: 600;">Academics</h6>
+            <h2 class="display-5 fw-bold" style="color: var(--primary);">Our Programs</h2>
         </div>
-    </div>
-</section>
-
-<!-- Programs Section with Parallax -->
-<section id="programs" class="programs-section py-4 py-md-5 parallax-section" data-scroll-speed="0.3">
-    <div class="container">
-        <div class="row mb-4 mb-md-5">
-            <div class="col-lg-8 mx-auto text-center px-3">
-                <h2 class="display-5 display-md-4 fw-bold mb-3 mb-md-4 scroll-reveal">Our Programs</h2>
-                <p class="lead text-muted scroll-reveal" data-delay="100">Discover our comprehensive range of academic programs designed to nurture talent and foster growth.</p>
-            </div>
-        </div>
+        
         <div class="row g-4">
-            <div class="col-lg-4 col-md-6">
-                <div class="card h-100 shadow-sm border-0 program-card scroll-reveal" data-delay="0">
-                    <div class="card-body p-4">
-                        <div class="program-icon mb-3">
-                            <i class="fas fa-microscope text-primary icon-hover" style="font-size: 3rem;"></i>
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body p-5">
+                        <div class="mb-4" style="width: 60px; height: 60px; background-color: rgba(30, 41, 59, 0.05); color: var(--primary); display: flex; align-items: center; justify-content: center; border-radius: 50%;">
+                            <i class="fas fa-microscope fa-lg"></i>
                         </div>
-                        <h5 class="card-title fw-bold mb-3">Science & Technology</h5>
-                        <p class="card-text text-muted mb-4">Advanced STEM programs with state-of-the-art laboratories and research opportunities.</p>
-                        <a asp-controller="Student" asp-action="Index" class="btn btn-outline-primary rounded btn-hover-slide">View Students</a>
+                        <h4 class="mb-3">Science & Tech</h4>
+                        <p class="text-muted mb-4">Pioneering research and advanced technological studies for the innovators of tomorrow.</p>
+                        <a asp-controller="Student" asp-action="Index" class="text-decoration-none fw-bold" style="color: var(--accent);">View Students <i class="fas fa-arrow-right ms-2 small"></i></a>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="card h-100 shadow-sm border-0 program-card scroll-reveal" data-delay="100">
-                    <div class="card-body p-4">
-                        <div class="program-icon mb-3">
-                            <i class="fas fa-palette text-primary icon-hover" style="font-size: 3rem;"></i>
+            
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body p-5">
+                        <div class="mb-4" style="width: 60px; height: 60px; background-color: rgba(30, 41, 59, 0.05); color: var(--primary); display: flex; align-items: center; justify-content: center; border-radius: 50%;">
+                            <i class="fas fa-palette fa-lg"></i>
                         </div>
-                        <h5 class="card-title fw-bold mb-3">Arts & Humanities</h5>
-                        <p class="card-text text-muted mb-4">Creative programs fostering artistic expression and cultural understanding.</p>
-                        <a asp-controller="ActivityReservation" asp-action="Index" class="btn btn-outline-primary rounded btn-hover-slide">View Reservations</a>
+                        <h4 class="mb-3">Arts & Culture</h4>
+                        <p class="text-muted mb-4">Fostering creativity and expression through our world-class humanities programs.</p>
+                        <a asp-controller="ActivityReservation" asp-action="Index" class="text-decoration-none fw-bold" style="color: var(--accent);">Reservations <i class="fas fa-arrow-right ms-2 small"></i></a>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="card h-100 shadow-sm border-0 program-card scroll-reveal" data-delay="200">
-                    <div class="card-body p-4">
-                        <div class="program-icon mb-3">
-                            <i class="fas fa-chart-line text-primary icon-hover" style="font-size: 3rem;"></i>
+
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body p-5">
+                        <div class="mb-4" style="width: 60px; height: 60px; background-color: rgba(30, 41, 59, 0.05); color: var(--primary); display: flex; align-items: center; justify-content: center; border-radius: 50%;">
+                            <i class="fas fa-chart-line fa-lg"></i>
                         </div>
-                        <h5 class="card-title fw-bold mb-3">Business Studies</h5>
-                        <p class="card-text text-muted mb-4">Comprehensive business education preparing future leaders and entrepreneurs.</p>
-                        <a asp-controller="GatePass" asp-action="Index" class="btn btn-outline-primary rounded btn-hover-slide">Gate Pass Management</a>
+                        <h4 class="mb-3">Business & Law</h4>
+                        <p class="text-muted mb-4">Preparing ethical leaders for the global marketplace with rigorous practical training.</p>
+                        <a asp-controller="GatePass" asp-action="Index" class="text-decoration-none fw-bold" style="color: var(--accent);">Gate Services <i class="fas fa-arrow-right ms-2 small"></i></a>
                     </div>
                 </div>
             </div>
@@ -133,133 +101,47 @@
     </div>
 </section>
 
-<!-- Features Section -->
-<section class="features-section py-4 py-md-5 bg-light">
-    <div class="container">
-        <div class="row mb-4 mb-md-5">
-            <div class="col-lg-8 mx-auto text-center px-3">
-                <h2 class="display-5 display-md-4 fw-bold mb-3 mb-md-4">Why Choose Excellence Academy?</h2>
-                <p class="lead text-muted">We provide an exceptional educational experience that prepares students for success in the modern world.</p>
-            </div>
-        </div>
-        <div class="row g-4">
-            <div class="col-lg-6">
-                <div class="feature-item d-flex mb-4">
-                    <div class="feature-icon me-4">
-                        <i class="fas fa-users-cog text-primary" style="font-size: 2.5rem;"></i>
-                    </div>
-                    <div>
-                        <h5 class="fw-bold mb-2">Expert Faculty</h5>
-                        <p class="text-muted mb-0">Learn from industry professionals and academic experts with years of experience.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="feature-item d-flex mb-4">
-                    <div class="feature-icon me-4">
-                        <i class="fas fa-laptop-code text-primary" style="font-size: 2.5rem;"></i>
-                    </div>
-                    <div>
-                        <h5 class="fw-bold mb-2">Modern Technology</h5>
-                        <p class="text-muted mb-0">State-of-the-art facilities and cutting-edge technology in every classroom.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="feature-item d-flex mb-4">
-                    <div class="feature-icon me-4">
-                        <i class="fas fa-globe-americas text-primary" style="font-size: 2.5rem;"></i>
-                    </div>
-                    <div>
-                        <h5 class="fw-bold mb-2">Global Perspective</h5>
-                        <p class="text-muted mb-0">International partnerships and exchange programs for a global education experience.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="feature-item d-flex mb-4">
-                    <div class="feature-icon me-4">
-                        <i class="fas fa-medal text-primary" style="font-size: 2.5rem;"></i>
-                    </div>
-                    <div>
-                        <h5 class="fw-bold mb-2">Excellence Recognition</h5>
-                        <p class="text-muted mb-0">Nationally recognized programs with numerous awards and accreditations.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Testimonials Section -->
-<section class="testimonials-section py-4 py-md-5">
-    <div class="container">
-        <div class="row mb-4 mb-md-5">
-            <div class="col-lg-8 mx-auto text-center px-3">
-                <h2 class="display-5 display-md-4 fw-bold mb-3 mb-md-4">What Our Students Say</h2>
-                <p class="lead text-muted">Hear from our graduates about their transformative experience at Excellence Academy.</p>
-            </div>
-        </div>
-        <div class="row g-4">
-            <div class="col-lg-4">
-                <div class="testimonial-card bg-white p-4 rounded-4 shadow-sm h-100">
-                    <div class="stars mb-3">
-                        <i class="fas fa-star text-warning"></i>
-                        <i class="fas fa-star text-warning"></i>
-                        <i class="fas fa-star text-warning"></i>
-                        <i class="fas fa-star text-warning"></i>
-                        <i class="fas fa-star text-warning"></i>
-                    </div>
-                    <p class="mb-4">"Excellence Academy provided me with the knowledge and confidence to pursue my dreams. The supportive environment and excellent faculty made all the difference."</p>
+<!-- Values Section -->
+<section class="py-5" style="background-color: var(--primary); color: white;">
+    <div class="container py-5">
+        <div class="row align-items-center">
+            <div class="col-lg-5 mb-5 mb-lg-0">
+                <h6 style="color: var(--accent); text-transform: uppercase; letter-spacing: 2px; font-weight: 600;">Our Values</h6>
+                <h2 class="display-5 fw-bold mb-4">Why Excellence?</h2>
+                <p class="text-muted mb-4" style="color: #94A3B8 !important;">We don't just teach; we cultivate character, integrity, and intellectual curiosity. Our approach encourages students to look beyond the textbook.</p>
+                <div class="d-flex flex-column gap-3">
                     <div class="d-flex align-items-center">
-                        <div class="avatar bg-primary rounded-circle me-3 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
-                            <span class="text-white fw-bold">SJ</span>
-                        </div>
-                        <div>
-                            <h6 class="mb-0 fw-bold">Sarah Johnson</h6>
-                            <small class="text-muted">Class of 2023</small>
-                        </div>
+                        <i class="fas fa-check-circle me-3" style="color: var(--accent);"></i>
+                        <span>World-class Research Facilities</span>
                     </div>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="testimonial-card bg-white p-4 rounded-4 shadow-sm h-100">
-                    <div class="stars mb-3">
-                        <i class="fas fa-star text-warning"></i>
-                        <i class="fas fa-star text-warning"></i>
-                        <i class="fas fa-star text-warning"></i>
-                        <i class="fas fa-star text-warning"></i>
-                        <i class="fas fa-star text-warning"></i>
-                    </div>
-                    <p class="mb-4">"The hands-on learning approach and real-world applications prepared me perfectly for my career. I couldn't have asked for a better educational experience."</p>
                     <div class="d-flex align-items-center">
-                        <div class="avatar bg-success rounded-circle me-3 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
-                            <span class="text-white fw-bold">MC</span>
-                        </div>
-                        <div>
-                            <h6 class="mb-0 fw-bold">Michael Chen</h6>
-                            <small class="text-muted">Class of 2022</small>
-                        </div>
+                        <i class="fas fa-check-circle me-3" style="color: var(--accent);"></i>
+                        <span>Nationally Accredited Faculty</span>
                     </div>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="testimonial-card bg-white p-4 rounded-4 shadow-sm h-100">
-                    <div class="stars mb-3">
-                        <i class="fas fa-star text-warning"></i>
-                        <i class="fas fa-star text-warning"></i>
-                        <i class="fas fa-star text-warning"></i>
-                        <i class="fas fa-star text-warning"></i>
-                        <i class="fas fa-star text-warning"></i>
-                    </div>
-                    <p class="mb-4">"The diverse community and inclusive environment at Excellence Academy helped me grow both academically and personally. Truly life-changing!"</p>
                     <div class="d-flex align-items-center">
-                        <div class="avatar bg-info rounded-circle me-3 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
-                            <span class="text-white fw-bold">EP</span>
+                        <i class="fas fa-check-circle me-3" style="color: var(--accent);"></i>
+                        <span>Global Alumni Network</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 offset-lg-1">
+                <div class="row g-3">
+                    <div class="col-6">
+                        <div class="p-4" style="background: rgba(255,255,255,0.05); border-radius: 12px;">
+                            <h3 class="fw-bold mb-2 text-white">100%</h3>
+                            <p class="small text-white-50 mb-0">College Acceptance</p>
                         </div>
-                        <div>
-                            <h6 class="mb-0 fw-bold">Emily Rodriguez</h6>
-                            <small class="text-muted">Class of 2023</small>
+                    </div>
+                    <div class="col-6">
+                        <div class="p-4" style="background: rgba(255,255,255,0.05); border-radius: 12px;">
+                            <h3 class="fw-bold mb-2 text-white">12:1</h3>
+                            <p class="small text-white-50 mb-0">Student-Faculty Ratio</p>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="p-4" style="background: rgba(255,255,255,0.05); border-radius: 12px;">
+                            <h3 class="fw-bold mb-2 text-white">Top 10</h3>
+                            <p class="small text-white-50 mb-0">Ranked Regionally for STEM Innovation</p>
                         </div>
                     </div>
                 </div>
@@ -267,67 +149,3 @@
         </div>
     </div>
 </section>
-
-<!-- CTA Section with Parallax Background -->
-<section id="contact" class="cta-section py-4 py-md-5 bg-primary text-white parallax-container" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
-    <div class="parallax-bg">
-        <div class="wave-animation"></div>
-        <div class="floating-dots">
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-        </div>
-    </div>
-    <div class="container position-relative">
-        <div class="row">
-            <div class="col-lg-8 mx-auto text-center px-3">
-                <h2 class="display-5 display-md-4 fw-bold mb-3 mb-md-4 scroll-reveal">Ready to Start Your Journey?</h2>
-                <p class="lead mb-4 mb-md-5 scroll-reveal" data-delay="100">Join thousands of students who have transformed their lives at Excellence Academy. Your future starts here.</p>
-                <div class="d-flex flex-column flex-sm-row justify-content-center gap-3 scroll-reveal" data-delay="200">
-                    <a asp-controller="Student" asp-action="Create" class="btn btn-light btn-lg px-4 px-md-5 py-3 rounded btn-pulse">Apply Now</a>
-                    <a asp-controller="LockerRequest" asp-action="Index" class="btn btn-outline-light btn-lg px-4 px-md-5 py-3 rounded btn-hover-glow">Locker Requests</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Contact Info Section -->
-<section class="contact-info-section py-4 py-md-5 bg-light">
-    <div class="container">
-        <div class="row g-4">
-            <div class="col-12 col-md-4 text-center">
-                <div class="contact-item">
-                    <i class="fas fa-map-marker-alt text-primary mb-3" style="font-size: 2rem;"></i>
-                    <h5 class="fw-bold mb-2">Visit Us</h5>
-                    <p class="text-muted small">123 Education Street<br>Learning City, LC 12345</p>
-                </div>
-            </div>
-            <div class="col-12 col-md-4 text-center">
-                <div class="contact-item">
-                    <i class="fas fa-phone text-primary mb-3" style="font-size: 2rem;"></i>
-                    <h5 class="fw-bold mb-2">Call Us</h5>
-                    <p class="text-muted small">(555) 123-4567<br>Mon-Fri 8AM-6PM</p>
-                </div>
-            </div>
-            <div class="col-12 col-md-4 text-center">
-                <div class="contact-item">
-                    <i class="fas fa-envelope text-primary mb-3" style="font-size: 2rem;"></i>
-                    <h5 class="fw-bold mb-2">Email Us</h5>
-                    <p class="text-muted small">info@excellenceacademy.edu<br>admissions@excellenceacademy.edu</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-@section Scripts {
-    <script src="~/js/Home/parallax-config.js" asp-append-version="true"></script>
-    <script src="~/js/Home/parallax.js" asp-append-version="true"></script>
-}
-
-@section Styles {
-    <link rel="stylesheet" href="~/css/Home/parallax.css" asp-append-version="true" />
-}

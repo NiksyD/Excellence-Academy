@@ -279,6 +279,25 @@
     filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.25));
 }
 
+.dock-action.danger {
+    background: linear-gradient(145deg, #dc3545 0%, #b02a37 100%);
+    border: 1.5px solid rgba(255, 255, 255, 0.35);
+    color: white;
+    box-shadow: 
+        0 6px 16px rgba(220, 53, 69, 0.3),
+        0 3px 8px rgba(220, 53, 69, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.dock-action.danger:hover {
+    background: linear-gradient(145deg, #e35d6a 0%, #c82333 100%);
+    color: white;
+    box-shadow: 
+        0 16px 32px rgba(220, 53, 69, 0.4),
+        0 10px 20px rgba(220, 53, 69, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
 /* Enhanced Tooltip system - Navigation Items */
 .dock-item:not(.dock-brand)::after {
     content: attr(data-tooltip) !important;

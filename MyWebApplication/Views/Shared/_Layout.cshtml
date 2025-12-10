@@ -8,213 +8,154 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/MyWebApplication.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="~/css/Shared/mac-dock.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/Shared/mobile-dropdown.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/Shared/footer.css" asp-append-version="true" />
     @await RenderSectionAsync("Styles", required: false)
 </head>
 <body>
-    <header>
-        <!-- Mobile Dropdown Navigation (Mobile/Tablet Only) -->
-        <div class="mobile-header">
-            <div class="mobile-header-content">
-                <!-- Brand -->
-                <a asp-controller="Home" asp-action="Index" class="mobile-brand">
-                    <i class="fas fa-graduation-cap"></i>
-                    <span>Excellence Academy</span>
-                </a>
-                
-                <!-- Dropdown Trigger -->
-                <button class="mobile-nav-trigger" aria-label="Navigation Menu" aria-expanded="false">
-                    <i class="fas fa-bars"></i>
-                    <span>Menu</span>
-                    <i class="fas fa-chevron-down"></i>
-                </button>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    <div class="app-container">
+        <!-- SIDEBAR NAVIGATION -->
+        <aside class="app-sidebar">
+            <div class="sidebar-header">
+                <i class="fas fa-graduation-cap brand-icon"></i>
+                <span class="brand-text">Excellence Academy</span>
             </div>
-            
-            <!-- Dropdown Menu -->
-            <div class="mobile-nav-dropdown">
-                <ul class="mobile-nav-list">
-                    <li class="mobile-nav-item">
-                        <a asp-controller="Home" asp-action="Index" class="mobile-nav-link">
-                            <i class="fas fa-home"></i>
-                            <span>Home</span>
-                        </a>
-                    </li>
-                    <li class="mobile-nav-item">
-                        <a asp-controller="Student" asp-action="Index" class="mobile-nav-link">
-                            <i class="fas fa-users"></i>
-                            <span>Student Portal</span>
-                        </a>
-                    </li>
-                    <li class="mobile-nav-item">
-                        <a asp-controller="GatePass" asp-action="Index" class="mobile-nav-link">
-                            <i class="fas fa-id-card"></i>
-                            <span>Gate Pass</span>
-                        </a>
-                    </li>
-                    <li class="mobile-nav-item">
-                        <a asp-controller="ActivityReservation" asp-action="Index" class="mobile-nav-link">
-                            <i class="fas fa-calendar-alt"></i>
-                            <span>Activity Reservations</span>
-                        </a>
-                    </li>
-                    <li class="mobile-nav-item">
-                        <a asp-controller="LockerRequest" asp-action="Index" class="mobile-nav-link">
-                            <i class="fas fa-key"></i>
-                            <span>Locker Request</span>
-                        </a>
-                    </li>
-                </ul>
-                
-                <div class="mobile-nav-divider"></div>
-                
-                <!-- Action Buttons -->
-                <div class="mobile-nav-actions">
-                    <a asp-controller="Student" asp-action="Create" class="mobile-action-btn primary">
-                        <i class="fas fa-user-plus"></i>
-                        <span>Apply Now</span>
-                    </a>
-                    <a href="@Url.Action("Index", "Home")#contact" class="mobile-action-btn secondary schedule-visit-btn">
-                        <i class="fas fa-calendar-check"></i>
-                        <span>Schedule Visit</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Overlay for closing dropdown -->
-        <div class="mobile-nav-overlay"></div>
-        
-        <!-- Mac-Style Dock Navigation (Desktop Only) -->
-        <nav class="mac-dock" role="navigation" aria-label="Main navigation dock">
-            <!-- Brand/Logo -->
-            <a asp-controller="Home" asp-action="Index" class="dock-item dock-brand" data-tooltip="Excellence Academy" aria-label="Excellence Academy Home">
-                <i class="fas fa-graduation-cap"></i>
-            </a>
-            
-            <!-- Main Navigation Items -->
-            <a asp-controller="Student" asp-action="Index" class="dock-item" data-tooltip="Student Portal" aria-label="Student Portal">
-                <i class="fas fa-users"></i>
-            </a>
-            
-            <a asp-controller="GatePass" asp-action="Index" class="dock-item" data-tooltip="Gate Pass" aria-label="Gate Pass">
-                <i class="fas fa-id-card"></i>
-            </a>
-            
-            <a asp-controller="ActivityReservation" asp-action="Index" class="dock-item" data-tooltip="Activity Reservations" aria-label="Activity Reservations">
-                <i class="fas fa-calendar-alt"></i>
-            </a>
-            
-            <a asp-controller="LockerRequest" asp-action="Index" class="dock-item" data-tooltip="Locker Request" aria-label="Locker Request">
-                <i class="fas fa-key"></i>
-            </a>
-            
-            <!-- Action Buttons -->
-            <div class="dock-actions">
-                <a href="@Url.Action("Index", "Home")#contact" class="dock-action schedule-visit-btn" data-tooltip="Schedule Visit" aria-label="Schedule Visit">
-                    <i class="fas fa-calendar-check"></i>
-                </a>
-                
-                <a asp-controller="Student" asp-action="Create" class="dock-action primary" data-tooltip="Apply Now" aria-label="Apply Now">
-                    <i class="fas fa-user-plus"></i>
-                </a>
-            </div>
-        </nav>
-    </header>
-    <main role="main" id="main-content">
-        @RenderBody()
-    </main>
 
-    <footer class="mac-footer">
-        <div class="footer-decoration"></div>
-        <div class="container">
-            <div class="row g-4">
-                <div class="col-lg-4 footer-fade-in" style="animation-delay: 0.1s">
-                    <div class="footer-brand">
-                        <div class="footer-brand-icon">
-                            <i class="fas fa-graduation-cap"></i>
-                        </div>
-                        <h5 class="footer-brand-text">Excellence Academy</h5>
+            <nav class="sidebar-nav">
+                <a asp-controller="Home" asp-action="Index" class="nav-link @(ViewContext.RouteData.Values["Controller"]?.ToString() == "Home" ? "active" : "")">
+                    <div class="nav-icon"><i class="fas fa-home"></i></div>
+                    <span>Overview</span>
+                </a>
+                
+                <a asp-controller="Student" asp-action="Index" class="nav-link @(ViewContext.RouteData.Values["Controller"]?.ToString() == "Student" ? "active" : "")">
+                    <div class="nav-icon"><i class="fas fa-users"></i></div>
+                    <span>Students</span>
+                </a>
+
+                <a asp-controller="GatePass" asp-action="Index" class="nav-link @(ViewContext.RouteData.Values["Controller"]?.ToString() == "GatePass" ? "active" : "")">
+                    <div class="nav-icon"><i class="fas fa-id-card"></i></div>
+                    <span>Gate Pass</span>
+                </a>
+
+                <a asp-controller="ActivityReservation" asp-action="Index" class="nav-link @(ViewContext.RouteData.Values["Controller"]?.ToString() == "ActivityReservation" ? "active" : "")">
+                    <div class="nav-icon"><i class="fas fa-calendar-alt"></i></div>
+                    <span>Reservations</span>
+                </a>
+
+                <a asp-controller="LockerRequest" asp-action="Index" class="nav-link @(ViewContext.RouteData.Values["Controller"]?.ToString() == "LockerRequest" ? "active" : "")">
+                    <div class="nav-icon"><i class="fas fa-key"></i></div>
+                    <span>Lockers</span>
+                </a>
+
+                @if (User.IsInRole("Admin"))
+                {
+                    <div style="margin-top: 1.5rem; padding-left: 1rem; margin-bottom: 0.5rem; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted);">
+                        Admin
                     </div>
-                    <p class="footer-description">Empowering minds, shaping futures. Join our community of learners where innovation meets tradition in education.</p>
-                    <div class="footer-social">
-                        <a href="#" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-6 footer-fade-in" style="animation-delay: 0.2s">
-                    <h6 class="footer-section-title">Quick Links</h6>
-                    <ul class="footer-links">
-                        <li><a href="#" class="footer-link">About Us</a></li>
-                        <li><a href="#programs" class="footer-link">Programs</a></li>
-                        <li><a href="#" class="footer-link">Admissions</a></li>
-                        <li><a href="#" class="footer-link">Faculty</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-2 col-md-6 footer-fade-in" style="animation-delay: 0.3s">
-                    <h6 class="footer-section-title">Student Life</h6>
-                    <ul class="footer-links">
-                        <li><a href="#" class="footer-link">Campus</a></li>
-                        <li><a href="#" class="footer-link">Activities</a></li>
-                        <li><a href="#" class="footer-link">Sports</a></li>
-                        <li><a asp-controller="Student" asp-action="Index" class="footer-link">Student Portal</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-4 footer-fade-in" style="animation-delay: 0.4s">
-                    <h6 class="footer-section-title">Contact Information</h6>
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-map-marker-alt"></i>
-                        </div>
-                        <p class="contact-text">123 Education Street<br>Learning City, LC 12345</p>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-phone"></i>
-                        </div>
-                        <p class="contact-text">(555) 123-4567</p>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-envelope"></i>
-                        </div>
-                        <p class="contact-text">info@excellenceacademy.edu</p>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-clock"></i>
-                        </div>
-                        <p class="contact-text">Mon-Fri: 8:00 AM - 6:00 PM</p>
-                    </div>
-                </div>
+                }
+            </nav>
+
+            <div class="sidebar-footer">
+                @using Microsoft.AspNetCore.Identity
+                @using MyWebApplication.Models
+                @inject SignInManager<ApplicationUser> SignInManager
+                @inject UserManager<ApplicationUser> UserManager
+                
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post">
+                        <button type="submit" class="btn btn-outline-light w-100 btn-sm" style="border-color: rgba(255,255,255,0.2); color: #CBD5E1;">
+                            <i class="fas fa-sign-out-alt me-2"></i> Sign Out
+                        </button>
+                    </form>
+                }
             </div>
-            <div class="footer-bottom">
-                <div class="row align-items-center">
-                    <div class="col-md-6">
-                        <p class="footer-copyright">&copy; 2025 Excellence Academy. All rights reserved.</p>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="footer-bottom-links">
-                            <a asp-controller="Home" asp-action="Privacy" class="footer-bottom-link">Privacy Policy</a>
-                            <a href="#" class="footer-bottom-link">Terms of Service</a>
-                        </div>
-                    </div>
+        </aside>
+
+        <!-- MAIN LAYOUT -->
+        <div class="app-main">
+            <!-- TOP HEADER -->
+            <header class="app-topbar">
+                <button class="mobile-toggle" type="button" id="sidebarToggle" aria-label="Toggle navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="topbar-title">
+                    @ViewData["Title"]
                 </div>
-            </div>
+
+                <div class="user-menu">
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <div class="d-flex align-items-center gap-2">
+                            <div style="text-align: right; line-height: 1.2;">
+                                <div style="font-weight: 600; font-size: 0.9rem; color: var(--primary);">@User.Identity?.Name</div>
+                                <div style="font-size: 0.75rem; color: var(--text-muted);">
+                                    @if (User.IsInRole("Admin")) { <span>Administrator</span> } else { <span>Student</span> }
+                                </div>
+                            </div>
+                            <div style="width: 36px; height: 36px; background-color: var(--primary); color: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600;">
+                                @User.Identity?.Name?.Substring(0,1).ToUpper()
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <a href="/Identity/Account/Login" class="btn-login">
+                            Log In
+                        </a>
+                        <a asp-controller="Student" asp-action="Create" class="btn btn-sm btn-outline-dark">
+                            Apply Now
+                        </a>
+                    }
+                </div>
+            </header>
+
+            <!-- CONTENT BODY -->
+            <main class="main-content">
+                @RenderBody()
+            </main>
         </div>
-    </footer>
+    </div>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    <script src="~/js/Shared/mac-dock.js" asp-append-version="true"></script>
-    <script src="~/js/Shared/mobile-dropdown.js" asp-append-version="true"></script>
     <script src="~/js/watermark-remover.js" asp-append-version="true"></script>
+
+    <script>
+        // Simple Sidebar Toggle Logic
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggle = document.getElementById('sidebarToggle');
+            const sidebar = document.querySelector('.app-sidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+            
+            function toggleSidebar() {
+                sidebar.classList.toggle('show');
+                overlay.classList.toggle('show');
+            }
+
+            if(toggle) {
+                toggle.addEventListener('click', function(e) {
+                    e.stopPropagation(); // Prevent immediate closing
+                    toggleSidebar();
+                });
+            }
+
+            if(overlay) {
+                overlay.addEventListener('click', toggleSidebar);
+            }
+
+            // Close sidebar when clicking a link on mobile
+            const navLinks = document.querySelectorAll('.sidebar-nav .nav-link');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                     if (window.innerWidth < 992) {
+                         sidebar.classList.remove('show');
+                         overlay.classList.remove('show');
+                     }
+                });
+            });
+        });
+    </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

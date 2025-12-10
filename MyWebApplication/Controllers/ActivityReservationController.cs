@@ -1,11 +1,14 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using MyWebApplication.Data;
 using MyWebApplication.Models;
 using MyWebApplication.Services;
+using System.Security.Claims;
 
 namespace MyWebApplication.Controllers
 {
+    [Authorize]
     public class ActivityReservationController : Controller
     {
         private readonly ApplicationDbContext _db;
@@ -34,6 +37,9 @@ namespace MyWebApplication.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(ActivityReservation obj, IFormFileCollection files)
         {
+            // Set User Owner
+            obj.UserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
             if (ModelState.IsValid)
             {
                 _db.ActivityReservations.Add(obj);
@@ -85,6 +91,13 @@ namespace MyWebApplication.Controllers
             {
                 return NotFound();
             }
+
+            // Authorization Check: Allow if Admin OR Owner
+            var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (activityReservation.UserId != currentUserId && !User.IsInRole("Admin"))
+            {
+                return Forbid();
+            }
             
             // Only allow editing if status is Pending
             if (activityReservation.Status != "Pending")
@@ -105,6 +118,13 @@ namespace MyWebApplication.Controllers
             if (existingReservation == null)
             {
                 return NotFound();
+            }
+
+            // Authorization Check: Allow if Admin OR Owner
+            var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (existingReservation.UserId != currentUserId && !User.IsInRole("Admin"))
+            {
+                return Forbid();
             }
             
             // Only allow editing if status is Pending
@@ -149,6 +169,7 @@ namespace MyWebApplication.Controllers
 
         //GET
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public IActionResult Review(int? id)
         {
             if (id == null || id == 0)
@@ -231,6 +252,13 @@ namespace MyWebApplication.Controllers
             if (activityReservation == null)
             {
                 return NotFound();
+            }
+
+            // Authorization Check: Allow if Admin OR Owner
+            var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (activityReservation.UserId != currentUserId && !User.IsInRole("Admin"))
+            {
+                return Forbid();
             }
 
             // Only allow deletion if status is Pending

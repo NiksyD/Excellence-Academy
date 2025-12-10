@@ -59,6 +59,10 @@ namespace MyWebApplication.Models
         [Display(Name = "Status")]
         public string Status { get; set; } = "Pending";
 
+        // Owner/User Reference
+        [Display(Name = "User ID")]
+        public string? UserId { get; set; }
+
         [Display(Name = "Date Created")]
         public DateTime DateCreated { get; set; } = DateTime.Now;
 
